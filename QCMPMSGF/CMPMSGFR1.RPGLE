@@ -1,66 +1,67 @@
- RAD  * =================================================================== *
- RAD  *                                                                     *
- RAD  *  Kurzdokumentation :                                                *
- RAD  *                                                                     *
- RAD  *  Bereich . . . : CMPMSGF                                            *
- RAD  *  Objekt  . . . : CMPMSGFR1                                          *
- RAD  *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
- RAD  *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
- RAD  *  Datum . . . . : 25.10.2001                                         *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *                                                                     *
- RAD  *  This software is free software, you can redistribute it and/or     *
- RAD  *  modify it under the terms of the GNU General Public License (GPL)  *
- RAD  *  as published by the Free Software Foundation.                      *
- RAD  *                                                                     *
- RAD  *  See GNU General Public License for details.                        *
- RAD  *          http://www.opensource.org                                  *
- RAD  *          http://www.opensource.org/licenses/gpl-license.html        *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *  History:                                                           *
- RAD  *                                                                     *
- RAD  *  Datum       Name          Änderung                                 *
- RAD  *  ----------  ------------  ---------------------------------------  *
- RAD  *  13.11.2001  Th.Raddatz    Fixed problem that the color of $$CD     *
- RAD  *                            was not set when $$CD was changed        *
- RAD  *                            manually.                                *
- RAD  *  13.11.2001  Th.Raddatz    Changed filter "First Message ID" to     *
- RAD  *                            "Position to" and added binary search.   *
- RAD  *  13.11.2001  Th.Raddatz    Changed filter "First Message ID" to     *
- RAD  *                            "Position to" and added binary search.   *
- RAD  *  20.12.2001  Th.Raddatz    Added the "Filter" panel.                *
- RAD  *  24.12.2001  Th.Raddatz    Added support for the RTVM0400 format    *
- RAD  *                            and enhanced compare rules to use        *
- RAD  *                            the message creation date/level and      *
- RAD  *                            the message modification date/level.     *
- RAD  *  14.04.2004  Th.Raddatz    Added addtional options:                 *
- RAD  *                               - Copy to  (31/32)                    *
- RAD  *                               - Change   (21/22)                    *
- RAD  *                               - Delete   (41/42)                    *
- RAD  *                               - Display  (51/52)                    *
- RAD  *  15.04.2004  Th.Raddatz    Added addtional command keys:            *
- RAD  *                               - Display Command Line Window (F21)   *
- RAD  *  08.06.2005  Th.Raddatz    Fixed bug that the color of field "Cd"   *
- RAD  *                            was not set properly on change.          *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *   >>PRE-COMPILER<<                                                  *
- RAD  *                                                                     *
- RAD  *     >>CRTCMD<<  CRTRPGMOD    MODULE(&LI/&OB) +                      *
- RAD  *                              SRCFILE(&SL/&SF) +                     *
- RAD  *                              SRCMBR(&SM);                           *
- RAD  *                                                                     *
- RAD  *     >>COMPILE<<                                                     *
+      * =================================================================== *
+      *                                                                     *
+      *  Kurzdokumentation :                                                *
+      *                                                                     *
+      *  Bereich . . . : CMPMSGF                                            *
+      *  Objekt  . . . : CMPMSGFR1                                          *
+      *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
+      *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+      *  Datum . . . . : 25.10.2001                                         *
+      *                                                                     *
+      * =================================================================== *
+      *                                                                     *
+      *  This software is free software, you can redistribute it and/or     *
+      *  modify it under the terms of the GNU General Public License (GPL)  *
+      *  as published by the Free Software Foundation.                      *
+      *                                                                     *
+      *  See GNU General Public License for details.                        *
+      *          http://www.opensource.org                                  *
+      *          http://www.opensource.org/licenses/gpl-license.html        *
+      *                                                                     *
+      * =================================================================== *
+      *  History:                                                           *
+      *                                                                     *
+      *  Datum       Name          Änderung                                 *
+      *  ----------  ------------  ---------------------------------------  *
+      *  13.11.2001  Th.Raddatz    Fixed problem that the color of $$CD     *
+      *                            was not set when $$CD was changed        *
+      *                            manually.                                *
+      *  13.11.2001  Th.Raddatz    Changed filter "First Message ID" to     *
+      *                            "Position to" and added binary search.   *
+      *  13.11.2001  Th.Raddatz    Changed filter "First Message ID" to     *
+      *                            "Position to" and added binary search.   *
+      *  20.12.2001  Th.Raddatz    Added the "Filter" panel.                *
+      *  24.12.2001  Th.Raddatz    Added support for the RTVM0400 format    *
+      *                            and enhanced compare rules to use        *
+      *                            the message creation date/level and      *
+      *                            the message modification date/level.     *
+      *  14.04.2004  Th.Raddatz    Added addtional options:                 *
+      *                               - Copy to  (31/32)                    *
+      *                               - Change   (21/22)                    *
+      *                               - Delete   (41/42)                    *
+      *                               - Display  (51/52)                    *
+      *  15.04.2004  Th.Raddatz    Added addtional command keys:            *
+      *                               - Display Command Line Window (F21)   *
+      *  08.06.2005  Th.Raddatz    Fixed bug that the color of field "Cd"   *
+      *                            was not set properly on change.          *
+      *                                                                     *
+      * =================================================================== *
+      *   >>PRE-COMPILER<<                                                  *
+      *                                                                     *
+      *     >>CRTCMD<<  CRTRPGMOD    MODULE(&LI/&OB) +                      *
+      *                              SRCFILE(&SL/&SF) +                     *
+      *                              SRCMBR(&SM);                           *
+      *                                                                     *
+      *     >>COMPILE<<                                                     *
       *       >>PARM<< TRUNCNBR(*NO);                                       *
       *       >>PARM<< DBGVIEW(*LIST);                                      *
- RAD  *     >>END-COMPILE<<                                                 *
- RAD  *                                                                     *
- RAD  *     >>EXECUTE<<                                                     *
- RAD  *                                                                     *
- RAD  *   >>END-PRE-COMPILER<<                                              *
- RAD  * =================================================================== *
+      *       >>PARM<< OPTION(*EVENTF);                                     *
+      *     >>END-COMPILE<<                                                 *
+      *                                                                     *
+      *     >>EXECUTE<<                                                     *
+      *                                                                     *
+      *   >>END-PRE-COMPILER<<                                              *
+      * =================================================================== *
      H DEBUG
      H NOMAIN
      H EXTBININT(*YES)
@@ -255,17 +256,17 @@
       *  ... retrieve message text
      D f_rtvMsgText...
      D                 PR          1024A
-     D  i_rtvm0400                         value  like(RTVM0400_t)
+     D  i_rtvm0400                         value  likeds(RTVM0400_t)
       *
       *  ... retrieve message help
      D f_rtvMsgHelp...
      D                 PR          1024A
-     D  i_rtvm0400                         value  like(RTVM0400_t)
+     D  i_rtvm0400                         value  likeds(RTVM0400_t)
       *
       *  ... retrieve replacement variables
      D f_rtvRplVars...
      D                 PR          1024A
-     D  i_rtvm0400                         value  like(RTVM0400_t)
+     D  i_rtvm0400                         value  likeds(RTVM0400_t)
       *
       *  ... open message file 1
      D p_openMsgF1...
@@ -380,8 +381,8 @@
       *  ... fill subfile record
      D p_sflFilRcd...
      D                 PR
-     D  i_rtvm0400_1                       value  like(RTVM0400_t)
-     D  i_rtvm0400_2                       value  like(RTVM0400_t)
+     D  i_rtvm0400_1                       value  likeds(RTVM0400_t)
+     D  i_rtvm0400_2                       value  likeds(RTVM0400_t)
       *
       *  ... set action code color attribute
      D p_sflSetCdColor...
@@ -395,19 +396,19 @@
       *
       *  ... retrieve message description format RTVM0400
      D f_rtvMsgD...
-     D                 PR                  like(RTVM0400_t)
+     D                 PR                  likeds(RTVM0400_t)
      D  i_msgId                       7A   value
-     D  i_qMsgF                            value like(qobj_t    )
+     D  i_qMsgF                            value like(qobj_t)
      D  i_rtvOpt                     10A   value
-     D  o_errCode                          value like(errCode_t )
+     D  o_errCode                          value likeds(errCode_t)
       *
       *  ... create an new (empty) RTVM0300 format
      D f_newRtvm0300...
-     D                 PR                  like(RTVM0300_t)
+     D                 PR                  likeds(RTVM0300_t)
       *
       *  ... create an new (empty) RTVM0400 format
      D f_newRtvm0400...
-     D                 PR                  like(RTVM0400_t)
+     D                 PR                  likeds(RTVM0400_t)
       *
       *  ... convert string to lower case
      D f_toLower...
@@ -454,15 +455,11 @@
      D g_find          S           1024A   varying inz
       *
       *  Message Description IO (Open Data Paths)
-     D g_RTVM0400_1  E DS                  extname(xdrtvm0400)  inz
-     D                                     prefix(g_RTVM0400_1_)
-     D g_RTVM0400_2  E DS                  extname(xdrtvm0400)  inz
-     D                                     prefix(g_RTVM0400_2_)
+     D g_RTVM0400_1    DS                  likeds(rtvm0400_t) inz
+     D g_RTVM0400_2    DS                  likeds(rtvm0400_t) inz
       *
-     D g_qMsgF_1     E DS                  extname(xdqobj   )   inz
-     D                                     prefix(g_qMsgF_1_)
-     D g_qMsgF_2     E DS                  extname(xdqobj   )   inz
-     D                                     prefix(g_qMsgF_2_)
+     D g_qMsgF_1       DS                  likeds(qObj_t) inz
+     D g_qMsgF_2       DS                  likeds(qObj_t) inz
       *
      D g_msgId_1       S              7A   inz(cMSGID_HIVAL)
      D g_msgId_2       S              7A   inz(cMSGID_HIVAL)
@@ -495,8 +492,7 @@
       *
       *  Fields
      D isDone          S               N   inz
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
      D isConfirmed_F9  S               N   inz
       *
      D range           DS
@@ -784,11 +780,11 @@
      D  i_upperMsgID                  7A   value
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   Eval      ##MSGF1 = g_qMsgF_1_name
-     C                   Eval      ##LIB1  = g_qMsgF_1_lib
+     C                   Eval      ##MSGF1 = g_qMsgF_1.name
+     C                   Eval      ##LIB1  = g_qMsgF_1.lib
       *
-     C                   Eval      ##MSGF2 = g_qMsgF_2_name
-     C                   Eval      ##LIB2  = g_qMsgF_2_lib
+     C                   Eval      ##MSGF2 = g_qMsgF_2.name
+     C                   Eval      ##LIB2  = g_qMsgF_2.lib
       *
      C                   Callp     p_sflInit
       *
@@ -890,8 +886,7 @@
      D                 PI
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   If        not workstn_sfldsp
@@ -921,8 +916,7 @@
      D                 PI
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_  )
+     D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   If        not workstn_sfldsp
@@ -1019,8 +1013,7 @@
      D isDone          S               N   inz
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
      D rrn             S             10I 0 inz
      D isSflDirty      S               N   inz(cFalse)
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1035,8 +1028,8 @@
      C                   Endif
       *
       *  Process MsgF 1 fields ...
-     C                   If        (##MSGF1 <> g_qMsgF_1_name)  or
-     C                             (##LIB1  <> g_qMsgF_1_lib )
+     C                   If        (##MSGF1 <> g_qMsgF_1.name)  or
+     C                             (##LIB1  <> g_qMsgF_1.lib )
       *
      C                   Eval      isSflDirty = cTrue
       *
@@ -1048,8 +1041,8 @@
      C                   Endif
       *
       *  Process MsgF 2 fields ...
-     C                   If        (##MSGF2 <> g_qMsgF_2_name)  or
-     C                             (##LIB2  <> g_qMsgF_2_lib )
+     C                   If        (##MSGF2 <> g_qMsgF_2.name)  or
+     C                             (##LIB2  <> g_qMsgF_2.lib )
       *
      C                   Eval      isSflDirty = cTrue
       *
@@ -1104,8 +1097,7 @@
      D                 PI
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   If        not workstn_sfldsp
@@ -1137,8 +1129,7 @@
      D                 PI
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   If        not workstn_sfldsp
@@ -1173,8 +1164,7 @@
      D isOK            S               N   inz
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
       *  Message file 1
@@ -1237,8 +1227,7 @@
      D isChanged       S               N   inz
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
      D sflError        S               N   inz
       *
       *  Message data structures
@@ -1465,9 +1454,7 @@
      D msgID           S              7A   inz
      D rtvOpt          S             10A   inz
       *
-     D errCode       E DS                  extname(xderrcode)
-     D                                     prefix(errCode_)
-     D                                     inz
+     D errCode         DS                  likeds(errCode_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   Callp     f_getFirstMsgID(i_lowerMsgID :
@@ -1483,8 +1470,8 @@
      C                   Eval      g_rtvOpt_2 = cMSGID_SAME
       *
       *  Position file Pointer ...
-     C                   Dou       (g_RTVM0400_1_msgId >= ' ')  or
-     C                             (g_RTVM0400_2_msgId >= ' ')
+     C                   Dou       (g_rtvm0400_1.msgId >= ' ')  or
+     C                             (g_rtvm0400_2.msgId >= ' ')
      C                   Eval      isFound    = f_sflReadRcd
      C                   If        not isFound
      C                   Leave
@@ -1510,11 +1497,8 @@
      D isFound         S               N   inz(cFalse)
       *
       *  Fields
-     D errCode_1     E DS                  extname(xderrcode) inz
-     D                                     prefix(errCode_1_)
-     D errCode_2     E DS                  extname(xderrcode) inz
-     D                                     prefix(errCode_2_)
-      *
+     D errCode_1       DS                  likeds(errCode_t) inz
+     D errCode_2       DS                  likeds(errCode_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   Eval      errCode_1 = f_newApiErrCode(cTrue)
@@ -1527,12 +1511,12 @@
      C                                                      errCode_1  )
       *
      C                   If        (f_isApiErr(errCode_1)  )  or
-     C                             (g_RTVM0400_1_bytAvl = 0)
+     C                             (g_rtvm0400_1.bytAvl = 0)
      C                   Eval      g_msgId_1  = cMSGID_HIVAL
      C                   Eval      g_rtvOpt_1 = cMSGID_EOF
      C                   Eval      g_RTVM0400_1 = f_newRtvm0400
      C                   Else
-     C                   Eval      g_msgId_1  = g_RTVM0400_1_msgID
+     C                   Eval      g_msgId_1  = g_rtvm0400_1.msgID
      C                   Eval      g_rtvOpt_1 = '*NEXT'
      C                   Endif
      C                   Endif
@@ -1547,12 +1531,12 @@
      C                                                      errCode_2  )
       *
      C                   If        (f_isApiErr(errCode_2)  )  or
-     C                             (g_RTVM0400_2_bytAvl = 0)
+     C                             (g_rtvm0400_2.bytAvl = 0)
      C                   Eval      g_msgId_2  = cMSGID_HIVAL
      C                   Eval      g_rtvOpt_2 = cMSGID_EOF
      C                   Eval      g_RTVM0400_2 = f_newRtvm0400
      C                   Else
-     C                   Eval      g_msgId_2  = g_RTVM0400_2_msgID
+     C                   Eval      g_msgId_2  = g_rtvm0400_2.msgID
      C                   Eval      g_rtvOpt_2 = '*NEXT'
      C                   Endif
      C                   Endif
@@ -1605,8 +1589,7 @@
      D numRcd          S             10I 0 inz
      D isSelected      S               N   inz
       *
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       *
       *  Message data structures
       /COPY QCMPMSGF,USR0009
@@ -1874,17 +1857,14 @@
      D isFound         S               N   inz(cFalse)
       *
       *  Fields
-     D qMsgF         E DS                  extname(xdqobj   ) inz
-     D                                     prefix(qMsgF_)
-     D errCode       E DS                  extname(xderrcode) inz
-     D                                     prefix(errCode_)
-     D RTVM0400      E DS                  extname(xdrtvm0400)  inz
-     D                                     prefix(RTVM0400_)
+     D qMsgF           DS                  likeds(qObj_t) inz
+     D errCode         DS                  likeds(errCode_t) inz
+     D rtvm0400        DS                  likeds(rtvm0400_t) inz
       *
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   Eval      qMsgF_name = i_msgF
-     C                   Eval      qMsgF_lib  = i_lib
+     C                   Eval      qMsgF.name = i_msgF
+     C                   Eval      qMsgF.lib  = i_lib
       *
       *  Retrieve message description
      C                   Eval      RTVM0400 = f_rtvMsgD(i_msgId     :
@@ -1893,13 +1873,13 @@
      C                                                  errCode     )
       *
      C                   If        (f_isApiErr(errCode)  )  or
-     C                             (RTVM0400_bytAvl   = 0)
+     C                             (rtvm0400.bytAvl   = 0)
      C                   Eval      RTVM0400 = f_rtvMsgD(i_msgId  :
      C                                                  qMsgF    :
      C                                                  '*NEXT'  :
      C                                                  errCode  )
      C                   If        (f_isApiErr(errCode)  )  or
-     C                             (RTVM0400_bytAvl   = 0)
+     C                             (rtvm0400.bytAvl   = 0)
      C                   Eval      isFound = cFalse
      C                   Else
      C                   Eval      isFound = cTrue
@@ -1911,7 +1891,7 @@
      C                   If        not isFound
      C                   Eval      o_msgID = ''
      C                   Else
-     C                   Eval      o_msgID = RTVM0400_msgID
+     C                   Eval      o_msgID = rtvm0400.msgID
      C                   Endif
       *
      C                   Return    isFound
@@ -1928,27 +1908,21 @@
       *
      D f_rtvMsgText...
      D                 PI          1024A
-     D  i_rtvm0400                         value  like(RTVM0400_t)
+     D  i_rtvm0400                         value  likeds(RTVM0400_t)
       *
       *  Return Value
      D o_msgText       S           1024A   inz
-      *
-      *  Fields
-     D RTVM0400      E DS                  extname(xdrtvm0400)  based(pRTVM0400)
-     D                                     prefix(RTVM0400_)
       *-------------------------------------------------------------------
       *
-     C                   Eval      pRTVM0400 = %addr(i_rtvm0400)
-      *
-     C                   If        RTVM0400_bytAvl = 0
+     C                   If        i_rtvm0400.bytAvl = 0
      C                   Eval      o_msgText = ''
      C                   Else
-     C                   If        RTVM0400_lenMsgR = 0
+     C                   If        i_rtvm0400.lenMsgR = 0
      C                   Eval      o_msgText = ''
      C                   Else
-     C                   Eval      o_msgText = %subst(RTVM0400           :
-     C                                                RTVM0400_ofsMsg + 1:
-     C                                                RTVM0400_lenMsgR   )
+     C                   Eval      o_msgText = %subst(i_rtvm0400           :
+     C                                                i_rtvm0400.ofsMsg + 1:
+     C                                                i_rtvm0400.lenMsgR   )
      C                   Endif
      C                   Endif
       *
@@ -1966,27 +1940,21 @@
       *
      D f_rtvMsgHelp...
      D                 PI          1024A
-     D  i_rtvm0400                         value  like(RTVM0400_t)
+     D  i_rtvm0400                         value  likeds(RTVM0400_t)
       *
       *  Return Value
      D o_msgHelp       S           1024A   inz
-      *
-      *  Fields
-     D RTVM0400      E DS                  extname(xdrtvm0400)  based(pRTVM0400)
-     D                                     prefix(RTVM0400_)
       *-------------------------------------------------------------------
       *
-     C                   Eval      pRTVM0400 = %addr(i_rtvm0400)
-      *
-     C                   If        RTVM0400_bytAvl = 0
+     C                   If        i_rtvm0400.bytAvl = 0
      C                   Eval      o_msgHelp = ''
      C                   Else
-     C                   If        RTVM0400_lenMsgHlpR = 0
+     C                   If        i_rtvm0400.lenMsgHlpR = 0
      C                   Eval      o_msgHelp = ''
      C                   Else
-     C                   Eval      o_msgHelp = %subst(RTVM0400              :
-     C                                                RTVM0400_ofsMsgHlp + 1:
-     C                                                RTVM0400_lenMsgHlpR   )
+     C                   Eval      o_msgHelp = %subst(i_rtvm0400              :
+     C                                                i_rtvm0400.ofsMsgHlp + 1:
+     C                                                i_rtvm0400.lenMsgHlpR   )
      C                   Endif
      C                   Endif
       *
@@ -2004,7 +1972,7 @@
       *
      D f_rtvRplVars...
      D                 PI          1024A
-     D  i_rtvm0400                         value  like(RTVM0400_t)
+     D  i_rtvm0400                         value  likeds(RTVM0400_t)
       *
       *  Return Value
      D o_rplVars       S           1024A   inz
@@ -2012,24 +1980,20 @@
       *  Fields
      D x               S             10I 0 inz
       *
-     D RTVM0400      E DS                  extname(xdrtvm0400)  based(pRTVM0400)
-     D                                     prefix(RTVM0400_)
-      *
      D rplVar          DS                  qualified            based(pRplVar)
      D  length                       10I 0
      D  decPos                       10I 0
      D  type                         10A
       *-------------------------------------------------------------------
       *
-     C                   Eval      pRTVM0400 = %addr(i_rtvm0400)
-      *
      C                   Eval      o_rplVars = ''
       *
-     C                   If        RTVM0400_NUMVARFMT > 0
-     C                   Eval      pRplVar = pRTVM0400 + RTVM0400_OFSVARFMT
+     C                   If        i_RTVM0400.NUMVARFMT > 0
+     C                   Eval      pRplVar = %addr(i_RTVM0400)
+     C                                       + i_RTVM0400.OFSVARFMT
       *
       *  Spin through replacement variables
-     C                   For       x = 1 to RTVM0400_NUMVARFMT
+     C                   For       x = 1 to i_RTVM0400.NUMVARFMT
       *
      C                   Eval      o_rplVars = %trimR(o_rplVars) + '('
       *
@@ -2059,7 +2023,7 @@
       *
      C                   Eval      o_rplVars = %trimR(o_rplVars) + ')'
       *
-     C                   Eval      pRplVar = pRplVar + RTVM0400_LENVARFMTE
+     C                   Eval      pRplVar = pRplVar + i_RTVM0400.LENVARFMTE
      C                   Endfor
       *
      C                   Endif
@@ -2084,8 +2048,7 @@
       *  Fields
       /COPY QCMPMSGF,USR0012
       *
-     D msg           E DS                  extname(xdmsg     ) inz
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       *-------------------------------------------------------------------
       *
      C                   If        g_qMsgF_1 <> ''
@@ -2098,8 +2061,8 @@
      C                                         cMsg_Prv      :
      C                                         cMsg_ToMyself )
      C                   Else
-     C                   Eval      g_qMsgF_1_name = i_msgF
-     C                   Eval      g_qMsgF_1_lib  = f_getMsgFLib(i_msgF: i_lib)
+     C                   Eval      g_qMsgF_1.name = i_msgF
+     C                   Eval      g_qMsgF_1.lib  = f_getMsgFLib(i_msgF: i_lib)
      C                   Eval      g_msgId_1      = cMSGID_LOVAL
      C                   Eval      g_rtvOpt_1     = ''
      C                   Endif
@@ -2124,8 +2087,7 @@
       *  Fields
       /COPY QCMPMSGF,USR0012
       *
-     D msg           E DS                  extname(xdmsg     ) inz
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       *-------------------------------------------------------------------
       *
      C                   If        g_qMsgF_2 <> ''
@@ -2138,8 +2100,8 @@
      C                                         cMsg_Prv      :
      C                                         cMsg_ToMyself )
      C                   Else
-     C                   Eval      g_qMsgF_2_name = i_msgF
-     C                   Eval      g_qMsgF_2_lib  = f_getMsgFLib(i_msgF: i_lib)
+     C                   Eval      g_qMsgF_2.name = i_msgF
+     C                   Eval      g_qMsgF_2.lib  = f_getMsgFLib(i_msgF: i_lib)
      C                   Eval      g_msgId_2      = cMSGID_LOVAL
      C                   Eval      g_rtvOpt_2     = ''
      C                   Endif
@@ -2162,8 +2124,7 @@
       *  Fields
       /COPY QCMPMSGF,USR0013
       *
-     D msg           E DS                  extname(xdmsg     ) inz
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       *-------------------------------------------------------------------
       *
      C                   If        g_qMsgF_1 = ''
@@ -2178,8 +2139,8 @@
      C                   Else
      C                   Eval      g_msgId_1      = cMSGID_HIVAL
      C                   Eval      g_rtvOpt_1     = cMSGID_EOF
-     C                   Eval      g_qMsgF_1_name = ''
-     C                   Eval      g_qMsgF_1_lib  = ''
+     C                   Eval      g_qMsgF_1.name = ''
+     C                   Eval      g_qMsgF_1.lib  = ''
      C                   Endif
       *
      C                   Return
@@ -2200,8 +2161,7 @@
       *  Fields
       /COPY QCMPMSGF,USR0013
       *
-     D msg           E DS                  extname(xdmsg     ) inz
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       *-------------------------------------------------------------------
       *
      C                   If        g_qMsgF_2 = ''
@@ -2216,8 +2176,8 @@
      C                   Else
      C                   Eval      g_msgId_2      = cMSGID_HIVAL
      C                   Eval      g_rtvOpt_2     = cMSGID_EOF
-     C                   Eval      g_qMsgF_2_name = ''
-     C                   Eval      g_qMsgF_2_lib  = ''
+     C                   Eval      g_qMsgF_2.name = ''
+     C                   Eval      g_qMsgF_2.lib  = ''
      C                   Endif
       *
      C                   Return
@@ -2295,14 +2255,12 @@
      D lib             S             10A   inz
       *
       *  Fields
-     D qObj          E DS                  extname(xdqobj   )   inz
-     D                                     prefix(qObj_)
-     D OBJD0100      E DS                  extname(xdobjd0100)  inz
-     D                                     prefix(OBJD0100_)
+     D qObj            DS                  likeds(qObj_t) inz
+     D OBJD0100        DS                  likeds(objd0100_t) inz
       *-------------------------------------------------------------------
       *
-     C                   Eval      qObj_name = i_msgF
-     C                   Eval      qObj_lib  = i_lib
+     C                   Eval      qObj.name = i_msgF
+     C                   Eval      qObj.lib  = i_lib
       *
      C                   Callp     QUSROBJD(OBJD0100        :
      C                                      %size(OBJD0100) :
@@ -2310,7 +2268,7 @@
      C                                      qObj            :
      C                                      '*MSGF'         )
       *
-     C                   Eval      lib = OBJD0100_rtnLib
+     C                   Eval      lib = OBJD0100.rtnLib
       *
      C                   Return    lib
       *
@@ -2415,8 +2373,7 @@
      D isAdded         S               N   inz(cFalse)
       *
       *  Fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       *
       *  Messages
       /COPY QCMPMSGF,USR0022
@@ -2712,24 +2669,20 @@
      D cmd             S           8192A   inz
      D msgHelp         S           1024A   inz
      D rplVars         S           1024A   inz
-     D severity        S              2A   inz
-     D qMsgF         E DS                  extname(xdqobj    )  inz
-     D                                     prefix(qMsgF_     )
-     D RTVM0400      E DS                  extname(xdrtvm0400)  inz
-     D                                     prefix(RTVM0400_  )
-     D errCode       E DS                  extname(xderrcode)   inz
-     D                                     prefix(errCode_)
+     D qMsgF           DS                  likeds(qObj_t) inz
+     D rtvm0400        DS                  likeds(rtvm0400_t) inz
+     D errCode         DS                  likeds(errCode_t) inz
       *-------------------------------------------------------------------
       *
-     C                   Eval      qMsgF_name = i_msgF
-     C                   Eval      qMsgF_lib  = i_lib
+     C                   Eval      qMsgF.name = i_msgF
+     C                   Eval      qMsgF.lib  = i_lib
      C                   Eval      RTVM0400 = f_rtvMsgD(i_msgID     :
      C                                                  qMsgF       :
      C                                                  cMSGID_SAME :
      C                                                  errCode     )
       *
      C                   If        (f_isApiErr(errCode))  or
-     C                             (RTVM0400_bytAvl = 0)
+     C                             (RTVM0400.bytAvl = 0)
      C                   Eval      isChanged = cFalse
      C                   Else
       *
@@ -2859,16 +2812,10 @@
       *
      D p_sflFilRcd...
      D                 PI
-     D  i_rtvm0400_1                       value  like(RTVM0400_t)
-     D  i_rtvm0400_2                       value  like(RTVM0400_t)
+     D  i_rtvm0400_1                       value  likeds(RTVM0400_t)
+     D  i_rtvm0400_2                       value  likeds(RTVM0400_t)
       *
       *  Fields
-     D RTVM0400_1    E DS                  extname(xdrtvm0400)
-     D                                     based(pRTVM0400_1)
-     D                                     prefix(RTVM0400_1_)
-     D RTVM0400_2    E DS                  extname(xdrtvm0400)
-     D                                     based(pRTVM0400_2)
-     D                                     prefix(RTVM0400_2_)
      D                 DS
      D date7$                         7A
      D date7                          7S 0 inz overlay(date7$: 1)
@@ -2884,85 +2831,82 @@
      D  mod_modLvl_2                 10I 0 inz
       *-------------------------------------------------------------------
       *
-     C                   Eval      pRTVM0400_1 = %addr(i_rtvm0400_1)
-     C                   Eval      pRTVM0400_2 = %addr(i_rtvm0400_2)
-      *
       *  Compare date : Y/N
      C                   If        g_cmpDate = 'Y'
       *            keep information
      C                   Else
-     C                   Eval      RTVM0400_1_MSGCRTDAT = cLowDat7
-     C                   Eval      RTVM0400_1_MSGMODDAT = cLowDat7
-     C                   Eval      RTVM0400_2_MSGCRTDAT = cLowDat7
-     C                   Eval      RTVM0400_2_MSGMODDAT = cLowDat7
+     C                   Eval      i_RTVM0400_1.crtDate = cLowDat7
+     C                   Eval      i_RTVM0400_1.modDate = cLowDat7
+     C                   Eval      i_RTVM0400_2.crtDate = cLowDat7
+     C                   Eval      i_RTVM0400_2.modDate = cLowDat7
      C                   Endif
       *
       *  Compare level: Y/N
      C                   If        g_cmpLvl  = 'Y'
       *            keep information
      C                   Else
-     C                   Eval      RTVM0400_1_MSGCRTNUM = 0
-     C                   Eval      RTVM0400_1_MSGMODNUM = 0
-     C                   Eval      RTVM0400_2_MSGCRTNUM = 0
-     C                   Eval      RTVM0400_2_MSGMODNUM = 0
+     C                   Eval      i_RTVM0400_1.crtLvlNbr = 0
+     C                   Eval      i_RTVM0400_1.modLvlNbr = 0
+     C                   Eval      i_RTVM0400_2.crtLvlNbr = 0
+     C                   Eval      i_RTVM0400_2.modLvlNbr = 0
      C                   Endif
       *
       *  Create creation/modification level data structure
-     C                   Eval      date7$ = RTVM0400_1_MSGCRTDAT
+     C                   Eval      date7$ = i_RTVM0400_1.crtDate
      C     *CYMD         Move      date7         mod_crtDate_1
-     C                   Eval      date7$ = RTVM0400_1_MSGMODDAT
+     C                   Eval      date7$ = i_RTVM0400_1.modDate
      C     *CYMD         Move      date7         mod_modDate_1
       *
-     C                   Eval      mod_crtLvl_1 = RTVM0400_1_MSGCRTNUM
-     C                   Eval      mod_modLvl_1 = RTVM0400_1_MSGMODNUM
+     C                   Eval      mod_crtLvl_1 = i_RTVM0400_1.crtLvlNbr
+     C                   Eval      mod_modLvl_1 = i_RTVM0400_1.modLvlNbr
       *
-     C                   Eval      date7$ = RTVM0400_2_MSGCRTDAT
+     C                   Eval      date7$ = i_RTVM0400_2.crtDate
      C     *CYMD         Move      date7         mod_crtDate_2
-     C                   Eval      date7$ = RTVM0400_2_MSGMODDAT
+     C                   Eval      date7$ = i_RTVM0400_2.modDate
      C     *CYMD         Move      date7         mod_modDate_2
       *
-     C                   Eval      mod_crtLvl_2 = RTVM0400_2_MSGCRTNUM
-     C                   Eval      mod_modLvl_2 = RTVM0400_2_MSGMODNUM
+     C                   Eval      mod_crtLvl_2 = i_RTVM0400_2.crtLvlNbr
+     C                   Eval      mod_modLvl_2 = i_RTVM0400_2.modLvlNbr
       *
       *  Set subfile hidden fields ...
-     C                   Eval      H_MSGID1 = RTVM0400_1_msgId
-     C                   Eval      H_FILE1  = g_qMsgF_1_name
-     C                   Eval      H_LIB1   = g_qMsgF_1_lib
-     C                   Eval      H_MSGID2 = RTVM0400_2_msgId
-     C                   Eval      H_FILE2  = g_qMsgF_2_name
-     C                   Eval      H_LIB2   = g_qMsgF_2_lib
+     C                   Eval      H_MSGID1 = i_RTVM0400_1.msgId
+     C                   Eval      H_FILE1  = g_qMsgF_1.name
+     C                   Eval      H_LIB1   = g_qMsgF_1.lib
+     C                   Eval      H_MSGID2 = i_RTVM0400_2.msgId
+     C                   Eval      H_FILE2  = g_qMsgF_2.name
+     C                   Eval      H_LIB2   = g_qMsgF_2.lib
       *
       *  Set subfile fields ...
      C                   Eval      ##OPT          = ''
      C                   Eval      workstn_opt_ri = cFalse
       *
-     C                   If        RTVM0400_1_msgId <> ''
-     C                   Eval      $$MSGID   = RTVM0400_1_msgId
+     C                   If        i_RTVM0400_1.msgId <> ''
+     C                   Eval      $$MSGID   = i_RTVM0400_1.msgId
      C                   Else
-     C                   Eval      $$MSGID   = RTVM0400_2_msgId
+     C                   Eval      $$MSGID   = i_RTVM0400_2.msgId
      C                   Endif
       *
-     C                   Eval      $$TEXT1   = f_rtvMsgText(RTVM0400_1)
-     C                   Eval      $$HELP1   = f_rtvMsgHelp(RTVM0400_1)
+     C                   Eval      $$TEXT1   = f_rtvMsgText(i_RTVM0400_1)
+     C                   Eval      $$HELP1   = f_rtvMsgHelp(i_RTVM0400_1)
       *
-     C                   Eval      $$TEXT2   = f_rtvMsgText(RTVM0400_2)
-     C                   Eval      $$HELP2   = f_rtvMsgHelp(RTVM0400_2)
+     C                   Eval      $$TEXT2   = f_rtvMsgText(i_RTVM0400_2)
+     C                   Eval      $$HELP2   = f_rtvMsgHelp(i_RTVM0400_2)
       *
       *  ... determine action code
      C                   Select
       *      ... no-action     (missing both descriptions)
-     C                   When      RTVM0400_1_msgId = '' and
-     C                             RTVM0400_2_msgId = ''
+     C                   When      i_RTVM0400_1.msgId = '' and
+     C                             i_RTVM0400_2.msgId = ''
      C                   Eval      $$CD = cCmpNoAction
       *      ... copy-to-left  (missing left description)
-     C                   When      RTVM0400_1_msgId = ''
+     C                   When      i_RTVM0400_1.msgId = ''
      C                   Eval      $$CD = cCmpCopyLeft
       *      ... copy-to-right (missing right description)
-     C                   When      RTVM0400_2_msgId = ''
+     C                   When      i_RTVM0400_2.msgId = ''
      C                   Eval      $$CD = cCmpCopyRight
      C                   Other
       *      ... others
-     C                   If        RTVM0400_1 = RTVM0400_2
+     C                   If        i_RTVM0400_1 = i_RTVM0400_2
       *          ... equal descriptions
      C                   Eval      $$CD = cCmpEqual
      C                   Else
@@ -3037,45 +2981,38 @@
      D  i_rrn                        10I 0 value
       *
       *  Fields
-     D qMsgF_1       E DS                  extname(xdqobj    ) inz
-     D                                     prefix(qMsgF_1_)
-     D qMsgF_2       E DS                  extname(xdqobj    ) inz
-     D                                     prefix(qMsgF_2_)
-     D RTVM0400_1    E DS                  extname(xdrtvm0400) inz
-     D                                     prefix(rtvm0400_1_)
-     D RTVM0400_2    E DS                  extname(xdrtvm0400) inz
-     D                                     prefix(rtvm0400_2_)
-     D errCode_1     E DS                  extname(xderrcode) inz
-     D                                     prefix(errCode_1_)
-     D errCode_2     E DS                  extname(xderrcode) inz
-     D                                     prefix(errCode_2_)
-      *
+     D qMsgF_1         DS                  likeds(qObj_t) inz
+     D qMsgF_2         DS                  likeds(qObj_t) inz
+     D rtvm0400_1      DS                  likeds(rtvm0400_t) inz
+     D rtvm0400_2      DS                  likeds(rtvm0400_t) inz
+     D errCode_1       DS                  likeds(errCode_t) inz
+     D errCode_2       DS                  likeds(errCode_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
       *  Retrieve message description of 1. file
-     C                   Eval      qMsgF_1_name = ##MSGF1
-     C                   Eval      qMsgF_1_lib  = ##LIB1
+     C                   Eval      qMsgF_1.name = ##MSGF1
+     C                   Eval      qMsgF_1.lib  = ##LIB1
      C                   Eval      RTVM0400_1 = f_rtvMsgD($$MSGID     :
      C                                                    qMsgF_1     :
      C                                                    cMSGID_SAME :
      C                                                    errCode_1   )
       *
      C                   If        (f_isApiErr(errCode_1)  )  or
-     C                             (RTVM0400_1_bytAvl = 0  )
-     C                   Eval      RTVM0400_1 = f_newRtvm0400
+     C                             (rtvm0400_1.bytAvl = 0  )
+     C                   Eval      rtvm0400_1 = f_newRtvm0400
      C                   Endif
       *
       *  Retrieve message description of 2. file
-     C                   Eval      qMsgF_2_name = ##MSGF2
-     C                   Eval      qMsgF_2_lib  = ##LIB2
-     C                   Eval      RTVM0400_2 = f_rtvMsgD($$MSGID     :
+     C                   Eval      qMsgF_2.name = ##MSGF2
+     C                   Eval      qMsgF_2.lib  = ##LIB2
+     C                   Eval      rtvm0400_2 = f_rtvMsgD($$MSGID     :
      C                                                    qMsgF_2     :
      C                                                    cMSGID_SAME :
      C                                                    errCode_2   )
       *
      C                   If        (f_isApiErr(errCode_2)  )  or
-     C                             (RTVM0400_2_bytAvl = 0  )
-     C                   Eval      RTVM0400_2 = f_newRtvm0400
+     C                             (rtvm0400_2.bytAvl = 0  )
+     C                   Eval      rtvm0400_2 = f_newRtvm0400
      C                   Endif
       *
      C     i_rrn         Chain     SFL
@@ -3098,29 +3035,22 @@
      P                 B
       *
      D f_rtvMsgD...
-     D                 PI                  like(RTVM0400_t)
+     D                 PI                  likeds(rtvm0400_t)
      D  i_msgId                       7A   value
-     D  i_qMsgF                            value like(qobj_t    )
+     D  i_qMsgF                            value like(qobj_t)
      D  i_rtvOpt                     10A   value
-     D  o_errCode                          value like(errCode_t )
+     D  o_errCode                          value likeds(errCode_t)
       *
       *  Fields
-     D RTVM0300      E DS                  extname(xdrtvm0300) inz
-     D                                     prefix(rtvm0300_)
-     D RTVM0400      E DS                  extname(xdrtvm0400) inz
-     D                                     prefix(rtvm0400_)
-     D errCode       E DS                  extname(xderrcode)
-     D                                     prefix(errCode_)
-     D                                     based(pErrCode)
-     D msg           E DS                  extname(xdmsg     ) inz
-     D                                     prefix(msg_)
+     D RTVM0300        DS                  likeds(rtvm0300_t) inz
+     D rtvm0400        DS                  likeds(rtvm0400_t) inz
+     D msg             DS                  likeds(msg_t) inz
      D sizeAdj         S             10I 0 inz static
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
       *
      C                   Eval      RTVM0400 = f_newRtvm0400
-     C                   Eval      pErrCode = %addr(o_errCode)
-     C                   Eval      errCode  = f_newApiErrCode(cTrue)
+     C                   Eval      o_errCode  = f_newApiErrCode(cTrue)
       *
       *  Retrieve message description
      C                   If        g_fmtName = 'RTVM0400'
@@ -3133,12 +3063,12 @@
      C                                     0                   :
      C                                     '*NO'               :
      C                                     '*YES'              :
-     C                                     errCode             :
+     C                                     o_errCode           :
      C                                     i_rtvOpt            :
      C                                     0                   :
      C                                     0                   )
       *
-     C                   If        errCode_excId = 'CPF3C21'
+     C                   If        o_errCode.excId = 'CPF3C21'
      C                   Eval      sizeAdj   = %size(RTVM0400) - %size(RTVM0300)
      C                   Eval      g_fmtName = 'RTVM0300'
      C                   Eval      msg = f_newMsg('USR0021')
@@ -3159,49 +3089,50 @@
      C                                     0                   :
      C                                     '*NO'               :
      C                                     '*YES'              :
-     C                                     errCode             :
+     C                                     o_errCode           :
      C                                     i_rtvOpt            :
      C                                     0                   :
      C                                     0                   )
      C                   Eval      RTVM0400 = f_newRtvm0400
-     C                   Eval      RTVM0400_BYTRET     = RTVM0300_BYTRET
-     C                   Eval      RTVM0400_BYTAVL     = RTVM0300_BYTAVL
-     C                   Eval      RTVM0400_MSGSEV     = RTVM0300_MSGSEV
-     C                   Eval      RTVM0400_ALTIDX     = RTVM0300_ALTIDX
-     C                   Eval      RTVM0400_ALTOPT     = RTVM0300_ALTOPT
-     C                   Eval      RTVM0400_LOGIND     = RTVM0300_LOGIND
-     C                   Eval      RTVM0400_MSGID      = RTVM0300_MSGID
-     C                   Eval      RTVM0400_RES_01     = RTVM0300_RES_01
-     C                   Eval      RTVM0400_NUMVARFMT  = RTVM0300_NUMVARFMT
-     C                   Eval      RTVM0400_CSINDTXT   = RTVM0300_CSINDTXT
-     C                   Eval      RTVM0400_CSINDDTA   = RTVM0300_CSINDDTA
-     C                   Eval      RTVM0400_CCSIDTXT   = RTVM0300_CCSIDTXT
-     C                   Eval      RTVM0400_OFSDFTR    = RTVM0300_OFSDFTR +
+     C                   Eval      RTVM0400.BYTRET = RTVM0300.BYTRET
+     C                   Eval      RTVM0400.BYTAVL = RTVM0300.BYTAVL
+     C                   Eval      RTVM0400.MSGSEV = RTVM0300.MSGSEV
+     C                   Eval      RTVM0400.ALTIDX = RTVM0300.ALTIDX
+     C                   Eval      RTVM0400.ALTOPT = RTVM0300.ALTOPT
+     C                   Eval      RTVM0400.LOGIND = RTVM0300.LOGIND
+     C                   Eval      RTVM0400.MSGID = RTVM0300.MSGID
+     C                   Eval      RTVM0400.reserved_01 = RTVM0300.reserved_01
+     C
+     C                   Eval      RTVM0400.NUMVARFMT = RTVM0300.NUMVARFMT
+     C                   Eval      RTVM0400.CSINDTXT = RTVM0300.CSINDTXT
+     C                   Eval      RTVM0400.CSINDDTA = RTVM0300.CSINDDTA
+     C                   Eval      RTVM0400.CCSIDTXT = RTVM0300.CCSIDTXT
+     C                   Eval      RTVM0400.OFSDFTR = RTVM0300.OFSDFTR +
      C                                                            sizeAdj
-     C                   Eval      RTVM0400_LENDFTRPYR = RTVM0300_LENDFTRPYR
-     C                   Eval      RTVM0400_LENDFTRPYA = RTVM0300_LENDFTRPYA
-     C                   Eval      RTVM0400_OFSMSG     = RTVM0300_OFSMSG  +
+     C                   Eval      RTVM0400.LENDFTRPYR = RTVM0300.LENDFTRPYR
+     C                   Eval      RTVM0400.LENDFTRPYA = RTVM0300.LENDFTRPYA
+     C                   Eval      RTVM0400.OFSMSG = RTVM0300.OFSMSG  +
      C                                                            sizeAdj
-     C                   Eval      RTVM0400_LENMSGR    = RTVM0300_LENMSGR
-     C                   Eval      RTVM0400_LENMSGA    = RTVM0300_LENMSGA
-     C                   Eval      RTVM0400_OFSMSGHLP  = RTVM0300_OFSMSGHLP +
+     C                   Eval      RTVM0400.LENMSGR = RTVM0300.LENMSGR
+     C                   Eval      RTVM0400.LENMSGA = RTVM0300.LENMSGA
+     C                   Eval      RTVM0400.OFSMSGHLP = RTVM0300.OFSMSGHLP +
      C                                                              sizeAdj
-     C                   Eval      RTVM0400_LENMSGHLPR = RTVM0300_LENMSGHLPR
-     C                   Eval      RTVM0400_LENMSGHLPA = RTVM0300_LENMSGHLPA
-     C                   Eval      RTVM0400_OFSVARFMT  = RTVM0300_OFSVARFMT +
+     C                   Eval      RTVM0400.LENMSGHLPR = RTVM0300.LENMSGHLPR
+     C                   Eval      RTVM0400.LENMSGHLPA = RTVM0300.LENMSGHLPA
+     C                   Eval      RTVM0400.OFSVARFMT = RTVM0300.OFSVARFMT +
      C                                                              sizeAdj
-     C                   Eval      RTVM0400_LENVARFMTR = RTVM0300_LENVARFMTR
-     C                   Eval      RTVM0400_LENVARFMTA = RTVM0300_LENVARFMTA
-     C                   Eval      RTVM0400_LENVARFMTE = RTVM0300_LENVARFMTE
-     C                   Eval      RTVM0400_DATA       = RTVM0300_DATA
+     C                   Eval      RTVM0400.LENVARFMTR = RTVM0300.LENVARFMTR
+     C                   Eval      RTVM0400.LENVARFMTA = RTVM0300.LENVARFMTA
+     C                   Eval      RTVM0400.LENVARFMTE = RTVM0300.LENVARFMTE
+     C                   Eval      RTVM0400.DATA = RTVM0300.DATA
      C                   Endif
       *
-     C                   If        RTVM0400_MSGCRTDAT = ''
-     C                   Eval      RTVM0400_MSGCRTDAT  = cLowDat7
+     C                   If        RTVM0400.crtDate = ''
+     C                   Eval      RTVM0400.crtDate = cLowDat7
      C                   Endif
       *
-     C                   If        RTVM0400_MSGMODDAT = ''
-     C                   Eval      RTVM0400_MSGMODDAT  = cLowDat7
+     C                   If        RTVM0400.modDate = ''
+     C                   Eval      RTVM0400.modDate = cLowDat7
      C                   Endif
       *
      C                   Return    RTVM0400
@@ -3217,11 +3148,10 @@
      P                 B
       *
      D f_newRtvm0300...
-     D                 PI                  like(RTVM0300_t)
+     D                 PI                  likeds(RTVM0300_t)
       *
       *  Fields
-     D RTVM0300      E DS                  extname(xdrtvm0300) inz
-     D                                     prefix(rtvm0300_)
+     D RTVM0300        DS                  likeds(rtvm0300_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   Clear                   RTVM0300
@@ -3239,17 +3169,16 @@
      P                 B
       *
      D f_newRtvm0400...
-     D                 PI                  like(RTVM0400_t)
+     D                 PI                  likeds(RTVM0400_t)
       *
       *  Fields
-     D RTVM0400      E DS                  extname(xdrtvm0400) inz
-     D                                     prefix(rtvm0400_)
+     D RTVM0400        DS                  likeds(rtvm0400_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   Clear                   RTVM0400
       *
-     C                   Eval      RTVM0400_MSGCRTDAT  = cLowDat7
-     C                   Eval      RTVM0400_MSGMODDAT  = cLowDat7
+     C                   Eval      RTVM0400.crtDate = cLowDat7
+     C                   Eval      RTVM0400.modDate = cLowDat7
       *
      C                   Return    RTVM0400
       *
@@ -3305,24 +3234,20 @@
       *  Fields
      D msgHelp         S           1024A   inz
      D rplVars         S           1024A   inz
-     D severity        S              2A   inz
-     D qMsgF         E DS                  extname(xdqobj    )  inz
-     D                                     prefix(qMsgF_     )
-     D RTVM0400      E DS                  extname(xdrtvm0400)  inz
-     D                                     prefix(RTVM0400_  )
-     D errCode       E DS                  extname(xderrcode)   inz
-     D                                     prefix(errCode_)
+     D qMsgF           DS                  likeds(qObj_t) inz
+     D rtvm0400        DS                  likeds(rtvm0400_t) inz
+     D errCode         DS                  likeds(errCode_t) inz
       *-------------------------------------------------------------------
       *
-     C                   Eval      qMsgF_name = i_msgF
-     C                   Eval      qMsgF_lib  = i_lib
+     C                   Eval      qMsgF.name = i_msgF
+     C                   Eval      qMsgF.lib  = i_lib
      C                   Eval      RTVM0400 = f_rtvMsgD(i_msgID     :
      C                                                  qMsgF       :
      C                                                  cMSGID_SAME :
      C                                                  errCode     )
       *
      C                   If        (f_isApiErr(errCode))  or
-     C                             (RTVM0400_bytAvl = 0)
+     C                             (RTVM0400.bytAvl = 0)
      C                   Eval      cmdValues = ''
      C                   Else
       *
@@ -3354,7 +3279,7 @@
      C                                      %trimR(rplVars) +
      C                                      ') ' +
      C                                   'SEV(' +
-     C                                      %char(RTVM0400_MSGSEV) +
+     C                                      %char(RTVM0400.MSGSEV) +
      C                                      ') '
       *
      C                   Endif

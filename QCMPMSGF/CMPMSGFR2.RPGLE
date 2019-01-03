@@ -1,48 +1,49 @@
- RAD  *%%TS  SD  20011025  160518  RADDATZ     REL-V4R4M0  5769-PW1
- RAD  * =================================================================== *
- RAD  *                                                                     *
- RAD  *  Kurzdokumentation :                                                *
- RAD  *                                                                     *
- RAD  *  Bereich . . . : CMPMSGF                                            *
- RAD  *  Objekt  . . . : CMPMSGFR2                                          *
- RAD  *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
- RAD  *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
- RAD  *  Datum . . . . : 20.12.2001                                         *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *                                                                     *
- RAD  *  This software is free software, you can redistribute it and/or     *
- RAD  *  modify it under the terms of the GNU General Public License (GPL)  *
- RAD  *  as published by the Free Software Foundation.                      *
- RAD  *                                                                     *
- RAD  *  See GNU General Public License for details.                        *
- RAD  *          http://www.opensource.org                                  *
- RAD  *          http://www.opensource.org/licenses/gpl-license.html        *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *  History:                                                           *
- RAD  *                                                                     *
- RAD  *  Datum       Name          Änderung                                 *
- RAD  *  ----------  ------------  ---------------------------------------  *
- RAD  *                                                                     *
- RAD  *                                                                     *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *   >>PRE-COMPILER<<                                                  *
- RAD  *                                                                     *
- RAD  *     >>CRTCMD<<  CRTRPGMOD    MODULE(&LI/&OB) +                      *
- RAD  *                              SRCFILE(&SL/&SF) +                     *
- RAD  *                              SRCMBR(&SM);                           *
- RAD  *                                                                     *
- RAD  *     >>COMPILE<<                                                     *
+      *%%TS  SD  20011025  160518  RADDATZ     REL-V4R4M0  5769-PW1
+      * =================================================================== *
+      *                                                                     *
+      *  Kurzdokumentation :                                                *
+      *                                                                     *
+      *  Bereich . . . : CMPMSGF                                            *
+      *  Objekt  . . . : CMPMSGFR2                                          *
+      *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
+      *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+      *  Datum . . . . : 20.12.2001                                         *
+      *                                                                     *
+      * =================================================================== *
+      *                                                                     *
+      *  This software is free software, you can redistribute it and/or     *
+      *  modify it under the terms of the GNU General Public License (GPL)  *
+      *  as published by the Free Software Foundation.                      *
+      *                                                                     *
+      *  See GNU General Public License for details.                        *
+      *          http://www.opensource.org                                  *
+      *          http://www.opensource.org/licenses/gpl-license.html        *
+      *                                                                     *
+      * =================================================================== *
+      *  History:                                                           *
+      *                                                                     *
+      *  Datum       Name          Änderung                                 *
+      *  ----------  ------------  ---------------------------------------  *
+      *                                                                     *
+      *                                                                     *
+      *                                                                     *
+      * =================================================================== *
+      *   >>PRE-COMPILER<<                                                  *
+      *                                                                     *
+      *     >>CRTCMD<<  CRTRPGMOD    MODULE(&LI/&OB) +                      *
+      *                              SRCFILE(&SL/&SF) +                     *
+      *                              SRCMBR(&SM);                           *
+      *                                                                     *
+      *     >>COMPILE<<                                                     *
       *       >>PARM<< TRUNCNBR(*NO);                                       *
       *       >>PARM<< DBGVIEW(*LIST);                                      *
- RAD  *     >>END-COMPILE<<                                                 *
- RAD  *                                                                     *
- RAD  *     >>EXECUTE<<                                                     *
- RAD  *                                                                     *
- RAD  *   >>END-PRE-COMPILER<<                                              *
- RAD  * =================================================================== *
+      *       >>PARM<< OPTION(*EVENTF);                                     *
+      *     >>END-COMPILE<<                                                 *
+      *                                                                     *
+      *     >>EXECUTE<<                                                     *
+      *                                                                     *
+      *   >>END-PRE-COMPILER<<                                              *
+      * =================================================================== *
      H DEBUG
      H NOMAIN
      H EXTBININT(*YES)
@@ -135,8 +136,7 @@
       *
       *  Fields
      D isDone          S               N   inz
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       *
       /COPY QCMPMSGF,USR0017
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -286,8 +286,7 @@
      D isDone          S               N   inz
       *
       *  Local fields
-     D msg           E DS                  extname(xdmsg     )
-     D                                     prefix(msg_)
+     D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C                   Eval      isDone     = cTrue
@@ -296,9 +295,7 @@
      C                   If        (##CPYL <> 'Y')  and
      C                             (##CPYL <> 'N')
      C                   Eval      msg = f_newMsg('USR0019')
-     C                   Callp     p_sndPgmMsg(msg           :
-     C                                         cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
+     C                   Callp     p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy )
      C                   Eval      workstn_cpyl_pc   = cTrue
      C                   Eval      workstn_cpyl_ri   = cTrue
      C                   Eval      isDone            = cFalse

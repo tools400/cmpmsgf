@@ -1,0 +1,215 @@
+     /* =================================================================== */
+     /*                                                                     */
+     /*  Documentation:                                                     */
+     /*                                                                     */
+     /*  Utility . . . : CMPMSGF                                            */
+     /*  Object  . . . : A_INSTALL  (PGM)                                   */
+     /*  Source member : A_INSTALL                                          */
+     /*  Source type . : CLLE                                               */
+     /*  Description   : CMPMSGF - Installer                                */
+     /*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      */
+     /*                                                                     */
+     /* =================================================================== */
+     /*                                                                     */
+     /*  This software is free software, you can redistribute it and/or     */
+     /*  modify it under the terms of the GNU General Public License (GPL)  */
+     /*  as published by the Free Software Foundation.                      */
+     /*                                                                     */
+     /*  See GNU General Public License for details.                        */
+     /*          http://www.opensource.org                                  */
+     /*          http://www.opensource.org/licenses/gpl-license.html        */
+     /*                                                                     */
+     /* =================================================================== */
+     /*  History:                                                           */
+     /*                                                                     */
+     /*  Datum       Name          Änderung                                 */
+     /*  ----------  ------------  ---------------------------------------  */
+     /*                                                                     */
+     /* =================================================================== */
+     /*   >>PRE-COMPILER<<                                                  */
+     /*     >>CRTCMD<<    CRTBNDCL  PGM(QTEMP/&OB) +                        */
+     /*                             SRCFILE(&SL/&SF) SRCMBR(&SM);           */
+     /*     >>IMPORTANT<<                                                   */
+     /*       >>PARM<<    OPTION(*EVENTF);                                  */
+     /*     >>END-IMPORTANT<<                                               */
+     /*     >>EXECUTE<<                                                     */
+     /*     >>CMD<<       CALL   PGM(QTEMP/A_INSTALL) +                     */
+     /*                          PARM('*CURRENT' '&SF' '&LI' 'ENG');        */
+     /*     >>CMD<<       DLTPGM PGM(QTEMP/A_INSTALL);                      */
+     /*   >>END-PRE-COMPILER<<                                              */
+     /* =================================================================== */
+             PGM        PARM(&TGTRLS &SRCFILE &TOLIB &LNG)
+
+             DCL        VAR(&TGTRLS   ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&SRCFILE  ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&TOLIB    ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LNG      ) TYPE(*CHAR) LEN( 3)
+
+             DCL        VAR(&SRCLIB   ) TYPE(*CHAR) LEN(10)
+
+             DCL        VAR(&CRTMSGF  ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&MSGF     ) TYPE(*CHAR) LEN(10) VALUE('CMPMSGF')
+             DCL        VAR(&PNLGRP   ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&CMD      ) TYPE(*CHAR) LEN(10)
+
+             CHGVAR     VAR(&SRCLIB) VALUE(&TOLIB   )
+
+     /* -------------------------------- */
+     /*  Delete old objects              */
+     /* -------------------------------- */
+             DLTCMD     CMD(&TOLIB/CMPMSGF)
+             MONMSG     MSGID(CPF2105)
+
+             DLTF       FILE(&TOLIB/CMPMSGFD1)
+             MONMSG     MSGID(CPF2105)
+
+             DLTF       FILE(&TOLIB/CMPMSGFD2)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPGM     PGM(&TOLIB/CMPMSGFC)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPGM     PGM(&TOLIB/A_MSG_ENG)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/CMPMSGFC1)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/CMPMSGFR1)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/CMPMSGFR2)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMOD     MODULE(&TOLIB/CMPMSGFR3)
+             MONMSG     MSGID(CPF2105)
+
+             DLTMSGF    MSGF(&TOLIB/CMPMSGF)
+             MONMSG     MSGID(CPF2105)
+
+             DLTPNLGRP  PNLGRP(&TOLIB/CMPMSGFP)
+             MONMSG     MSGID(CPF2105)
+
+             RMVMSG     PGMQ(*SAME (*)) CLEAR(*ALL)
+
+     /* -------------------------------- */
+     /*  Create message file             */
+     /* -------------------------------- */
+             IF         COND(&LNG *EQ 'ENG') THEN(DO)
+                CHGVAR     VAR(&CRTMSGF) VALUE('A_MSG_ENG')
+                CHGVAR     VAR(&PNLGRP ) VALUE('CMPMSGFPE')
+                CHGVAR     VAR(&CMD    ) VALUE('CMPMSGFE')
+                GOTO       CMDLBL(INSTALL)
+             ENDDO
+
+             SNDPGMMSG  MSGID(CPF9898) MSGF(QCPFMSG) MSGDTA('Invalid +
+                          language parameter:' *BCAT &LNG) +
+                          TOPGMQ(*PRV (*PGMBDY)) MSGTYPE(*ESCAPE)
+
+INSTALL:
+             CRTMSGF    MSGF(&TOLIB/&MSGF) +
+                          TEXT('Tool: CMPMSGF    (Compare Message File)')
+
+             CRTCLPGM   PGM(QTEMP/&CRTMSGF) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*PGM) +
+                          OPTION(*LSTDBG) +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(&CRTMSGF  ) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+             CALL       PGM(QTEMP/&CRTMSGF) PARM(&TOLIB)
+             DLTPGM     PGM(QTEMP/&CRTMSGF)
+
+     /* -------------------------------- */
+     /*  Display files                   */
+     /* -------------------------------- */
+             CRTDSPF    FILE(&TOLIB/CMPMSGFD1) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*FILE) +
+                          RSTDSP(*YES)
+             DLTSPLF    FILE(CMPMSGFD1) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+             CRTDSPF    FILE(&TOLIB/CMPMSGFD2) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*FILE) +
+                          RSTDSP(*YES)
+             DLTSPLF    FILE(CMPMSGFD2) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+     /* -------------------------------- */
+     /*  Create modules                  */
+     /* -------------------------------- */
+             CRTCLMOD   MODULE(&TOLIB/CMPMSGFC1) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
+                          DBGVIEW(*LIST) +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(CMPMSGFC1) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+             CRTRPGMOD  MODULE(&TOLIB/CMPMSGFR1) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
+                          DBGVIEW(*LIST) TRUNCNBR(*NO) +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(CMPMSGFR1) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+             CRTRPGMOD  MODULE(&TOLIB/CMPMSGFR2) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
+                          DBGVIEW(*LIST) TRUNCNBR(*NO) +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(CMPMSGFR2) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+             CRTRPGMOD  MODULE(&TOLIB/CMPMSGFR3) +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(*MODULE) +
+                          DBGVIEW(*LIST) TRUNCNBR(*NO) +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(CMPMSGFR3) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+     /* -------------------------------- */
+     /*  Create programs                 */
+     /* -------------------------------- */
+             CRTPGM     PGM(&TOLIB/CMPMSGFC) +
+                          MODULE(&TOLIB/CMPMSGFC1   +
+                                 &TOLIB/CMPMSGFR1   +
+                                 &TOLIB/CMPMSGFR2   +
+                                 &TOLIB/CMPMSGFR3)  +
+                          ENTMOD(&TOLIB/CMPMSGFC1)  +
+                          DETAIL(*BASIC)            +
+                          ACTGRP(*NEW)              +
+                          TGTRLS(&TGTRLS)
+             DLTSPLF    FILE(CMPMSGFC  ) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+     /* -------------------------------- */
+     /*  Create panel groups             */
+     /* -------------------------------- */
+             CRTPNLGRP PNLGRP(&TOLIB/CMPMSGFP  ) +
+                          SRCFILE(&SRCLIB/&SRCFILE) +
+                          SRCMBR(&PNLGRP)
+             DLTSPLF    FILE(CMPMSGFP  ) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+     /* -------------------------------- */
+     /*  Create commands                 */
+     /* -------------------------------- */
+             CRTCMD     CMD(&TOLIB/CMPMSGF   )                   +
+                          SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(&CMD) +
+                          PGM(&TOLIB/CMPMSGFP  )                 +
+                          HLPSCHIDX(*NONE)                       +
+                          HLPPNLGRP(*LIBL/CMPMSGFP  )            +
+                          HLPID(CMPMSGF   )                      +
+                          PRDLIB(&TOLIB)                         +
+                          MSGF(*LIBL/CMPMSGF)
+             DLTSPLF    FILE(&CMD      ) JOB(*) SPLNBR(*LAST)
+             MONMSG     MSGID(CPF0000)
+
+     /* -------------------------------- */
+     /*  Delete obsolete objects         */
+     /* -------------------------------- */
+             DLTMOD     MODULE(&TOLIB/CMPMSGFC1)
+             DLTMOD     MODULE(&TOLIB/CMPMSGFR1)
+             DLTMOD     MODULE(&TOLIB/CMPMSGFR2)
+             DLTMOD     MODULE(&TOLIB/CMPMSGFR3)
+
+             ENDPGM

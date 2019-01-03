@@ -8,75 +8,112 @@
 /* -------------------------------------------------------------------------- */
              XMLGENINC  XINCLUDE(*YES)
 
-             XMLGENCMD  XCMD(DLTCMD CMD(&TOLIB/CMPMSGF))
+             XMLGENVRS XSRCFILE(QCMPMSGF) XSRCLIB(TOOLS400) XSRCMBR(COPYRIGHT)
 
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/CMPMSGFD1 ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/CMPMSGFD2 ))
+             XMLGENSET  XVAR(&SRCFILE) XVALUE(QCMPMSGF)
 
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDERRCODE ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDGLSTHDR ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDMSG     ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDOBJD0100))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDQOBJ    ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDRTVM0300))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDRTVM0400))
+/* ---------------------------------- */
+/*  Deploy source member              */
+/* ---------------------------------- */
+             XMLGENMBR  XMBR(A_INSTALL ) XMBRATR(TXT   ) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*CMD) +
+                          XGENCRT(*NO) XPARAM(*BLANK)
 
-             XMLGENCMD  XCMD(DLTMSGF MSGF(&TOLIB/CMPMSGF  ))
-
-             XMLGENCMD  XCMD(CRTMSGF MSGF(&TOLIB/CMPMSGF  ) +
-                          TEXT('Tool: CMPMSGF    (Compare +
-                          Message File    )'))
-
-             XMLGENMBR  XMBR(A_MSG_ENG) XMBRATR(CLP) +
+             XMLGENMBR  XMBR(A_MSG_ENG ) XMBRATR(CLP) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
                           XTOSRCF(QCMPMSGF  ) XOBJTYPE(*PGM) +
-                          XGENCRT(*YES) XPARAM(*BLANK)
+                          XGENCRT(*NO) XPARAM(*BLANK)
 
-             XMLGENCMD  XCMD(CALL PGM(&TOLIB/A_MSG_ENG) PARM('&TOLIB'))
-
-             XMLGENCMD  XCMD(DLTPGM PGM(&TOLIB/A_MSG_ENG))
-
-             XMLGENMBR  XMBR(XDERRCODE ) XMBRATR(PF   ) +
+             XMLGENMBR  XMBR(A_README  ) XMBRATR(TXT   ) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*FILE  ) +
-                          XGENCRT(*YES) XPARAM('MAXMBRS(1)  +
-                                                SIZE(1 0 0)')
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*CMD) +
+                          XGENCRT(*NO) XPARAM(*BLANK)
 
-             XMLGENMBR  XMBR(XDGLSTHDR ) XMBRATR(PF   ) +
+             XMLGENMBR  XMBR(CMPMSGFC  ) XMBRATR(MAKPGM) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*FILE  ) +
-                          XGENCRT(*YES) XPARAM('MAXMBRS(1)  +
-                                                SIZE(1 0 0)')
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*PGM) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
 
-             XMLGENMBR  XMBR(XDMSG     ) XMBRATR(PF   ) +
+             XMLGENMBR  XMBR(CMPMSGFC1 ) XMBRATR(CLLE ) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*FILE  ) +
-                          XGENCRT(*YES) XPARAM('MAXMBRS(1)  +
-                                                SIZE(1 0 0)')
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
 
-             XMLGENMBR  XMBR(XDOBJD0100) XMBRATR(PF   ) +
+             XMLGENMBR  XMBR(CMPMSGFD1 ) XMBRATR(DSPF ) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*FILE  ) +
-                          XGENCRT(*YES) XPARAM('MAXMBRS(1)  +
-                                                SIZE(1 0 0)')
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO) XPARAM('RSTDSP(*YES)')
 
-             XMLGENMBR  XMBR(XDQOBJ    ) XMBRATR(PF   ) +
+             XMLGENMBR  XMBR(CMPMSGFD2 ) XMBRATR(DSPF ) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*FILE  ) +
-                          XGENCRT(*YES) XPARAM('MAXMBRS(1)  +
-                                                SIZE(1 0 0)')
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO) XPARAM('RSTDSP(*YES)')
 
-             XMLGENMBR  XMBR(XDRTVM0300) XMBRATR(PF   ) +
+             XMLGENMBR  XMBR(CMPMSGFE  ) XMBRATR(CMD  ) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*FILE  ) +
-                          XGENCRT(*YES) XPARAM('MAXMBRS(1)  +
-                                                SIZE(1 0 0)')
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*CMD   ) +
+                          XGENCRT(*NO) XPARAM(*BLANK)
 
-             XMLGENMBR  XMBR(XDRTVM0400) XMBRATR(PF   ) +
+             XMLGENMBR  XMBR(CMPMSGFPE ) XMBRATR(PNLGRP) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*FILE  ) +
-                          XGENCRT(*YES) XPARAM('MAXMBRS(1)  +
-                                                SIZE(1 0 0)')
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*PNLGRP) +
+                          XGENCRT(*NO) XPARAM(*BLANK)
+
+             XMLGENMBR  XMBR(CMPMSGFR1 ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(CMPMSGFR2 ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(CMPMSGFR3 ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(CMPMSGFR4 ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(COPYRIGHT ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(FDERRCODE ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(FDMSG     ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(FDOBJD0100) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(FDQOBJ    ) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(FDRTVM0300) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
+
+             XMLGENMBR  XMBR(FDRTVM0400) XMBRATR(RPGLE) +
+                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
+                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
+                          XGENCRT(*NO)  XPARAM(*BLANKS)
 
              XMLGENMBR  XMBR(USR0001   ) XMBRATR(RPGLE) +
                           XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
@@ -188,95 +225,15 @@
                           XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
                           XGENCRT(*NO)  XPARAM(*BLANKS)
 
-             XMLGENMBR  XMBR(CMPMSGFC  ) XMBRATR(MAKPGM) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*PGM) +
-                          XGENCRT(*NO)  XPARAM(*BLANKS)
+/* ---------------------------------- */
+/*  Create objects                    */
+/* ---------------------------------- */
+             XMLGENCMD  XCMD(CRTBNDCL PGM(&TOLIB/A_INSTALL) +
+                          SRCFILE(&TOLIB/QCMPMSGF) SRCMBR(*PGM) +
+                          DFTACTGRP(*NO) ACTGRP(*NEW) +
+                          DBGVIEW(*LIST)) XDLTSPLF(A_INSTALL)
 
-             XMLGENMBR  XMBR(CMPMSGFC1 ) XMBRATR(CLLE ) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*NO)  XPARAM(*BLANKS)
-
-             XMLGENMBR  XMBR(CMPMSGFD1 ) XMBRATR(DSPF ) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*YES) XPARAM('RSTDSP(*YES)')
-
-             XMLGENMBR  XMBR(CMPMSGFD2 ) XMBRATR(DSPF ) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*YES) XPARAM('RSTDSP(*YES)')
-
-             XMLGENMBR  XMBR(CMPMSGFP  ) XMBRATR(PNLGRP) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*PNLGRP) +
-                          XGENCRT(*YES) XPARAM(*BLANK)
-
-             XMLGENMBR  XMBR(CMPMSGFR1 ) XMBRATR(RPGLE) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*NO)  XPARAM(*BLANKS)
-
-             XMLGENMBR  XMBR(CMPMSGFR2 ) XMBRATR(RPGLE) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*NO)  XPARAM(*BLANKS)
-
-             XMLGENMBR  XMBR(CMPMSGFR3 ) XMBRATR(RPGLE) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*NO)  XPARAM(*BLANKS)
-
-             XMLGENMBR  XMBR(CMPMSGFR4 ) XMBRATR(RPGLE) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*NO)  XPARAM(*BLANKS)
-
-             XMLGENMBR  XMBR(COPYRIGHT ) XMBRATR(RPGLE) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*MODULE) +
-                          XGENCRT(*NO)  XPARAM(*BLANKS)
-
-             XMLGENCMD  XCMD(CRTCLMOD MODULE(&TOLIB/CMPMSGFC1) +
-                          SRCFILE(&TOLIB/QCMPMSGF) SRCMBR(*MODULE) +
-                          DBGVIEW(*LIST))
-
-             XMLGENCMD  XCMD(CRTRPGMOD MODULE(&TOLIB/CMPMSGFR1) +
-                          SRCFILE(&TOLIB/QCMPMSGF) SRCMBR(*MODULE) +
-                          DBGVIEW(*LIST) TRUNCNBR(*NO))
-
-             XMLGENCMD  XCMD(CRTRPGMOD MODULE(&TOLIB/CMPMSGFR2) +
-                          SRCFILE(&TOLIB/QCMPMSGF) SRCMBR(*MODULE) +
-                          DBGVIEW(*LIST) TRUNCNBR(*NO))
-
-             XMLGENCMD  XCMD(CRTRPGMOD MODULE(&TOLIB/CMPMSGFR3) +
-                          SRCFILE(&TOLIB/QCMPMSGF) SRCMBR(*MODULE) +
-                          DBGVIEW(*LIST) TRUNCNBR(*NO))
-
-             XMLGENCMD  XCMD(CRTPGM PGM(&TOLIB/CMPMSGFC) +
-                          MODULE(&TOLIB/CMPMSGFC1 &TOLIB/CMPMSGFR1  +
-                                                  &TOLIB/CMPMSGFR2  +
-                                                  &TOLIB/CMPMSGFR3) +
-                          TEXT(*ENTMODTXT) ENTMOD(&TOLIB/CMPMSGFC1) +
-                          USRPRF(*USER) ACTGRP(*NEW      ) +
-                          BNDDIR(QC2LE) )
-
-             XMLGENMBR  XMBR(CMPMSGF   ) XMBRATR(CMD  ) +
-                          XFROMSRCF(QCMPMSGF  ) XFROMSRCL(TOOLS400) +
-                          XTOSRCF(QCMPMSGF  ) XOBJTYPE(*CMD   ) +
-                          XGENCRT(*YES) XPARAM(*BLANK)
-
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDERRCODE ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDGLSTHDR ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDMSG     ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDOBJD0100))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDQOBJ    ))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDRTVM0300))
-             XMLGENCMD  XCMD(DLTF FILE(&TOLIB/XDRTVM0400))
-
-             XMLGENCMD  XCMD(DLTMOD MODULE(&TOLIB/CMPMSGFC1))
-             XMLGENCMD  XCMD(DLTMOD MODULE(&TOLIB/CMPMSGFR1))
-             XMLGENCMD  XCMD(DLTMOD MODULE(&TOLIB/CMPMSGFR2))
-             XMLGENCMD  XCMD(DLTMOD MODULE(&TOLIB/CMPMSGFR3))
+             XMLGENCMD  XCMD(CALL PGM(&TOLIB/A_INSTALL) +
+                             PARM('&TGTRLS' '&SRCFILE' '&TOLIB' 'ENG'))
+             XMLGENCMD  XCMD(DLTPGM PGM(&TOLIB/A_INSTALL))
 

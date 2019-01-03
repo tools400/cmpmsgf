@@ -1,30 +1,30 @@
- RAD  * =================================================================== *
- RAD  *                                                                     *
- RAD  *  Kurzdokumentation :                                                *
- RAD  *                                                                     *
- RAD  *  Bereich . . . : CMPMSGF                                            *
- RAD  *  Objekt  . . . : CMPMSGFR4                                          *
- RAD  *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     ) GLOBAL*
- RAD  *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
- RAD  *  Datum . . . . : 23.12.2001                                         *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *                                                                     *
- RAD  *  This software is free software, you can redistribute it and/or     *
- RAD  *  modify it under the terms of the GNU General Public License (GPL)  *
- RAD  *  as published by the Free Software Foundation.                      *
- RAD  *                                                                     *
- RAD  *  See GNU General Public License for details.                        *
- RAD  *          http://www.opensource.org                                  *
- RAD  *          http://www.opensource.org/licenses/gpl-license.html        *
- RAD  *                                                                     *
- RAD  * =================================================================== *
- RAD  *  History:                                                           *
- RAD  *                                                                     *
- RAD  *  Datum       Name          Änderung                                 *
- RAD  *  ----------  ------------  ---------------------------------------  *
- RAD  *                                                                     *
- RAD  * =================================================================== *
+      * =================================================================== *
+      *                                                                     *
+      *  Kurzdokumentation :                                                *
+      *                                                                     *
+      *  Bereich . . . : CMPMSGF                                            *
+      *  Objekt  . . . : CMPMSGFR4                                          *
+      *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     ) GLOBAL*
+      *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+      *  Datum . . . . : 23.12.2001                                         *
+      *                                                                     *
+      * =================================================================== *
+      *                                                                     *
+      *  This software is free software, you can redistribute it and/or     *
+      *  modify it under the terms of the GNU General Public License (GPL)  *
+      *  as published by the Free Software Foundation.                      *
+      *                                                                     *
+      *  See GNU General Public License for details.                        *
+      *          http://www.opensource.org                                  *
+      *          http://www.opensource.org/licenses/gpl-license.html        *
+      *                                                                     *
+      * =================================================================== *
+      *  History:                                                           *
+      *                                                                     *
+      *  Datum       Name          Änderung                                 *
+      *  ----------  ------------  ---------------------------------------  *
+      *                                                                     *
+      * =================================================================== *
       *
       *== Workstation Constants ======================================*
      D cKeyF1          C                   CONST(X'31')
@@ -109,16 +109,12 @@
       *===============================================================*
       *
       *== Templates ==================================================*
-     D msg_t         E DS                  extname(xdmsg     ) based(pDummy)
-     D                                     prefix(msg_t_     )
-     D qobj_t        E DS                  extname(xdqobj    ) based(pDummy)
-     D                                     prefix(qobj_t_    )
-     D errCode_t     E DS                  extname(xderrcode )  based(pDummy)
-     D                                     prefix(errCode_t_ )
-     D RTVM0300_t    E DS                  extname(xdrtvm0300)  based(pDummy)
-     D                                     prefix(rtvm0300_t_)
-     D RTVM0400_t    E DS                  extname(xdrtvm0400)  based(pDummy)
-     D                                     prefix(rtvm0400_t_)
+      /COPY QCMPMSGF,FDMSG
+      /COPY QCMPMSGF,FDQOBJ
+      /COPY QCMPMSGF,FDERRCODE
+      /COPY QCMPMSGF,FDRTVM0300
+      /COPY QCMPMSGF,FDRTVM0400
+      /COPY QCMPMSGF,FDOBJD0100
       *===============================================================*
       *
       *== Prototypes =================================================*
@@ -190,7 +186,7 @@
       *  ... test for API error         (CMPMSGFR3)
      D f_isApiErr...
      D                 PR              N
-     D  i_errCode                          value  like(errCode_t)
+     D  i_errCode                          value  likeds(errCode_t)
       *
       *  ... retrieve network attribute (CMPMSGFR3)
      D f_rtvNetAtrA...
