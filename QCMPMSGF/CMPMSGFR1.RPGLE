@@ -76,60 +76,60 @@
      F                                     indds(workstn)
      F                                     sfile(SFL:SFLRRN)
       *
-     D workstn         DS
+     D workstn         DS                  qualified
       *
-     D  workstn_cd_white...
+     D  cd_white...
      D                        50     50N
-     D  workstn_cd_grn...
+     D  cd_grn...
      D                        51     51N
-     D  workstn_cd_ylw...
+     D  cd_ylw...
      D                        52     52N
-     D  workstn_cd_red...
+     D  cd_red...
      D                        53     53N
       *
-     D  workstn_msgf1_pc...
+     D  msgf1_pc...
      D                        61     61N
-     D  workstn_lib1_pc...
+     D  lib1_pc...
      D                        62     62N
-     D  workstn_msgf2_pc...
+     D  msgf2_pc...
      D                        65     65N
-     D  workstn_lib2_pc...
+     D  lib2_pc...
      D                        66     66N
       *
-     D  workstn_msgf1_ri...
+     D  msgf1_ri...
      D                        71     71N
-     D  workstn_lib1_ri...
+     D  lib1_ri...
      D                        72     72N
-     D  workstn_msgf2_ri...
+     D  msgf2_ri...
      D                        75     75N
-     D  workstn_lib2_ri...
+     D  lib2_ri...
      D                        76     76N
       *
-     D  workstn_sfldsp...
+     D  sfldsp...
      D                        80     80N
-     D  workstn_sfldspctl...
+     D  sfldspctl...
      D                        81     81N
-     D  workstn_sflclr...
+     D  sflclr...
      D                        82     82N
-     D  workstn_sflend...
+     D  sflend...
      D                        83     83N
-     D  workstn_sflmode...
+     D  sflmode...
      D                        84     84N
-     D  workstn_sflnxtchg...
+     D  sflnxtchg...
      D                        85     85N
-     D  workstn_opt_ri...
+     D  opt_ri...
      D                        86     86N
-     D  workstn_posto_ri...
+     D  posto_ri...
      D                        87     87N
-     D  workstn_find_ri...
+     D  find_ri...
      D                        88     88N
-     D  workstn_msgsflend...
+     D  msgsflend...
      D                        89     89N
-     D  workstn_options_1...
+     D  options_1...
      D                        91     91N
-     D  workstn_options_2...
+     D  options_2...
      D                        92     92N
-     D  workstn_options_3...
+     D  options_3...
      D                        93     93N
       *
       *== Workstation information data structure =====================*
@@ -482,7 +482,7 @@
      D  i_lib1                       10A   const
      D  i_file2                      10A   const
      D  i_lib2                       10A   const
-     D  i_range                      16A   const
+     D  i_range                            const likeds(range_t)
      D  i_cmpDate                     1A   const
      D  i_cmpLvl                      1A   const
      D  i_error                       1A   const
@@ -492,31 +492,25 @@
       *
       *  Fields
      D isDone          S               N   inz
+     D range           DS                  likeds(i_range) inz
      D msg             DS                  likeds(msg_t) inz
      D isConfirmed_F9  S               N   inz
-      *
-     D range           DS
-     D  range_numVal                  5I 0 inz
-     D  range_lower                   7A   inz
-     D  range_upper                   7A   inz
-      *
-     D msgID1          S              7A   inz
-     D msgID2          S              7A   inz
       *
       /COPY QCMPMSGF,USR0017
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-      *  Set range selection for "*ALL"
      C                   Eval      range = i_range
-     C                   If        range_lower = '*ALL'
-     C                   Eval      range_lower = '*FIRST'
-     C                   Eval      range_upper = '*LAST'
+      *
+      *  Set range selection for "*ALL"
+     C                   If        range.lower = '*ALL'
+     C                   Eval      range.lower = '*FIRST'
+     C                   Eval      range.upper = '*LAST'
      C                   Endif
       *
       *  Validate range selection
-     C                   If        (%subst(range_lower: 1: 1) <> '*' )  and
-     C                             (%subst(range_upper: 1: 1) <> '*' )  and
-     C                             (range_lower > range_upper        )
+     C                   If        (%subst(range.lower: 1: 1) <> '*' )  and
+     C                             (%subst(range.upper: 1: 1) <> '*' )  and
+     C                             (range.lower > range.upper        )
      C                   Eval      msg = f_newMsg('USR0018'  :
      C                                            ''         :
      C                                            '*ESCAPE'  )
@@ -577,8 +571,8 @@
      C                   Callp     p_sflClrInd
       *
       *  Initial load of subfile
-     C                   Callp     cmd_refresh(range_lower :
-     C                                         range_upper )
+     C                   Callp     cmd_refresh(range.lower :
+     C                                         range.upper )
       *
       *  Loop until no more changes
      C                   Eval      isDOne = cFalse
@@ -586,29 +580,29 @@
      C                   Dou       isDone
       *
       *  Set subfile mode
-     C                   Eval      workstn_sflmode = SFLMODE
+     C                   Eval      workstn.sflmode = SFLMODE
       *
       *  Display messages
-     C                   Eval      workstn_msgsflend = cFalse
+     C                   Eval      workstn.msgsflend = cFalse
      C                   Write     MSGCTL
       *
       *  Display "no entries found"
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
      C                   Write     EMPTY
      C                   Endif
       *
       *  Display options
-     C                   Eval      workstn_options_1 = cFalse
-     C                   Eval      workstn_options_2 = cFalse
-     C                   Eval      workstn_options_3 = cFalse
+     C                   Eval      workstn.options_1 = cFalse
+     C                   Eval      workstn.options_2 = cFalse
+     C                   Eval      workstn.options_3 = cFalse
       *
      C                   Select
      C                   When      g_sflOpt = 2
-     C                   Eval      workstn_options_2 = cTrue
+     C                   Eval      workstn.options_2 = cTrue
      C                   When      g_sflOpt = 3
-     C                   Eval      workstn_options_3 = cTrue
+     C                   Eval      workstn.options_3 = cTrue
      C                   Other
-     C                   Eval      workstn_options_1 = cTrue
+     C                   Eval      workstn.options_1 = cTrue
      C                   Endsl
       *
       *  Display command keys
@@ -647,8 +641,8 @@
      C                   Eval      isDone = cmd_endPgm
       *  ... F5  - Refresh screen
      C                   When      screen_AID = cKeyF5
-     C                   Callp     cmd_refresh(range_lower :
-     C                                         range_upper )
+     C                   Callp     cmd_refresh(range.lower :
+     C                                         range.upper )
       *
       *  ... F9  - Process
      C                   When      screen_AID = cKeyF9
@@ -690,8 +684,8 @@
      C                                         g_filterCpyL   :
      C                                         g_filterEqual  :
      C                                         g_filterNEqual ) = cKeyEnter
-     C                   Callp     cmd_refresh(range_lower :
-     C                                         range_upper )
+     C                   Callp     cmd_refresh(range.lower :
+     C                                         range.upper )
      C                   Endif
       *
       *  ... F21 - Command line
@@ -708,8 +702,8 @@
       *
       *  ... ENTER
      C                   When      screen_AID = cKeyEnter
-     C                   Eval      isDone = cmd_enter(range_lower :
-     C                                                range_upper )
+     C                   Eval      isDone = cmd_enter(range.lower :
+     C                                                range.upper )
       *
       *  ... Page up
      C                   When      screen_AID = cKeyPageUp
@@ -819,7 +813,7 @@
       *
      C                   Eval      isOK = cTrue
       *
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
      C                   Goto      exitProcedure
      C                   Endif
       *
@@ -889,7 +883,7 @@
      D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
       *
      C                   Eval      msg = f_newMsg('USR0007')
      C                   Callp     p_sndPgmMsg(msg           :
@@ -919,7 +913,7 @@
      D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
       *
      C                   Eval      msg = f_newMsg('USR0007')
      C                   Callp     p_sndPgmMsg(msg           :
@@ -1100,7 +1094,7 @@
      D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
      C                   Eval      msg = f_newMsg('USR0007')
      C                   Callp     p_sndPgmMsg(msg           :
      C                                         cMsg_Same     :
@@ -1132,7 +1126,7 @@
      D msg             DS                  likeds(msg_t) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
      C                   Eval      msg = f_newMsg('USR0007')
      C                   Callp     p_sndPgmMsg(msg           :
      C                                         cMsg_Same     :
@@ -1172,10 +1166,10 @@
      C                   Callp     p_sndPgmMsg(msg           :
      C                                         cMsg_Same     :
      C                                         cMsg_ToPgmBdy )
-     C                   Eval      workstn_msgF1_pc = *on
-     C                   Eval      workstn_msgF1_ri = *on
-     C                   Eval      workstn_lib1_pc  = *on
-     C                   Eval      workstn_lib1_ri  = *on
+     C                   Eval      workstn.msgF1_pc = *on
+     C                   Eval      workstn.msgF1_ri = *on
+     C                   Eval      workstn.lib1_pc  = *on
+     C                   Eval      workstn.lib1_ri  = *on
      C                   Eval      isOK = cFalse
      C                   Goto      exitProcedure
      C                   Endif
@@ -1185,10 +1179,10 @@
      C                   Callp     p_sndPgmMsg(msg           :
      C                                         cMsg_Same     :
      C                                         cMsg_ToPgmBdy )
-     C                   Eval      workstn_msgF2_pc = *on
-     C                   Eval      workstn_msgF2_ri = *on
-     C                   Eval      workstn_lib2_pc  = *on
-     C                   Eval      workstn_lib2_ri  = *on
+     C                   Eval      workstn.msgF2_pc = *on
+     C                   Eval      workstn.msgF2_ri = *on
+     C                   Eval      workstn.lib2_pc  = *on
+     C                   Eval      workstn.lib2_ri  = *on
      C                   Eval      isOK = cFalse
      C                   Goto      exitProcedure
      C                   Endif
@@ -1234,7 +1228,7 @@
       /COPY QCMPMSGF,USR0006
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
      C                   Eval      isChanged = cFalse
      C                   Goto      exitProcedure
      C                   Endif
@@ -1302,7 +1296,7 @@
      C                   Eval      sflError = not f_sflDspMsgID(SFLRRN: 'R')
       *  ... invalid option
      C                   Other
-     C                   Eval      workstn_opt_ri = cTrue
+     C                   Eval      workstn.opt_ri = cTrue
      C                   Eval      sflError = cTrue
       *
      C                   Clear                   USR0006
@@ -1348,12 +1342,12 @@
       *
       *  *  Local fields
      D rrn             S                   like(o_sflRrn  )        inz
-     D sfldsp          S                   like(workstn_sfldsp   ) inz
-     D sfldspctl       S                   like(workstn_sfldspctl) inz
+     D sfldsp          S                   like(workstn.sfldsp   ) inz
+     D sfldspctl       S                   like(workstn.sfldspctl) inz
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
       *  If there are no records in the subfile ...
-     C                   If        not workstn_sfldsp
+     C                   If        not workstn.sfldsp
       *  ... then
       *      return "no chnages"
      C                   Eval      isChanged = cFalse
@@ -1381,17 +1375,17 @@
      C                   Eval      rrn       = SFLRRN
       *
       *          and re-activate subfile record
-     C                   Eval      workstn_sflnxtchg = cTrue
+     C                   Eval      workstn.sflnxtchg = cTrue
      C                   Update    SFL
       *
-     C                   Eval      sfldsp    = workstn_sfldsp
-     C                   Eval      sfldspctl = workstn_sfldspctl
+     C                   Eval      sfldsp    = workstn.sfldsp
+     C                   Eval      sfldspctl = workstn.sfldspctl
       *
-     C                   Eval      workstn_sfldsp    = cTrue
-     C                   Eval      workstn_sfldspctl = cFalse
+     C                   Eval      workstn.sfldsp    = cTrue
+     C                   Eval      workstn.sfldspctl = cFalse
      C                   WRITE     CTL
-     C                   Eval      workstn_sfldsp    = sfldsp
-     C                   Eval      workstn_sfldspctl = sfldspctl
+     C                   Eval      workstn.sfldsp    = sfldsp
+     C                   Eval      workstn.sfldspctl = sfldspctl
       *
      C                   Endif
      C                   Endif
@@ -1417,14 +1411,14 @@
      D                 PI
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   Eval      workstn_sfldsp    = cFalse
-     C                   Eval      workstn_sfldspctl = cFalse
-     C                   Eval      workstn_sflclr    = cTrue
-     C                   Eval      workstn_sflend    = cFalse
+     C                   Eval      workstn.sfldsp    = cFalse
+     C                   Eval      workstn.sfldspctl = cFalse
+     C                   Eval      workstn.sflclr    = cTrue
+     C                   Eval      workstn.sflend    = cFalse
      C                   WRITE     CTL
       *
-     C                   Eval      workstn_sfldspctl = cTrue
-     C                   Eval      workstn_sflclr    = cFalse
+     C                   Eval      workstn.sfldspctl = cTrue
+     C                   Eval      workstn.sflclr    = cFalse
       *
      C                   Reset                   g_sflPage
      C                   Reset                   g_sflBot
@@ -1678,14 +1672,14 @@
       *
       *  Display subfile
      C                   If        numRcd > 0
-     C                   Eval      workstn_sfldsp = cTrue
+     C                   Eval      workstn.sfldsp = cTrue
      C                   Endif
       *
       *  Set subfile end indicator
      C                   If        not isFound
-     C                   Eval      workstn_sflend = cTrue
+     C                   Eval      workstn.sflend = cTrue
      C                   Else
-     C                   Eval      workstn_sflend = cFalse
+     C                   Eval      workstn.sflend = cFalse
      C                   Endif
       *
       *  Send warning message
@@ -1717,8 +1711,8 @@
       *
      C     i_sflRrn      Chain     SFL
      C                   Eval      ##OPT = ''
-     C                   Eval      workstn_opt_ri    = cFalse
-     C                   Eval      workstn_sflnxtchg = cFalse
+     C                   Eval      workstn.opt_ri    = cFalse
+     C                   Eval      workstn.sflnxtchg = cFalse
      C                   Update    SFL
       *
      C                   Return
@@ -1739,8 +1733,8 @@
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
      C     i_sflRrn      Chain     SFL
-     C                   Eval      workstn_opt_ri    = cTrue
-     C                   Eval      workstn_sflnxtchg = cTrue
+     C                   Eval      workstn.opt_ri    = cTrue
+     C                   Eval      workstn.sflnxtchg = cTrue
      C                   Update    SFL
       *
      C                   Eval      SFLRCDNBR = i_sflRrn
@@ -1761,18 +1755,18 @@
      D                 PI
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
-     C                   Eval      workstn_msgf1_pc = cFalse
-     C                   Eval      workstn_lib1_pc  = cFalse
-     C                   Eval      workstn_msgf2_pc = cFalse
-     C                   Eval      workstn_lib2_pc  = cFalse
+     C                   Eval      workstn.msgf1_pc = cFalse
+     C                   Eval      workstn.lib1_pc  = cFalse
+     C                   Eval      workstn.msgf2_pc = cFalse
+     C                   Eval      workstn.lib2_pc  = cFalse
       *
-     C                   Eval      workstn_msgf1_ri = cFalse
-     C                   Eval      workstn_lib1_ri  = cFalse
-     C                   Eval      workstn_msgf2_ri = cFalse
-     C                   Eval      workstn_lib2_ri  = cFalse
+     C                   Eval      workstn.msgf1_ri = cFalse
+     C                   Eval      workstn.lib1_ri  = cFalse
+     C                   Eval      workstn.msgf2_ri = cFalse
+     C                   Eval      workstn.lib2_ri  = cFalse
       *
-     C                   Eval      workstn_posto_ri = cFalse
-     C                   Eval      workstn_find_ri  = cFalse
+     C                   Eval      workstn.posto_ri = cFalse
+     C                   Eval      workstn.find_ri  = cFalse
       *
      C                   Return
       *
@@ -2878,7 +2872,7 @@
       *
       *  Set subfile fields ...
      C                   Eval      ##OPT          = ''
-     C                   Eval      workstn_opt_ri = cFalse
+     C                   Eval      workstn.opt_ri = cFalse
       *
      C                   If        i_RTVM0400_1.msgId <> ''
      C                   Eval      $$MSGID   = i_RTVM0400_1.msgId
@@ -2948,20 +2942,20 @@
       *  Fields
       *-------------------------------------------------------------------
       *
-     C                   Eval      workstn_cd_white = *off
-     C                   Eval      workstn_cd_grn   = *off
-     C                   Eval      workstn_cd_ylw   = *off
-     C                   Eval      workstn_cd_red   = *off
+     C                   Eval      workstn.cd_white = *off
+     C                   Eval      workstn.cd_grn   = *off
+     C                   Eval      workstn.cd_ylw   = *off
+     C                   Eval      workstn.cd_red   = *off
       *
      C                   Select
      C                   When      i_cd = cCmpCopyLeft
-     C                   Eval      workstn_cd_ylw = *on
+     C                   Eval      workstn.cd_ylw = *on
      C                   When      i_cd = cCmpCopyRight
-     C                   Eval      workstn_cd_ylw = *on
+     C                   Eval      workstn.cd_ylw = *on
      C                   When      i_cd = cCmpNotEqual
-     C                   Eval      workstn_cd_red = *on
+     C                   Eval      workstn.cd_red = *on
      C                   Other
-     C                   Eval      workstn_cd_white = *on
+     C                   Eval      workstn.cd_white = *on
      C                   Endsl
       *
      C                   Return

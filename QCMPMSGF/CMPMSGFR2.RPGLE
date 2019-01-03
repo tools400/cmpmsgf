@@ -123,8 +123,6 @@
       *
      P f_chgFilter...
      P                 B                   export
-      *
-     D f_chgFilter...
      D                 PI             1A
      D  io_cpyr                       1A
      D  io_cpyl                       1A
@@ -225,7 +223,6 @@
       *
      C                   Return    rtnKey
       *
-     P f_chgFilter...
      P                 E
       *
       *===============================================================*
@@ -234,8 +231,6 @@
       *
      P cmd_endPgm...
      P                 B
-      *
-     D cmd_endPgm...
      D                 PI              N
       *
       *  Return value
@@ -248,7 +243,6 @@
       *
      C                   Return    isDone
       *
-     P cmd_endPgm...
      P                 E
       *
       *===============================================================*
@@ -257,8 +251,6 @@
       *
      P cmd_refresh...
      P                 B
-      *
-     D cmd_refresh...
      D                 PI
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
@@ -269,7 +261,6 @@
       *
      C                   Return
       *
-     P cmd_refresh...
      P                 E
       *
       *===============================================================*
@@ -278,8 +269,6 @@
       *
      P cmd_enter...
      P                 B
-      *
-     D cmd_enter...
      D                 PI              N
       *
       *  Return value
@@ -351,7 +340,6 @@
       *
      C                   Return    isDone
       *
-     P cmd_enter...
      P                 E
       *
       *===============================================================*
@@ -360,8 +348,6 @@
       *
      P p_scrClrInd...
      P                 B
-      *
-     D p_scrClrInd...
      D                 PI
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
@@ -377,7 +363,6 @@
       *
      C                   Return
       *
-     P p_scrClrInd...
      P                 E
       *
       *===============================================================*
@@ -386,8 +371,6 @@
       *
      P p_loadFilter...
      P                 B                   export
-      *
-     D p_loadFilter...
      D                 PI
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
@@ -397,7 +380,6 @@
       *
      C                   Return
       *
-     P p_loadFilter...
      P                 E
       *
       *===============================================================*
@@ -406,8 +388,6 @@
       *
      P p_unloadFilter...
      P                 B                   export
-      *
-     D p_unloadFilter...
      D                 PI
       * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       *
@@ -417,6 +397,5 @@
       *
      C                   Return
       *
-     P p_unloadFilter...
      P                 E
       *

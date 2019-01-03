@@ -63,8 +63,6 @@
       *
      P p_rmvPgmMsg...
      P                 B                   export
-      *
-     D p_rmvPgmMsg...
      D                 PI
      D  i_toStkC                     10I 0 const  options(*NOPASS)
      D  i_toProc                    256A   const  options(*NOPASS)
@@ -216,7 +214,6 @@
       *
      C                   Return
       *
-     P p_rmvPgmMsg...
      P                 E
       *
       *===============================================================*
@@ -225,8 +222,6 @@
       *
      P p_sndPgmMsg...
      P                 B                   export
-      *
-     D p_sndPgmMsg...
      D                 PI
      D  i_msg                              const  like(msg_t     )
      D  i_toStkC                     10I 0 const  options(*NOPASS)
@@ -392,7 +387,6 @@
       *
      C                   Return
       *
-     P p_sndPgmMsg...
      P                 E
       *
       *===============================================================*
@@ -400,8 +394,6 @@
       *===============================================================*
      P f_newMsg...
      P                 B                         export
-      *
-     D f_newMsg...
      D                 PI                         like(msg_t     )
      D  i_msgID                       7A   const  options(*nopass :
      D                                                    *omit   )
@@ -507,7 +499,6 @@
       *
      C                   Return    msg
       *
-     P f_newMsg...
      P                 E
       *
       *==================================================================*
@@ -516,8 +507,6 @@
       *
      P f_newApiErrCode...
      P                 B                   export
-      *
-     D f_newApiErrCode...
      D                 PI                         like(errCode_t)
      D  i_monMsg                       N   value
       *
@@ -535,7 +524,6 @@
       *
      C                   Return    errCode
       *
-     P f_newApiErrCode...
      P                 E
       *
       *==================================================================*
@@ -547,8 +535,6 @@
       *
      P f_isApiErr...
      P                 B                   export
-      *
-     D f_isApiErr...
      D                 PI              N
      D  i_errCode                          value  likeds(errCode_t)
       *
@@ -564,7 +550,6 @@
       *
      C                   Return    o_isError
       *
-     P f_isApiErr...
      P                 E
       *
       *=========================================================================
@@ -573,8 +558,6 @@
       *
      P f_rtvNetAtrA...
      P                 B                   export
-      *
-     D f_rtvNetAtrA...
      D                 PI          4096A
      D  i_netAtrName                 10A   value
       *
@@ -626,7 +609,6 @@
       *
      C                   return    netAtrA
       *
-     P f_rtvNetAtrA...
      P                 E
       *
       *==================================================================*
@@ -635,8 +617,6 @@
       *
      P f_exist...
      P                 B                   export
-      *
-     D f_exist...
      D                 PI              N
      D  i_obj                        10A   value
      D  i_lib                        10A   value
@@ -670,6 +650,5 @@
       *
      C                   Return    isAvailable
       *
-     P f_exist...
      P                 E
       *

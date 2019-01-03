@@ -115,6 +115,11 @@
       /COPY QCMPMSGF,FDRTVM0300
       /COPY QCMPMSGF,FDRTVM0400
       /COPY QCMPMSGF,FDOBJD0100
+      *
+     D range_t         DS                  based(pDummy)
+     D  numVal                        5I 0
+     D  lower                         7A
+     D  upper                         7A
       *===============================================================*
       *
       *== Prototypes =================================================*
@@ -126,7 +131,7 @@
      D  i_lib1                       10A   const
      D  i_file2                      10A   const
      D  i_lib2                       10A   const
-     D  i_range                      16A   const
+     D  i_range                            const likeds(range_t)
      D  i_cmpDate                     1A   const
      D  i_cmpLvl                      1A   const
      D  i_error                       1A   const
