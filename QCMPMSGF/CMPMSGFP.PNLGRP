@@ -1,0 +1,345 @@
+.*=====================================================================*
+.*                                                                     *
+.*  Kurzdokumentation :                                                *
+.*                                                                     *
+.*  Bereich . . . : CMPMSGF                                            *
+.*  Objekt  . . . : CMPMSGFP                                           *
+.*  Beschreibung  : Tool: CMPMSGF    (Compare Message File    ) PNLGRP *
+.*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+.*  Datum . . . . : 29.10.2001                                         *
+.*                                                                     *
+.*=====================================================================*
+.*                                                                     *
+.*  This software is free software, you can redistribute it and/or     *
+.*  modify it under the terms of the GNU General Public License (GPL)  *
+.*  as published by the Free Software Foundation.                      *
+.*                                                                     *
+.*  See GNU General Public License for details.                        *
+.*          http://www.opensource.org                                  *
+.*          http://www.opensource.org/licenses/gpl-license.html        *
+.*                                                                     *
+.*=====================================================================*
+.*  History:                                                           *
+.*                                                                     *
+.*  Datum       Name          Änderung                                 *
+.*  ----------  ------------  ---------------------------------------  *
+.*                                                                     *
+.*=====================================================================*
+.* >>PRE-COMPILER<<                                                    *
+.*                                                                     *
+.*   >>CRTCMD<< CRTPNLGRP    PNLGRP(&LI/&OB) +                         *
+.*                           SRCFILE(&SL/&SF) +                        *
+.*                           SRCMBR(&SM);                              *
+.*                                                                     *
+.*   >>COMPILE<<                                                       *
+.*   >>END-COMPILE<<                                                   *
+.*                                                                     *
+.*   >>EXECUTE<<                                                       *
+.*                                                                     *
+.* >>END-PRE-COMPILER<<                                                *
+.*=====================================================================*
+:PNLGRP.
+.*
+:HELP name='CMPMSGF/ALL'.
+:IMHELP name=CMPMSGF.
+:IMHELP name='CMPMSGF/NEWMSGF   '.
+:IMHELP name='CMPMSGF/OLDMSGF   '.
+:IMHELP name='CMPMSGF/RANGE     '.
+:IMHELP name='CMPMSGF/CMPDATE   '.
+:IMHELP name='CMPMSGF/CMPLVL    '.
+:IMHELP name='CMPMSGF/ERROR     '.
+:EHELP.
+.*--------------------------------------------------------------------
+.* Hilfetext für den Befehl
+.*--------------------------------------------------------------------
+:HELP NAME='CMPMSGF'.
+Compare Message File (CMPMSGF) - Help
+:P.
+The Compare Message File (CMPMSGF) command compares two message
+files. The result of the comparison is shown in a subfile.
+:P.
+Missing message descriptions can easily be put in sync by
+pressing F9. Non-matching message descriptions can be flagged
+as 'copy-to-left' or 'copy-to-right' to put them in sync.
+:P.
+Everything from the RTVM0400 format of the QMHRTVM API is
+compared. In order to use the RTVM0400 format you should
+be on V5R1 or above or apply one of the following PTFs:
+:P.
+:LINES.
+   R450 - SF62999
+   R430 - SF64296
+   R440 - SF64297
+:ELINES.
+:P.
+See APAR #SA89599 for additional information.
+:P.
+If you have to use the RTVM0300 format, then only the following
+attributes are compared:
+:P.
+:UL.
+:LI.Message severity
+:LI.Alert index
+:LI.Alert option
+:LI.Log indicator
+:LI.Message ID
+:LI.Substitution Variables
+:LI.Default Reply
+:LI.CCSID conversion status indicator of text
+:LI.CCSID conversion status indicator of replacement data
+:LI.Coded character set identifier of text
+:LI.Message
+:LI.Message Help
+:EUL.
+:P.
+Also the :HP2.CMPDATE:EHP2. and :HP2.CMPLVL:EHP2. parameter
+does not work.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort NEWMSGF
+.*--------------------------------------------------------------------
+:HELP name='CMPMSGF/NEWMSGF   '.
+New message file - Help
+:XH3.New message file (NEWMSGF)
+:P.
+Specifies the name and library of the new-message file.
+.*
+:IMHELP name='COM/REQPARM'.
+.*
+:PARML.
+:PT.:PV.message-file-name:EPV.
+:PD.Specify the name of the new-message file.
+.*
+:PT.:PK DEF.*LIBL:EPK.
+:PD.All libraries in the job's library list are searched until the first
+match is found.
+.*
+:PT.:PV.*CURLIB:EPV.
+:PD.The current library for the job is used to locate the new-message
+file.  If no library is specified as the current library for the
+job, QGPL is used.
+.*
+:PT.:PV.library-name:EPV.
+:PD.Specify the library where the new-message file is located.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort OLDMSGF
+.*--------------------------------------------------------------------
+:HELP name='CMPMSGF/OLDMSGF   '.
+Old message file - Help
+:XH3.Old message file (OLDMSGF)
+:P.
+Specifies the name and library of the old-message file.
+.*
+:IMHELP name='COM/REQPARM'.
+.*
+:PARML.
+:PT.:PV.message-file-name:EPV.
+:PD.Specify the name of the old-message file.
+.*
+:PT.:PK DEF.*LIBL:EPK.
+:PD.All libraries in the job's library list are searched until the first
+match is found.
+.*
+:PT.:PV.*CURLIB:EPV.
+:PD.The current library for the job is used to locate the old-message
+file.  If no library is specified as the current library for the
+job, QGPL is used.
+.*
+:PT.:PV.library-name:EPV.
+:PD.Specify the library where the old-message file is located.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort RANGE
+.*--------------------------------------------------------------------
+:HELP name='CMPMSGF/RANGE     '.
+Range of message identifiers - Help
+:XH3.Range of message identifiers (RANGE)
+:P.
+Specifies the range of message identifiers in the specified message files
+for which message descriptions are compared.  All message
+descriptions in the message files specified on the Message file prompt
+(NEWMSGF/OLDMSGF parameter) can be compared by specifying *ALL on this
+parameter.
+:P.
+If the starting message identifier is not specified, the message
+descriptions begin with the first message in the specified message file.
+If the ending message identifier is not specified, the default value,
+*LAST, is used.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:XH3.Starting Message Identifier
+:P.
+The first of the two values in this parameter, called the startingen-ID
+message identifier, specifies the message identifier of the first
+message description to compare.
+:P.
+:PARML.
+:PT.:PK DEF.*FIRST:EPK.
+:PD.The first message in the file specified on the Message file prompt
+(NEWMSGF/OLDMSGF parameter) is the first message whose description is
+compared.
+:PT.:PV.lower-value:EPV.
+:PD.Specify the 7-character identifier of the first message description
+to be compared.
+:EPARML.
+:P.
+:XH3.Ending Message Identifier
+:P.
+The second of the two values, called the ending message identifier,
+specifies the message identifier for the last message description to be
+compared.
+:P.
+:PARML.
+:PT.:PK DEF.*ONLY:EPK.
+:PD.Only the message identifier specified as a starting message
+identifier has its description compared.
+:PT.:PV.*LAST:EPV.
+:PD.The last message in the files is the last message whose description
+is compared.
+:PT.:PV.upper-value:EPV.
+:PD.Specify the 7-character identifier of the last message description
+to be compared.
+:EPARML.
+:P.
+:XH3.Other Single Values:
+:P.
+:PARML.
+:PT.:PV.*ALL:EPV.
+:PD.All message descriptions in the message files specified are
+compared.  This value can only be specified in the first element
+of this parameter.
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort CMPDATE
+.*--------------------------------------------------------------------
+:HELP name='CMPMSGF/CMPDATE   '.
+Compare modif./creation date - Help
+:XH3.Compare modif./creation date (CMPDATE)
+:P.
+Specify *YES if the creation and modification dates should be
+compared.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+.*
+:PT.:PK DEF.*YES:EPK.
+:PD.Also the message creation and modification dates are compared.
+.*
+:PT.:PV.*NO:EPV.
+:PD.The message creation and modification date are not compared.
+.*
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort CMPLVL
+.*--------------------------------------------------------------------
+:HELP name='CMPMSGF/CMPLVL    '.
+Compare modif./creation level - Help
+:XH3.Compare modif./creation level (CMPLVL)
+:P.
+Specify *YES if the creation and modification levels should be
+compared.
+:P.
+:HP2.Attention::EHP2. *YES may not work properly, when the messages are changed
+multiple times over a day.
+:P.
+Example:
+:P.
+Message #1 and message #2 are created at the same day. Message #1
+was changed 2 times and message #2 was changed 3 times. However
+the latest change was applied to message #1. So actually message #2
+should be replaced by message #2. But since message #2 was changed
+one times more than message #1, CMPMSGF suggest to replace message #1
+by message #2.
+:P.
+:LINES.
+   message #1 (2 changes)  <==  message #2 (3 changed)
+:ELINES.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+.*
+:PT.:PK DEF.*YES:EPK.
+:PD.Also the message creation and modification levels are compared.
+.*
+:PT.:PV.*NO:EPV.
+:PD.The message creation and modification levels are not compared.
+.*
+:EPARML.
+.*
+:EHELP.
+.*
+.*--------------------------------------------------------------------
+.* Hilfetext für Schlüsselwort ERROR
+.*--------------------------------------------------------------------
+:HELP name='CMPMSGF/ERROR     '.
+Show errors only - Help
+:XH3.Show errors only (ERROR)
+:P.
+Specify *YES to show only non-matching message descriptions.
+.*
+:IMHELP name='COM/OPTPARM'.
+.*
+:PARML.
+.*
+:PT.:PK DEF.*NO:EPK.
+:PD.All message descriptions are shown.
+.*
+:PT.:PV.*YES:EPV.
+:PD.Only non-matching message descriptions are shown.
+.*
+:EPARML.
+.*
+:EHELP.
+.*
+.*====================================================================
+.*  Textbausteine, die an mehreren Stellen im Hilfetext
+.*  verwendet werden.
+.*====================================================================
+
+.*=====================================
+.*  Erforderlicher Parameter
+.*=====================================
+:HELP NAME='COM/REQPARM'.
+:P.
+This is a required parameter.
+:P.
+:IMHELP name='COM/VALUES'.
+:EHELP.
+
+.*=====================================
+.*  Optionaler Parameter
+.*=====================================
+:HELP NAME='COM/OPTPARM'.
+:P.
+This is an optional parameter.
+:P.
+:IMHELP name='COM/VALUES'.
+:EHELP.
+
+.*=====================================
+.*  Werteliste
+.*=====================================
+:HELP NAME='COM/VALUES'.
+:P.
+The possible values are:
+:EHELP.
+.*
+:EPNLGRP.

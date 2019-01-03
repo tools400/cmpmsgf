@@ -1,0 +1,165 @@
+     /* =================================================================== */
+     /*                                                                     */
+     /*  Kurzdokumentation :                                                */
+     /*                                                                     */
+     /*  Bereich . . . : CMPMSGF                                            */
+     /*  Objekt  . . . : CMPMSGFC1                                          */
+     /*  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       */
+     /*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      */
+     /*  Datum . . . . : 25.10.2001                                         */
+     /*                                                                     */
+     /* =================================================================== */
+     /*                                                                     */
+     /*  This software is free software, you can redistribute it and/or     */
+     /*  modify it under the terms of the GNU General Public License (GPL)  */
+     /*  as published by the Free Software Foundation.                      */
+     /*                                                                     */
+     /*  See GNU General Public License for details.                        */
+     /*          http://www.opensource.org                                  */
+     /*          http://www.opensource.org/licenses/gpl-license.html        */
+     /*                                                                     */
+     /* =================================================================== */
+     /*  History:                                                           */
+     /*                                                                     */
+     /*  Datum       Name          Änderung                                 */
+     /*  ----------  ------------  ---------------------------------------  */
+     /*                                                                     */
+     /* =================================================================== */
+     /* >>PRE-COMPILER<<                                                    */
+     /*                                                                     */
+     /*   >>CRTCMD<< CRTCLMOD     MODULE(&LI/&OB) +                         */
+     /*                           SRCFILE(&SL/&SF) +                        */
+     /*                           SRCMBR(&SM);                              */
+     /*                                                                     */
+     /*   >>COMPILE<<                                                       */
+     /*     >>PARM<< DBGVIEW(*LIST);                                        */
+     /*   >>END-COMPILE<<                                                   */
+     /*                                                                     */
+     /*   >>EXECUTE<<                                                       */
+     /*                                                                     */
+     /* >>END-PRE-COMPILER<<                                                */
+     /* =================================================================== */
+             PGM        PARM(&I_FILE1         +
+                             &I_FILE2         +
+                             &I_RANGE         +
+                             &I_CMPDATE       +
+                             &I_CMPLVL        +
+                             &I_ERROR         )
+
+             DCL        VAR(&I_FILE1   ) TYPE(*CHAR) LEN(20)
+             DCL        VAR(&I_FILE2   ) TYPE(*CHAR) LEN(20)
+             DCL        VAR(&I_RANGE   ) TYPE(*CHAR) LEN(16)
+             DCL        VAR(&I_CMPDATE ) TYPE(*CHAR) LEN( 1)
+             DCL        VAR(&I_CMPLVL  ) TYPE(*CHAR) LEN( 1)
+             DCL        VAR(&I_ERROR   ) TYPE(*CHAR) LEN( 1)
+
+             DCL        VAR(&FILE1     ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIB1      ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&FILE2     ) TYPE(*CHAR) LEN(10)
+             DCL        VAR(&LIB2      ) TYPE(*CHAR) LEN(10)
+
+             DCL        VAR(&KEYCODE2 )  TYPE(*CHAR) LEN( 2)
+             DCL        VAR(&KEYCODE  )  TYPE(*CHAR) LEN( 1)
+
+/* Error handling       */
+             DCL        VAR(&ERROR)      TYPE(*LGL) +
+                          VALUE('0')
+             DCL        VAR(&TRUE)       TYPE(*LGL) +
+                          VALUE('1')
+             DCL        VAR(&FALSE)      TYPE(*LGL) +
+                          VALUE('0')
+             DCL        VAR(&ERRMSGKEY)  TYPE(*CHAR) LEN(4)
+
+             DCL        VAR(&ERRMSGTYP)  TYPE(*CHAR) LEN(10) +
+                          VALUE('*DIAG')
+             DCL        VAR(&ERRNBRTYP)  TYPE(*CHAR) LEN(4) +
+                          VALUE(X'00000001')
+             DCL        VAR(&ERRPGMMSGQ) TYPE(*CHAR) LEN(10) +
+                          VALUE('*')
+             DCL        VAR(&ERRSTKCTR)  TYPE(*CHAR) LEN(4) +
+                          VALUE(X'00000001')
+             DCL        VAR(&ERRCODE  )  TYPE(*CHAR) LEN(4) +
+                          VALUE(X'00000000')
+
+             MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(ERROR))
+
+             CHGVAR     VAR(&ERROR    ) VALUE(&FALSE)
+
+  /* ------------------------------------------------------------------------ */
+  /* Break input variables into pieces.                                       */
+  /* ------------------------------------------------------------------------ */
+
+             CHGVAR     VAR(&FILE1  )  VALUE(%SST(&I_FILE1  1 10))
+             CHGVAR     VAR(&LIB1   )  VALUE(%SST(&I_FILE1 11 10))
+
+             CHGVAR     VAR(&FILE2  )  VALUE(%SST(&I_FILE2  1 10))
+             CHGVAR     VAR(&LIB2   )  VALUE(%SST(&I_FILE2 11 10))
+
+  /* ------------------------------------------------------------------------ */
+  /* Check message files.                                                     */
+  /* ------------------------------------------------------------------------ */
+
+             IF         COND(&LIB1 *NE '*LIBL') THEN(DO)
+                CHKOBJ    OBJ(&LIB1)   OBJTYPE(*LIB)  +
+                          MBR(*NONE) AUT(*NONE)
+             ENDDO
+
+             CHKOBJ    OBJ(&LIB1/&FILE1)  OBJTYPE(*MSGF) +
+                          MBR(*NONE) AUT(*NONE)
+
+             RTVOBJD    OBJ(&LIB1/&FILE1) OBJTYPE(*MSGF) RTNLIB(&LIB1)
+
+             IF         COND(&LIB2 *NE '*LIBL') THEN(DO)
+                CHKOBJ    OBJ(&LIB2)   OBJTYPE(*LIB)  +
+                          MBR(*NONE) AUT(*NONE)
+             ENDDO
+
+             CHKOBJ    OBJ(&LIB2/&FILE2)  OBJTYPE(*MSGF) +
+                          MBR(*NONE) AUT(*NONE)
+
+             RTVOBJD    OBJ(&LIB2/&FILE2) OBJTYPE(*MSGF) RTNLIB(&LIB2)
+
+  /* ------------------------------------------------------------------------ */
+  /* Compare Message files.                                                   */
+  /* ------------------------------------------------------------------------ */
+
+               CALLPRC    PRC(F_CMPMSGF) PARM(&FILE1       +
+                                              &LIB1        +
+                                              &FILE2       +
+                                              &LIB2        +
+                                              &I_RANGE     +
+                                              &I_CMPDATE   +
+                                              &I_CMPLVL    +
+                                              &I_ERROR     ) +
+                                            RTNVAL(&KEYCODE2)
+             CHGVAR     VAR(&KEYCODE) VALUE(%SST(&KEYCODE2 1 1))
+
+ /* -------------------------------------------------------------- */
+ /*  End program                                                   */
+ /* -------------------------------------------------------------- */
+
+ENDE:
+
+/* -------------------------------------------------------------- */
+/*    Fehler aufgetreten ?                                        */
+/* -------------------------------------------------------------- */
+
+             IF         COND(&ERROR) THEN(DO)
+               SNDPGMMSG  MSGID(USR0011) MSGF(*LIBL/CMPMSGF) +
+                          TOPGMQ(*PRV (*PGMBDY)) +
+                          MSGTYPE(*ESCAPE)
+               MONMSG     MSGID(CPF0000)
+             ENDDO
+
+             RETURN
+
+ ERROR:
+             IF         COND(&ERROR) THEN(GOTO CMDLBL(ENDE))
+             ELSE       CHGVAR     VAR(&ERROR) VALUE(&TRUE)
+
+             CALL       PGM(QMHMOVPM) PARM(&ERRMSGKEY &ERRMSGTYP +
+                          &ERRNBRTYP &ERRPGMMSGQ &ERRSTKCTR &ERRCODE)
+
+             GOTO       CMDLBL(ENDE)
+
+             ENDPGM

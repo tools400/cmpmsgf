@@ -1,0 +1,152 @@
+      *%%TS  SD  20011120  172452  RADDATZ     REL-V4R4M0  5769-PW1
+      * =================================================================== *
+      *                                                                     *
+      *  Kurzdokumentation :                                                *
+      *                                                                     *
+      *  Bereich . . . : CMPMSGF                                            *
+      *  Objekt  . . . : CMPMSGFD2                                          *
+      *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
+      *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+      *  Datum . . . . : 20.12.2001                                         *
+      *                                                                     *
+      * =================================================================== *
+      *                                                                     *
+      *  This software is free software, you can redistribute it and/or     *
+      *  modify it under the terms of the GNU General Public License (GPL)  *
+      *  as published by the Free Software Foundation.                      *
+      *                                                                     *
+      *  See GNU General Public License for details.                        *
+      *          http://www.opensource.org                                  *
+      *          http://www.opensource.org/licenses/gpl-license.html        *
+      *                                                                     *
+      * =================================================================== *
+      *  History:                                                           *
+      *                                                                     *
+      *  Datum       Name          Änderung                                 *
+      *  ----------  ------------  ---------------------------------------  *
+      *                                                                     *
+      * =================================================================== *
+      *   >>PRE-COMPILER<<                                                  *
+      *                                                                     *
+      *     >>CRTCMD<<  CRTDSPF       FILE(&LI/&OB) +                       *
+      *                               SRCFILE(&SL/&SF)  +                   *
+      *                               SRCMBR(&SM);                          *
+      *                                                                     *
+      *     >>COMPILE<<                                                     *
+      *       >>PARM<<  RSTDSP(*YES);                                       *
+      *     >>END-COMPILE<<                                                 *
+      *                                                                     *
+      *     >>EXECUTE<<                                                     *
+      *                                                                     *
+      *   >>END-PRE-COMPILER<<                                              *
+      * =================================================================== *
+      *
+      *%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A                                      INDARA
+     A                                      PRINT
+      *
+      *----------------------------------------------------*
+     A          R SCR
+      *%%TS  SD  20011120  172452  RADDATZ     REL-V4R4M0  5769-PW1
+     A                                      OVERLAY
+     A                                      WINDOW(MSGCTL)
+     A                                      CF01
+     A                                      CF02
+     A                                      CF03
+     A                                      CF04
+     A                                      CF05
+     A                                      CF06
+     A                                      CF07
+     A                                      CF08
+     A                                      CF09
+     A                                      CF10
+     A                                      CF12
+     A                                      CF13
+     A                                      CF14
+     A                                      CF15
+     A                                      CF16
+     A                                      CF17
+     A                                      CF18
+     A                                      CF19
+     A                                      CF20
+     A                                      CF21
+     A                                      CF22
+     A                                      CF23
+     A                                      CF24
+     A                                      RTNCSRLOC(&SCNREC &SCNFLD)
+     A            SCNREC        10A  H
+     A            SCNFLD        10A  H
+     A                                  1 25'Filter'
+     A                                      COLOR(WHT)
+     A                                  3  2'Set filter values, press Enter.'
+     A                                      COLOR(BLU)
+     A                                  5  2'Show:'
+     A                                  6  4'Copy-to-Left . . .'
+     A            ##CPYL         1A  B  6 25
+     A  61                                  DSPATR(PC)
+     A  71                                  DSPATR(RI)
+     A                                  7  4'Copy-to-Right  . .'
+     A            ##CPYR         1A  B  7 25
+     A  62                                  DSPATR(PC)
+     A  72                                  DSPATR(RI)
+     A                                  8  4'Equal  . . . . . .'
+     A            ##EQUAL        1A  B  8 25
+     A  63                                  DSPATR(PC)
+     A  73                                  DSPATR(RI)
+     A                                  9  4'Not Equal  . . . .'
+     A            ##NEQUAL       1A  B  9 25
+     A  64                                  DSPATR(PC)
+     A  74                                  DSPATR(RI)
+     A                                 11  2'Changing the filter will reload th-
+     A                                      e subfile!'
+     A                                      COLOR(BLU)
+      *
+      *----------------------------------------------------*
+     A          R BOT#1
+      *%%TS  SD  20011120  145900  RADDATZ     REL-V4R4M0  5769-PW1
+     A                                      OVERLAY
+     A                                      WINDOW(MSGCTL)
+     A                                 13  2'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 13 12'F5=Refresh'
+     A                                      COLOR(BLU)
+     A                                 13 25'F12=Cancel'
+     A                                      COLOR(BLU)
+      *
+      *----------------------------------------------------*
+     A          R MSGSFL                    SFL
+      *%%TS  SD  19971017  155045  RADDATZ     REL-V3R6M0  5716-PW1
+     A                                      SFLMSGRCD(14)
+     A            MSGKY                     SFLMSGKEY
+     A            PGMQ                      SFLPGMQ(276)
+      *
+      *----------------------------------------------------*
+     A          R MSGCTL                    SFLCTL(MSGSFL)
+      *%%TS  SD  19971021  180314  RADDATZ     REL-V3R6M0  5716-PW1
+     A                                      KEEP
+     A                                      LOCK
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      SFLINZ
+     A N89                                  SFLEND
+     A                                      SFLSIZ(0050)
+     A                                      SFLPAG(0001)
+     A                                      WINDOW(&ZEI &POS 14 54 *NOMSGLIN)
+     A            PGMQ                      SFLPGMQ(276)
+     A            ZEI            3S 0P
+     A            POS            3S 0P
+      *
+      *----------------------------------------------------*
+      *  RMVWDW ZUM LÖSCHEN DES WINDOWS
+      *
+     A          R RMVWDW                    CLRL(*NO) OVERLAY FRCDTA
+      *
+      *  DER DUMMY SATZ MUSS VORHANDEN SEIN,
+      *  AUCH WENN KEIN ZUGRIFF AUF IHN ERFOLGT !!
+      *
+      *----------------------------------------------------*
+     A          R DUMMY                     ASSUME
+      *%%TS  SD  19931014  095141  LASCHE      REL-V2R2M0  5738-PW1
+     A                                 11  1' '

@@ -1,0 +1,108 @@
+      *===============================================================*
+      *  QMHRTVM API - RTVM0400                                       *
+      * ============================================================= *
+      *   >>PRE-COMPILER<<                                            *
+      *                                                               *
+      *     >>CRTCMD<<  CRTPF         FILE(&LI/&OB) +                 *
+      *                               SRCFILE(&SL/&SF)  +             *
+      *                               SRCMBR(&SM);                    *
+      *                                                               *
+      *     >>COMPILE<<                                               *
+      *       >>PARM<<                MAXMBRS(1);                     *
+      *       >>PARM<<                MBR(*FILE);                     *
+      *       >>PARM<<                FILETYPE(*DATA);                *
+      *                                                               *
+      *     >>END-COMPILE<<                                           *
+      *                                                               *
+      *     >>EXECUTE<<                                               *
+      *                                                               *
+      *   >>END-PRE-COMPILER<<                                        *
+      *===============================================================*
+      *  PTF-Information:      APAR#: SA89599                         *
+      *                                                               *
+      *     R450 SF62999                                              *
+      *     R430 SF64296                                              *
+      *     R440 SF64297                                              *
+      *                                                               *
+      *===============================================================*
+      *
+      ***
+      *
+     A          R RTVM0400                  TEXT('QMHRTVM API - RTVM0400')
+      *
+     A            BYTRET         9B 0       TEXT('Bytes Returned              ')
+     A            BYTAVL         9B 0       TEXT('Bytes Available             ')
+     A            MSGSEV         9B 0       TEXT('Message Severity            ')
+     A            ALTIDX         9B 0       TEXT('Alert Index                 ')
+     A            ALTOPT         9A         TEXT('Alert Option                ')
+     A            LOGIND         1A         TEXT('Log Indicator               ')
+     A            MSGID          7A         TEXT('Message ID                  ')
+     A            RES_01         3A         TEXT('Reserved                    ')
+     A            NUMVARFMT      9B 0       TEXT('Nbr. of subst. var. formats ')
+     A            CSINDTXT       9B 0       TEXT('CCSID conv. stat. ind. text ')
+     A            CSINDDTA       9B 0       TEXT('CCSID conv. stat. ind. data ')
+     A            CCSIDTXT       9B 0       TEXT('CCSID of Text returned      ')
+     A            OFSDFTR        9B 0       TEXT('Offset of default reply     ')
+     A            LENDFTRPYR     9B 0       TEXT('Length of default reply ret.')
+     A            LENDFTRPYA     9B 0       TEXT('Length of default reply avl.')
+     A            OFSMSG         9B 0       TEXT('Offset of message           ')
+     A            LENMSGR        9B 0       TEXT('Length of message returned  ')
+     A            LENMSGA        9B 0       TEXT('Length of message available ')
+     A            OFSMSGHLP      9B 0       TEXT('Offset of message           ')
+     A            LENMSGHLPR     9B 0       TEXT('Length of message help ret. ')
+     A            LENMSGHLPA     9B 0       TEXT('Length of message help avl. ')
+     A            OFSVARFMT      9B 0       TEXT('Ofs. of subst. var. formats ')
+     A            LENVARFMTR     9B 0       TEXT('Length subst. var. fmt. ret.')
+     A            LENVARFMTA     9B 0       TEXT('Length subst. var. fmt. avl.')
+     A            LENVARFMTE     9B 0       TEXT('Length subst. var. element  ')
+      *
+     A            RPYTYPE       10A         TEXT('Reply Type                  ')
+     A            RES_02         2A         TEXT('Reserved                    ')
+     A            MAXRPYLEN      9B 0       TEXT('Maximum reply length        ')
+     A            MAXRPYDECP     9B 0       TEXT('Maximum reply decimal pos.  ')
+     A            OFSRPYENT      9B 0       TEXT('Offset of reply value entr. ')
+     A            NUMRPYENTR     9B 0       TEXT('Number of reply values ret. ')
+     A            LENRPYENTR     9B 0       TEXT('Length of reply values ret. ')
+     A            LENRPYENTA     9B 0       TEXT('Length of reply values avl. ')
+     A            LENRPYENT      9B 0       TEXT('Length of reply value       ')
+     A            OFSSPCENT      9B 0       TEXT('Offset of special value entr')
+     A            NUMSPCENTR     9B 0       TEXT('Number of special values ret')
+     A            LENSPCENTR     9B 0       TEXT('Length of special values ret')
+     A            LENSPCENTA     9B 0       TEXT('Length of special values avl')
+     A            LENSPCENT      9B 0       TEXT('Length of special value     ')
+     A            OFSLOWRPY      9B 0       TEXT('Offset of lower range reply ')
+     A            LENLOWRPYR     9B 0       TEXT('Length of lower range ret.  ')
+     A            LENLOWRPYA     9B 0       TEXT('Length of lower range avl.  ')
+     A            OFSUPRPY       9B 0       TEXT('Offset of upper range reply ')
+     A            LENUPRPYR      9B 0       TEXT('Length of upper range ret.  ')
+     A            LENUPRPYA      9B 0       TEXT('Length of upper range avl.  ')
+     A            OFSRTSTE       9B 0       TEXT('Offset of relat. test entry ')
+     A            LENRTSTER      9B 0       TEXT('Length of relat. test ret.  ')
+     A            LENRTSTEA      9B 0       TEXT('Length of relat. test avl.  ')
+     A            MSGCRTDAT      7A         TEXT('Message creation date       ')
+     A            RES_03         1A         TEXT('Reserved                    ')
+     A            MSGCRTNUM      9B 0       TEXT('Message creation level      ')
+     A            MSGMODDAT      7A         TEXT('Message modification date   ')
+     A            RES_04         1A         TEXT('Reserved                    ')
+     A            MSGMODNUM      9B 0       TEXT('Message modification level  ')
+     A            MSGCCSID       9B 0       TEXT('Stored CCSID of message     ')
+     A            OFSDMPLE       9B 0       TEXT('Offset of dump list entries ')
+     A            NUMDMPLER      9B 0       TEXT('Number of dump list ent. ret')
+     A            LENDMPLER      9B 0       TEXT('Length of dump list ent. ret')
+     A            LENDMPLEA      9B 0       TEXT('Length of dump list ent. avl')
+     A            DFTPGM        10A         TEXT('Default program name        ')
+     A            DFTPGMLIB     10A         TEXT('Default program library name')
+      *
+     A            DATA        4096A         TEXT('Data                        ')
+      *
+      *                       CHAR(*)  Default reply
+      *                       CHAR(*)  Message
+      *                       CHAR(*)  Message help
+      *                       CHAR(*)  Substitution variable formats
+      *                       CHAR(*)  Valid reply value entries
+      *                       CHAR(*)  Special reply value entries
+      *                       CHAR(*)  Lower range reply value
+      *                       CHAR(*)  Upper range reply value
+      *                       CHAR(*)  Relational test entry
+      *                       CHAR(*)  Dump list entries
+      *

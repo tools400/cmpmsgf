@@ -1,0 +1,234 @@
+      *%%TS  SD  20040415  085322  RADDATZ     REL-V5R2M0  5722-WDS
+      * =================================================================== *
+      *                                                                     *
+      *  Kurzdokumentation :                                                *
+      *                                                                     *
+      *  Bereich . . . : CMPMSGF                                            *
+      *  Objekt  . . . : CMPMSGFD1                                          *
+      *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
+      *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+      *  Datum . . . . : 25.10.2001                                         *
+      *                                                                     *
+      * =================================================================== *
+      *                                                                     *
+      *  This software is free software, you can redistribute it and/or     *
+      *  modify it under the terms of the GNU General Public License (GPL)  *
+      *  as published by the Free Software Foundation.                      *
+      *                                                                     *
+      *  See GNU General Public License for details.                        *
+      *          http://www.opensource.org                                  *
+      *          http://www.opensource.org/licenses/gpl-license.html        *
+      *                                                                     *
+      * =================================================================== *
+      *  History:                                                           *
+      *                                                                     *
+      *  Datum       Name          Änderung                                 *
+      *  ----------  ------------  ---------------------------------------  *
+      *                                                                     *
+      * =================================================================== *
+      *   >>PRE-COMPILER<<                                                  *
+      *                                                                     *
+      *     >>CRTCMD<<  CRTDSPF       FILE(&LI/&OB) +                       *
+      *                               SRCFILE(&SL/&SF)  +                   *
+      *                               SRCMBR(&SM);                          *
+      *                                                                     *
+      *     >>COMPILE<<                                                     *
+      *       >>PARM<<  RSTDSP(*YES);                                       *
+      *     >>END-COMPILE<<                                                 *
+      *                                                                     *
+      *     >>EXECUTE<<                                                     *
+      *                                                                     *
+      *   >>END-PRE-COMPILER<<                                              *
+      * =================================================================== *
+      *%%EC
+     A                                      DSPSIZ(24 80 *DS3                  -
+     A                                             27 132 *DS4)
+     A                                      INDARA
+     A                                      PRINT
+      *
+      *----------------------------------------------------*
+      *
+     A          R SFL                       SFL
+      *%%TS  SD  20011028  125813  RADDATZ     REL-V4R4M0  5769-PW1
+     A  85                                  SFLNXTCHG
+     A            H_MSGID1      10A  H
+     A            H_FILE1       10A  H
+     A            H_LIB1        10A  H
+     A            H_MSGID2      10A  H
+     A            H_FILE2       10A  H
+     A            H_LIB2        10A  H
+     A            ##OPT          2A  B 11  3
+     A  86                                  DSPATR(RI)
+     A            $$MSGID        7   O 11  7
+     A            $$TEXT1       30A  O 11 15
+     A            $$CD           2A  O 11 46
+     A  50                                  COLOR(WHT)
+     A  51                                  COLOR(GRN)
+     A  52                                  COLOR(YLW)
+     A  53                                  COLOR(RED)
+     A            $$TEXT2       30A  O 11 49
+     A            $$HELP1       30A  O 12 15
+     A            $$HELP2       30A  O 12 49
+      *----------------------------------------------------*
+     A          R CTL                       SFLCTL(SFL)
+      *%%TS  SD  20040415  085322  RADDATZ     REL-V5R2M0  5722-WDS
+     A  *DS3                                SFLSIZ(0006)
+     A  *DS4                                SFLSIZ(0006)
+     A  *DS3                                SFLPAG(0005)
+     A  *DS4                                SFLPAG(0005)
+     A                                      ROLLUP(91)
+     A                                      ROLLDOWN(92)
+     A                                      CF01
+     A                                      CF02
+     A                                      CF03
+     A                                      CF04
+     A                                      CF05
+     A                                      CF06
+     A                                      CF07
+     A                                      CF08
+     A                                      CF09
+     A                                      CF10
+     A                                      CF11
+     A                                      CF12
+     A                                      CF13
+     A                                      CF14
+     A                                      CF15
+     A                                      CF16
+     A                                      CF17
+     A                                      CF18
+     A                                      CF19
+     A                                      CF20
+     A                                      CF21
+     A                                      CF22
+     A                                      CF23
+     A                                      CF24
+     A                                      RTNCSRLOC(&SCNREC &SCNFLD)
+     A                                      OVERLAY
+     A                                      SFLCSRRRN(&SFLCSRRRN)
+     A                                      SFLMODE(&SFLMODE)
+     A  80                                  SFLDSP
+     A  81                                  SFLDSPCTL
+     A  82                                  SFLCLR
+     A  83                                  SFLEND(*MORE)
+     A  84                                  SFLDROP(CF11)
+     A N84                                  SFLFOLD(CF11)
+     A            SCNREC        10A  H
+     A            SCNFLD        10A  H
+     A            SFLMODE        1A  H
+     A            SFLRRN         5S 0H
+     A            SFLCSRRRN      5S 0H
+     A            SFLRCDNBR      4S 0H      SFLRCDNBR(CURSOR)
+     A                                  1 31'Compare Message File'
+     A                                      DSPATR(HI)
+     A            $$SYSTEM       8A  O  1 72
+     A                                  3  2'Message File  . .'
+     A            ##MSGF1       10A  B  3 22
+     A  61                                  DSPATR(PC)
+     A  71                                  DSPATR(RI)
+     A                                  3 45'Message File  . .'
+     A            ##MSGF2       10A  B  3 65
+     A  65                                  DSPATR(PC)
+     A  75                                  DSPATR(RI)
+     A                                  4  4'Library . . . .'
+     A            ##LIB1        10A  B  4 24
+     A  62                                  DSPATR(PC)
+     A  72                                  DSPATR(RI)
+     A                                  4 47'Library . . . .'
+     A            ##LIB2        10A  B  4 67
+     A  66                                  DSPATR(PC)
+     A  76                                  DSPATR(RI)
+     A                                  5  2'Find  . .'
+     A            ##FIND        30A  B  5 14
+     A  88                                  DSPATR(RI)
+     A                                      CHECK(LC)
+     A                                  5 45'Position to . . .'
+     A            ##POSTO        7A  B  5 65
+     A  87                                  DSPATR(RI)
+     A                                  7  2'Type options, press Enter.'
+     A                                      COLOR(BLU)
+     A  91                              8  3'L=Copy to left'
+     A                                      COLOR(BLU)
+     A  92                              8  3'21=Change left'
+     A                                      COLOR(BLU)
+     A  93                              8  3'22=Change right'
+     A                                      COLOR(BLU)
+     A  91                              8 19'R=Copy to right'
+     A                                      COLOR(BLU)
+     A  92                              8 20'31=Copy to left'
+     A                                      COLOR(BLU)
+     A  93                              8 21'32=Copy to right'
+     A                                      COLOR(BLU)
+     A  91                              8 36'N=No action'
+     A                                      COLOR(BLU)
+     A  92                              8 38'41=Delete left'
+     A                                      COLOR(BLU)
+     A  93                              8 40'42=Delete right'
+     A                                      COLOR(BLU)
+     A  92                              8 55'51=Display left'
+     A                                      COLOR(BLU)
+     A  93                              8 58'52=Display right'
+     A                                      COLOR(BLU)
+     A                                 10  2'Opt'
+     A                                      COLOR(WHT)
+     A                                 10  7'Msg-ID '
+     A                                      COLOR(WHT)
+     A                                 10 15'Message Text                  '
+     A                                      COLOR(WHT)
+     A                                 10 46'Cd'
+     A                                      COLOR(WHT)
+     A                                 10 49'Message Text                  '
+     A                                      COLOR(WHT)
+      *
+      *----------------------------------------------------*
+     A          R BOT#1
+      *%%TS  SD  20040414  130417  RADDATZ     REL-V5R2M0  5722-WDS
+     A                                      OVERLAY
+     A                                 23  3'F3=Exit'
+     A                                      COLOR(BLU)
+     A                                 23 13'F5=Refresh'
+     A                                      COLOR(BLU)
+     A                                 23 26'F9=Process'
+     A                                      COLOR(BLU)
+     A                                 23 39'F11=Fold/Drop'
+     A                                      COLOR(BLU)
+     A                                 23 63'F24=More keys'
+     A                                      COLOR(BLU)
+      *
+      *----------------------------------------------------*
+     A          R BOT#2
+      *%%TS  SD  20040415  084552  RADDATZ     REL-V5R2M0  5722-WDS
+     A                                      OVERLAY
+     A                                 23  3'F12=Cancel'
+     A                                      COLOR(BLU)
+     A                                 23 16'F19=Filter'
+     A                                      COLOR(BLU)
+     A                                 23 29'F21=Command line'
+     A                                      COLOR(BLU)
+     A                                 23 64'F24=More keys'
+     A                                      COLOR(BLU)
+      *
+      *----------------------------------------------------*
+      *
+     A          R EMPTY
+      *%%TS  SD  20011025  152545  RADDATZ     REL-V4R4M0  5769-PW1
+     A                                      OVERLAY
+     A                                 12  4'(No entries found)'
+      *
+      *----------------------------------------------------*
+     A          R MSGSFL                    SFL
+     A                                      SFLMSGRCD(24)
+     A            MSGKY                     SFLMSGKEY
+     A            PGMQ                      SFLPGMQ(276)
+      *
+      *----------------------------------------------------*
+     A          R MSGCTL                    SFLCTL(MSGSFL)
+      *%%TS  SD  20010927  155141  RADDATZ     REL-V4R4M0  5769-PW1
+     A                                      KEEP
+     A                                      LOCK
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      SFLINZ
+     A N89                                  SFLEND
+     A                                      SFLSIZ(0002)
+     A                                      SFLPAG(0001)
+     A            PGMQ                      SFLPGMQ(276)

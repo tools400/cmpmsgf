@@ -1,0 +1,47 @@
+     /* =================================================================== */
+     /*                                                                     */
+     /*  Kurzdokumentation :                                                */
+     /*                                                                     */
+     /*  Bereich . . . : CMPMSGF                                            */
+     /*  Objekt  . . . : CMPMSGF                                            */
+     /*  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       */
+     /*  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      */
+     /*  Datum . . . . : 25.10.2001                                         */
+     /*                                                                     */
+     /* =================================================================== */
+     /*                                                                     */
+     /*  This software is free software, you can redistribute it and/or     */
+     /*  modify it under the terms of the GNU General Public License (GPL)  */
+     /*  as published by the Free Software Foundation.                      */
+     /*                                                                     */
+     /*  See GNU General Public License for details.                        */
+     /*          http://www.opensource.org                                  */
+     /*          http://www.opensource.org/licenses/gpl-license.html        */
+     /*                                                                     */
+     /* =================================================================== */
+     /*  History:                                                           */
+     /*                                                                     */
+     /*  Datum       Name          Änderung                                 */
+     /*  ----------  ------------  ---------------------------------------  */
+     /*                                                                     */
+     /* =================================================================== */
+     /* >>PRE-COMPILER<<                                                    */
+     /*                                                                     */
+     /*   >>CRTCMD<< CRTPGM       PGM(&LI/&OB);                             */
+     /*                                                                     */
+     /*   >>LINK<<                                                          */
+     /*     >>PARM<< USRPRF(*USER);                                         */
+     /*     >>PARM<< ACTGRP(*NEW      );                                    */
+     /*     >>PARM<< ENTMOD(*LIBL/CMPMSGFC1);                               */
+     /*     >>PARM<< BNDDIR(QC2LE);                                         */
+     /*     >>PARM<< MODULE(&LI/CMPMSGFC1 +                                 */
+     /*                     &LI/CMPMSGFR1 +                                 */
+     /*                     &LI/CMPMSGFR2 +                                 */
+     /*                     &LI/CMPMSGFR3 );                                */
+     /*     >>PARM<< DETAIL(*BASIC);                                        */
+     /*   >>END-LINK<<                                                      */
+     /*                                                                     */
+     /*   >>EXECUTE<<                                                       */
+     /*                                                                     */
+     /* >>END-PRE-COMPILER<<                                                */
+     /* =================================================================== */
