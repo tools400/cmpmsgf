@@ -1,49 +1,49 @@
-      *%%TS  SD  20011025  160518  RADDATZ     REL-V4R4M0  5769-PW1
-      * =================================================================== *
-      *                                                                     *
-      *  Kurzdokumentation :                                                *
-      *                                                                     *
-      *  Bereich . . . : CMPMSGF                                            *
-      *  Objekt  . . . : CMPMSGFR2                                          *
-      *  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
-      *  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
-      *  Datum . . . . : 20.12.2001                                         *
-      *                                                                     *
-      * =================================================================== *
-      *                                                                     *
-      *  This software is free software, you can redistribute it and/or     *
-      *  modify it under the terms of the GNU General Public License (GPL)  *
-      *  as published by the Free Software Foundation.                      *
-      *                                                                     *
-      *  See GNU General Public License for details.                        *
-      *          http://www.opensource.org                                  *
-      *          http://www.opensource.org/licenses/gpl-license.html        *
-      *                                                                     *
-      * =================================================================== *
-      *  History:                                                           *
-      *                                                                     *
-      *  Datum       Name          Änderung                                 *
-      *  ----------  ------------  ---------------------------------------  *
-      *                                                                     *
-      *                                                                     *
-      *                                                                     *
-      * =================================================================== *
-      *   >>PRE-COMPILER<<                                                  *
-      *                                                                     *
-      *     >>CRTCMD<<  CRTRPGMOD    MODULE(&LI/&OB) +                      *
-      *                              SRCFILE(&SL/&SF) +                     *
-      *                              SRCMBR(&SM);                           *
-      *                                                                     *
-      *     >>COMPILE<<                                                     *
-      *       >>PARM<< TRUNCNBR(*NO);                                       *
-      *       >>PARM<< DBGVIEW(*LIST);                                      *
-      *       >>PARM<< OPTION(*EVENTF);                                     *
-      *     >>END-COMPILE<<                                                 *
-      *                                                                     *
-      *     >>EXECUTE<<                                                     *
-      *                                                                     *
-      *   >>END-PRE-COMPILER<<                                              *
-      * =================================================================== *
+       //%%TS  SD  20011025  160518  RADDATZ     REL-V4R4M0  5769-PW1
+       // =================================================================== *
+       //                                                                     *
+       //  Kurzdokumentation :                                                *
+       //                                                                     *
+       //  Bereich . . . : CMPMSGF                                            *
+       //  Objekt  . . . : CMPMSGFR2                                          *
+       //  Beschreibung  : Tool: CMPMSGF    (Compare Message File     )       *
+       //  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+       //  Datum . . . . : 20.12.2001                                         *
+       //                                                                     *
+       // =================================================================== *
+       //                                                                     *
+       //  This software is free software, you can redistribute it and/or     *
+       //  modify it under the terms of the GNU General Public License (GPL)  *
+       //  as published by the Free Software Foundation.                      *
+       //                                                                     *
+       //  See GNU General Public License for details.                        *
+       //          http://www.opensource.org                                  *
+       //          http://www.opensource.org/licenses/gpl-license.html        *
+       //                                                                     *
+       // =================================================================== *
+       //  History:                                                           *
+       //                                                                     *
+       //  Datum       Name          Änderung                                 *
+       //  ----------  ------------  ---------------------------------------  *
+       //                                                                     *
+       //                                                                     *
+       //                                                                     *
+       // =================================================================== *
+       //   >>PRE-COMPILER<<                                                  *
+       //                                                                     *
+       //     >>CRTCMD<<  CRTRPGMOD    MODULE(&LI/&OB) +                      *
+       //                              SRCFILE(&SL/&SF) +                     *
+       //                              SRCMBR(&SM);                           *
+       //                                                                     *
+       //     >>COMPILE<<                                                     *
+       //       >>PARM<< TRUNCNBR(*NO);                                       *
+       //       >>PARM<< DBGVIEW(*LIST);                                      *
+       //       >>PARM<< OPTION(*EVENTF);                                     *
+       //     >>END-COMPILE<<                                                 *
+       //                                                                     *
+       //     >>EXECUTE<<                                                     *
+       //                                                                     *
+       //   >>END-PRE-COMPILER<<                                              *
+       // =================================================================== *
      H DEBUG
      H NOMAIN
      H EXTBININT(*YES)
@@ -52,75 +52,63 @@
      H DATFMT(*ISO )  TIMFMT(*ISO )
      H EXPROPTS(*RESDECPOS)
       /COPY QCMPMSGF,COPYRIGHT
-      *===============================================================*
+       //===============================================================*
      FCMPMSGFD2 CF   E             WORKSTN usropn
      F                                     infds(Screen)
      F                                     indds(workstn)
-      *
-     D workstn         DS
-      *
-     D  workstn_cpyl_pc...
-     D                        61     61N
-     D  workstn_cpyr_pc...
-     D                        62     62N
-     D  workstn_equal_pc...
-     D                        63     63N
-     D  workstn_nequal_pc...
-     D                        64     64N
-      *
-     D  workstn_cpyl_ri...
-     D                        71     71N
-     D  workstn_cpyr_ri...
-     D                        72     72N
-     D  workstn_equal_ri...
-     D                        73     73N
-     D  workstn_nequal_ri...
-     D                        74     74N
-      *
-     D  workstn_msgsflend...
-     D                        89     89N
-      *
-      *== Workstation information data structure =====================*
+       //
+     D workstn         DS                  qualified
+     D  cpyl_pc               61     61N
+     D  cpyr_pc               62     62N
+     D  equal_pc              63     63N
+     D  nequal_pc             64     64N
+     D  cpyl_ri               71     71N
+     D  cpyr_ri               72     72N
+     D  equal_ri              73     73N
+     D  nequal_ri             74     74N
+     D  msgsflend             89     89N
+     D
+
+       //== Workstation information data structure =====================*
      D screen          DS
-     D  screen_Open            9      9A
-     D  screen_status         11     15S 0
-     D  screen_AID           369    369A
-      *===============================================================*
-      *
-      *== Prototypes and Constants ===================================*
+     D screen_Open             9      9A
+     D screen_status          11     15S 0
+     D screen_AID            369    369A
+       //===============================================================*
+
+       //== Prototypes and Constants ===================================*
       /COPY QCMPMSGF,CMPMSGFR4
-      *===============================================================*
-      *
-      *== Private Prototypes =========================================*
-      *
-      * ... end program
+       //===============================================================*
+
+       //== Private Prototypes =========================================*
+
+       // ... end program
      D cmd_endPgm...
      D                 PR              N
-      *
-      * ... refresh screen
+
+       // ... refresh screen
      D cmd_refresh...
      D                 PR
-      *
-      * ... process enter key
+
+       // ... process enter key
      D cmd_enter...
      D                 PR              N
-      *
-      *  ... clear screen indicators
+
+       //  ... clear screen indicators
      D p_scrClrInd...
      D                 PR
-      *===============================================================*
-      *
-      *== Global fields ==============================================*
+       //===============================================================*
+
+       //== Global fields ==============================================*
      D g_cpyr          S              1A   inz
      D g_cpyl          S              1A   inz
      D g_equal         S              1A   inz
      D g_nequal        S              1A   inz
-      *===============================================================*
-      *
-      *===============================================================*
-      *   Main procedure (with local variables)
-      *===============================================================*
-      *
+       //===============================================================*
+
+       //===============================================================*
+       //   Main procedure (with local variables)
+       //===============================================================*
      P f_chgFilter...
      P                 B                   export
      D                 PI             1A
@@ -128,274 +116,259 @@
      D  io_cpyl                       1A
      D  io_equal                      1A
      D  io_nequal                     1A
-      *
-      *  Return value
+
+       //  Return value
      D rtnKey          S              1A   inz
-      *
-      *  Fields
+
+       //  Fields
      D isDone          S               N   inz
      D msg             DS                  likeds(msg_t) inz
-      *
+
       /COPY QCMPMSGF,USR0017
-      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      *
-     C                   Eval      g_cpyr   = io_cpyr
-     C                   Eval      g_cpyl   = io_cpyl
-     C                   Eval      g_equal  = io_equal
-     C                   Eval      g_nequal = io_nequal
-      *
-     C                   Eval      ZEI = 3
-     C                   Eval      POS = 3
-      *
-      *  Load screen values
-     C                   Callp     cmd_refresh
-      *
-      *  Initialize MsgQ Name
-      ***                Eval      PGMQ = '_QRNP_PEP_' + sds_pgmProc
-     C                   Eval      PGMQ = '_CL_PEP'
-      *
-      *  Remove program messages
-     C                   Callp     p_rmvPgmMsg(cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
-      *
-      *  Clear indicators
-     C                   Callp     p_scrClrInd
-      *
-      *  Loop until no more changes
-     C                   Eval      isDOne = cFalse
-      *
-     C                   Dou       isDone
-      *
-      *  Display messages
-     C                   Eval      workstn_msgsflend = cFalse
-     C                   Write     MSGCTL
-      *
-      *  Display command keys
-     C                   Write     BOT#1
-      *
-      *  Display window
-     C                   Exfmt     SCR
-      *
-      *  Clear indicators
-     C                   Callp     p_scrClrInd
-      *
-      *  Remove messages
-     C                   Callp     p_rmvPgmMsg(cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
-      *
-      *  Process command key ...
-     C                   Select
-      *  ... F3  - End program
-     C                   When      screen_AID = cKeyF3
-     C                   Eval      isDone = cmd_endPgm
-      *  ... F5  - Refresh screen
-     C                   When      screen_AID = cKeyF5
-     C                   Callp     cmd_refresh
-      *
-      *  ... F12 - End program
-     C                   When      screen_AID = cKeyF12
-     C                   Eval      isDone = cmd_endPgm
-      *
-      *  ... ENTER
-     C                   When      screen_AID = cKeyEnter
-     C                   Eval      isDone = cmd_enter
-      *
-     C                   If        isDone
-     C                   Eval      io_cpyr   = g_cpyr
-     C                   Eval      io_cpyl   = g_cpyl
-     C                   Eval      io_equal  = g_equal
-     C                   Eval      io_nequal = g_nequal
-     C                   Endif
-      *
-     C                   Other
-      *  ... wrong key
-     C                   Eval      msg = f_newMsg('USR0001')
-     C                   Callp     p_sndPgmMsg(msg           :
-     C                                         cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
-     C                   Endsl
-      *
-     C                   Enddo
-      *
-     C                   Write     RMVWDW
-      *
-     C                   Eval      rtnKey = screen_AID
-      *
-     C                   Return    rtnKey
-      *
+       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
+
+       g_cpyr   = io_cpyr;
+       g_cpyl   = io_cpyl;
+       g_equal  = io_equal;
+       g_nequal = io_nequal;
+
+       ZEI = 3;
+       POS = 3;
+
+       //  Load screen values
+       cmd_refresh();
+
+       //  Initialize MsgQ Name
+       //**                Eval      PGMQ = '_QRNP_PEP_' + sds_pgmProc
+       PGMQ = '_CL_PEP';
+
+       //  Remove program messages
+       p_rmvPgmMsg(cMsg_Same     :
+                  cMsg_ToPgmBdy );
+
+       //  Clear indicators
+       p_scrClrInd();
+
+       //  Loop until no more changes
+       isDOne = cFalse;
+
+       Dou isDone;
+
+          //  Display messages
+          workstn.msgsflend = cFalse;
+          Write MSGCTL;
+
+          //  Display command keys
+          Write BOT#1;
+
+          //  Display window
+          Exfmt SCR;
+
+          //  Clear indicators
+          p_scrClrInd();
+
+          //  Remove messages
+          p_rmvPgmMsg(cMsg_Same     :
+                     cMsg_ToPgmBdy );
+
+          //  Process command key ...
+          Select;
+             //  ... F3  - End program
+          When screen_AID = cKeyF3;
+             isDone = cmd_endPgm;
+             //  ... F5  - Refresh screen
+          When screen_AID = cKeyF5;
+             cmd_refresh();
+
+             //  ... F12 - End program
+          When screen_AID = cKeyF12;
+             isDone = cmd_endPgm;
+
+             //  ... ENTER
+          When screen_AID = cKeyEnter;
+             isDone = cmd_enter;
+
+             If isDone;
+                io_cpyr   = g_cpyr;
+                io_cpyl   = g_cpyl;
+                io_equal  = g_equal;
+                io_nequal = g_nequal;
+             Endif;
+
+          Other;
+             //  ... wrong key
+             msg = f_newMsg('USR0001');
+             p_sndPgmMsg(msg           :
+                        cMsg_Same     :
+                        cMsg_ToPgmBdy );
+          Endsl;
+
+       Enddo;
+
+       Write RMVWDW;
+
+       rtnKey = screen_AID;
+
+       Return rtnKey;
+
+      /END-FREE
      P                 E
-      *
-      *===============================================================*
-      *  cmd_endPgm
-      *===============================================================*
-      *
+
+       //===============================================================*
+       //  cmd_endPgm
+       //===============================================================*
      P cmd_endPgm...
      P                 B
      D                 PI              N
-      *
-      *  Return value
-     D isDone          S               N   inz
-      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      *
-     C                   Callp     p_rmvPgmMsg(cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
-     C                   Eval      isDone = cTrue
-      *
-     C                   Return    isDone
-      *
+       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
+
+       p_rmvPgmMsg(cMsg_Same     :
+                  cMsg_ToPgmBdy );
+
+       Return cTrue;
+
+      /END-FREE
      P                 E
-      *
-      *===============================================================*
-      *  cmd_refresh
-      *===============================================================*
-      *
+
+       //===============================================================*
+       //  cmd_refresh
+       //===============================================================*
      P cmd_refresh...
      P                 B
      D                 PI
-      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      *
-     C                   Eval      ##CPYR   = g_cpyr
-     C                   Eval      ##CPYL   = g_cpyl
-     C                   Eval      ##EQUAL  = g_equal
-     C                   Eval      ##NEQUAL = g_nequal
-      *
-     C                   Return
-      *
+       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
+
+       ##CPYR   = g_cpyr;
+       ##CPYL   = g_cpyl;
+       ##EQUAL  = g_equal;
+       ##NEQUAL = g_nequal;
+
+       Return;
+
+      /END-FREE
      P                 E
-      *
-      *===============================================================*
-      *  cmd_enter
-      *===============================================================*
-      *
+
+       //===============================================================*
+       //  cmd_enter
+       //===============================================================*
      P cmd_enter...
      P                 B
      D                 PI              N
-      *
-      *  Return value
-     D isDone          S               N   inz
-      *
-      *  Local fields
+
      D msg             DS                  likeds(msg_t) inz
-      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      *
-     C                   Eval      isDone     = cTrue
-      *
-      *  Check ##CPYL
-     C                   If        (##CPYL <> 'Y')  and
-     C                             (##CPYL <> 'N')
-     C                   Eval      msg = f_newMsg('USR0019')
-     C                   Callp     p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy )
-     C                   Eval      workstn_cpyl_pc   = cTrue
-     C                   Eval      workstn_cpyl_ri   = cTrue
-     C                   Eval      isDone            = cFalse
-     C                   Goto      exitProcedure
-     C                   Endif
-      *
-      *  Check ##CPYR
-     C                   If        (##CPYR <> 'Y')  and
-     C                             (##CPYR <> 'N')
-     C                   Eval      msg = f_newMsg('USR0019')
-     C                   Callp     p_sndPgmMsg(msg           :
-     C                                         cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
-     C                   Eval      workstn_cpyr_pc   = cTrue
-     C                   Eval      workstn_cpyr_ri   = cTrue
-     C                   Eval      isDone            = cFalse
-     C                   Goto      exitProcedure
-     C                   Endif
-      *
-      *  Check ##EQUAL
-     C                   If        (##EQUAL <> 'Y')  and
-     C                             (##EQUAL <> 'N')
-     C                   Eval      msg = f_newMsg('USR0019')
-     C                   Callp     p_sndPgmMsg(msg           :
-     C                                         cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
-     C                   Eval      workstn_equal_pc   = cTrue
-     C                   Eval      workstn_equal_ri   = cTrue
-     C                   Eval      isDone            = cFalse
-     C                   Goto      exitProcedure
-     C                   Endif
-      *
-      *  Check ##NEQUAL
-     C                   If        (##NEQUAL <> 'Y')  and
-     C                             (##NEQUAL <> 'N')
-     C                   Eval      msg = f_newMsg('USR0019')
-     C                   Callp     p_sndPgmMsg(msg           :
-     C                                         cMsg_Same     :
-     C                                         cMsg_ToPgmBdy )
-     C                   Eval      workstn_nequal_pc   = cTrue
-     C                   Eval      workstn_nequal_ri   = cTrue
-     C                   Eval      isDone            = cFalse
-     C                   Goto      exitProcedure
-     C                   Endif
-      *
-      *
-     C                   Eval      g_cpyr   = ##CPYR
-     C                   Eval      g_cpyl   = ##CPYL
-     C                   Eval      g_equal  = ##EQUAL
-     C                   Eval      g_nequal = ##NEQUAL
-      *
-     C     exitProcedure Tag
-      *
-     C                   Return    isDone
-      *
+       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
+
+       //  Check ##CPYL
+       If (##CPYL <> 'Y')  and
+          (##CPYL <> 'N');
+          msg = f_newMsg('USR0019');
+          p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy );
+          workstn.cpyl_pc = cTrue;
+          workstn.cpyl_ri = cTrue;
+          return cFalse;
+       Endif;
+
+       //  Check ##CPYR
+       If (##CPYR <> 'Y')  and
+          (##CPYR <> 'N');
+          msg = f_newMsg('USR0019');
+          p_sndPgmMsg(msg           :
+                     cMsg_Same     :
+                     cMsg_ToPgmBdy );
+          workstn.cpyr_pc = cTrue;
+          workstn.cpyr_ri = cTrue;
+          return cFalse;
+       Endif;
+
+       //  Check ##EQUAL
+       If (##EQUAL <> 'Y')  and
+          (##EQUAL <> 'N');
+          msg = f_newMsg('USR0019');
+          p_sndPgmMsg(msg           :
+                     cMsg_Same     :
+                     cMsg_ToPgmBdy );
+          workstn.equal_pc = cTrue;
+          workstn.equal_ri = cTrue;
+          return cFalse;
+       Endif;
+
+       //  Check ##NEQUAL
+       If (##NEQUAL <> 'Y')  and
+          (##NEQUAL <> 'N');
+          msg = f_newMsg('USR0019');
+          p_sndPgmMsg(msg           :
+                     cMsg_Same     :
+                     cMsg_ToPgmBdy );
+          workstn.nequal_pc = cTrue;
+          workstn.nequal_ri = cTrue;
+          return cFalse;
+       Endif;
+
+       g_cpyr = ##CPYR;
+       g_cpyl = ##CPYL;
+       g_equal = ##EQUAL;
+       g_nequal = ##NEQUAL;
+
+       Return cTrue;
+
+      /END-FREE
      P                 E
-      *
-      *===============================================================*
-      *  scrClrInd
-      *===============================================================*
-      *
+
+       //===============================================================*
+       //  scrClrInd
+       //===============================================================*
      P p_scrClrInd...
      P                 B
      D                 PI
-      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      *
-     C                   Eval      workstn_cpyr_pc   = cFalse
-     C                   Eval      workstn_cpyl_pc   = cFalse
-     C                   Eval      workstn_equal_pc  = cFalse
-     C                   Eval      workstn_nequal_pc = cFalse
-      *
-     C                   Eval      workstn_cpyr_ri   = cFalse
-     C                   Eval      workstn_cpyl_ri   = cFalse
-     C                   Eval      workstn_equal_ri  = cFalse
-     C                   Eval      workstn_nequal_ri = cFalse
-      *
-     C                   Return
-      *
+       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
+
+       workstn.cpyr_pc   = cFalse;
+       workstn.cpyl_pc   = cFalse;
+       workstn.equal_pc  = cFalse;
+       workstn.nequal_pc = cFalse;
+
+       workstn.cpyr_ri   = cFalse;
+       workstn.cpyl_ri   = cFalse;
+       workstn.equal_ri  = cFalse;
+       workstn.nequal_ri = cFalse;
+
+      /END-FREE
      P                 E
-      *
-      *===============================================================*
-      *  Load Module "Filter"
-      *===============================================================*
-      *
+
+       //===============================================================*
+       //  Load Module "Filter"
+       //===============================================================*
      P p_loadFilter...
      P                 B                   export
      D                 PI
-      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      *
-     C                   If        not %open(CMPMSGFD2)
-     C                   Open      CMPMSGFD2
-     C                   Endif
-      *
-     C                   Return
-      *
+       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
+
+       If not %open(CMPMSGFD2);
+          Open CMPMSGFD2;
+       Endif;
+
+      /END-FREE
      P                 E
-      *
-      *===============================================================*
-      *  Unload Module "Filter"
-      *===============================================================*
-      *
+
+       //===============================================================*
+       //  Unload Module "Filter"
+       //===============================================================*
      P p_unloadFilter...
      P                 B                   export
      D                 PI
-      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      *
-     C                   If        %open(CMPMSGFD2)
-     C                   Close     CMPMSGFD2
-     C                   Endif
-      *
-     C                   Return
-      *
+       // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
+
+       If %open(CMPMSGFD2);
+          Close CMPMSGFD2;
+       Endif;
+
+      /END-FREE
      P                 E
-      *
+
