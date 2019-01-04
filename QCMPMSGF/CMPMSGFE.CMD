@@ -27,7 +27,7 @@
 /* =================================================================== */
 /* >>PRE-COMPILER<<                                                    */
 /*                                                                     */
-/*   >>CRTCMD<< CRTCMD       CMD(&LI/&OB) +                            */
+/*   >>CRTCMD<< CRTCMD       CMD(&LI/CMPMSGF) +                        */
 /*                           SRCFILE(&SL/&SF) +                        */
 /*                           SRCMBR(&SM);                              */
 /*                                                                     */
