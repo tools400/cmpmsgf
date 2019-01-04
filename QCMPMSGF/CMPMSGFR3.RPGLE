@@ -101,11 +101,11 @@
      D    program                    10A   inz
      D p1_rmvUnhExc    S             10A   inz
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
 
        //  Set defaults ...
        //  ... stack counter
-      /FREE
-       If %parms >= p_toStkC;
+       If (%parms >= p_toStkC);
           toStkC = i_toStkC;
        Else;
           toStkC = cMsg_Same;
@@ -113,50 +113,50 @@
 
        //  Set defaults ...
        //  ... stack counter
-       If %parms >= p_toStkC;
+       If (%parms >= p_toStkC);
           toStkC = i_toStkC;
        Else;
           toStkC = cMsg_Same;
        Endif;
 
        //  ... to procedure
-       If %parms >= p_toProc;
+       If (%parms >= p_toProc);
           toProc = i_toProc;
        Else;
           toProc = cMsg_ToMyself;
        Endif;
 
        //  ... to modul
-       If %parms >= p_toMod;
+       If (%parms >= p_toMod);
           p_TestOmit(isPresent: p_toMod: *omit);
-          If isPresent = 1;
-             toMod  = i_toMod;
+          If (isPresent = 1);
+             toMod = i_toMod;
           Else;
-             toMod  = '*NONE';
+             toMod = '*NONE';
           Endif;
        Else;
-          toMod  = '*NONE';
+          toMod = '*NONE';
        Endif;
 
        //  ... to program
-       IF %parms >= p_toPgm;
-          toPgm  = i_toPgm;
+       IF (%parms >= p_toPgm);
+          toPgm = i_toPgm;
        Else;
-          toPgm  = '*NONE';
+          toPgm = '*NONE';
        Endif;
 
        //  Set parameter
        //  Call stack counter ...
        Select;
           //  ... *EXT
-       When toStkC        = cMsg_Ext;
+       When (toStkC = cMsg_Ext);
           p1_callStkCtr = 0;
-          toProc        = '*EXT';
+          toProc = '*EXT';
           //  ... *PERVIOUS
-       When toStkC        = cMsg_Prv;
+       When (toStkC = cMsg_Prv);
           p1_callStkCtr = 1;
           //  ... *SAME
-       When toStkC        = cMsg_Same;
+       When (toStkC = cMsg_Same);
           p1_callStkCtr = 0;
           //  ... sonst
        Other;
@@ -166,23 +166,23 @@
        //  To procedure ...
        Select;
           //  ... *
-       When toProc        = cMsg_ToMyself;
-          p1_callStkE   = '*';
+       When (toProc = cMsg_ToMyself);
+          p1_callStkE = '*';
           //      ... skip RmvPgmMsg
           p1_callStkCtr = p1_callStkCtr + 1;
           //  ... *PGMBDY
-       When toProc        = cMsg_ToPgmBdy;
+       When (toProc = cMsg_ToPgmBdy);
           //**                Eval      p1_callStkE   = '_QRNP_PEP_' + sds.pgmProc
-          p1_callStkE   = '_CL_PEP';
+          p1_callStkE = '_CL_PEP';
           //  ... *PGMNAME
-       When toProc        = cMsg_ToPgm;
-          p1_callStkE   = sds.pgmName;
+       When (toProc = cMsg_ToPgm);
+          p1_callStkE = sds.pgmName;
           //  ... *EXT
-       When toProc        = '*EXT';
-          p1_callStkE   = '*EXT';
+       When (toProc = '*EXT');
+          p1_callStkE = '*EXT';
           //  ... procedure
        Other;
-          p1_callStkE   = toProc;
+          p1_callStkE = toProc;
        Endsl;
 
        //  To modul ...
@@ -192,20 +192,18 @@
        p1_qCallStkE.program = toPgm;
 
        //  Message key ...
-       p1_msgKey      = '';
+       p1_msgKey = '';
        //  Message to remove ...
-       p1_msgToRmv    = '*ALL';
+       p1_msgToRmv = '*ALL';
        //  Errorcode ...
        p1_errCode = f_newApiErrCode(cFalse);
 
        //  Others ...
        p1_lenCallStkE = %size(p1_CallStkE);
-       p1_RmvUnhExc   = '*NO';
+       p1_RmvUnhExc = '*NO';
 
-       QMHRMVPM ( p1_callStkE : p1_callStkCtr :
-       p1_msgKey : p1_msgToRmv : p1_errCode :
-       p1_lenCallStkE : p1_qCallStkE :
-       p1_rmvUnhExc );
+       QMHRMVPM(p1_callStkE: p1_callStkCtr: p1_msgKey: p1_msgToRmv
+                : p1_errCode: p1_lenCallStkE: p1_qCallStkE: p1_rmvUnhExc);
 
       /END-FREE
      P                 E
@@ -258,57 +256,57 @@
      D    program                    10A   inz
      D p1_waitTime     S             10I 0 inz
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
 
        //  Splitt i_msg
-      /FREE
        msg = i_msg;
 
        //  Set defaults ...
        //  ... stack counter
-       If %parms >= p_toStkC;
+       If (%parms >= p_toStkC);
           toStkC = i_toStkC;
        Else;
           toStkC = cMsg_Same;
        Endif;
 
        //  ... to procedure
-       If %parms >= p_toProc;
+       If (%parms >= p_toProc);
           toProc = i_toProc;
        Else;
           toProc = cMsg_ToMyself;
        Endif;
 
        //  ... to modul
-       If %parms >= p_toMod;
+       If (%parms >= p_toMod);
           p_TestOmit(isPresent: p_toMod: *omit);
-          If isPresent = 1;
-             toMod  = i_toMod;
+          If (isPresent = 1);
+             toMod = i_toMod;
           Else;
-             toMod  = '*NONE';
+             toMod = '*NONE';
           Endif;
        Else;
-          toMod  = '*NONE';
+          toMod = '*NONE';
        Endif;
 
        //  ... to program
-       IF %parms >= p_toPgm;
-          toPgm  = i_toPgm;
+       IF (%parms >= p_toPgm);
+          toPgm = i_toPgm;
        Else;
-          toPgm  = '*NONE';
+          toPgm = '*NONE';
        Endif;
 
        //  Set parameter
        //  Call stack counter ...
        Select;
           //  ... *EXT
-       When toStkC        = cMsg_Ext;
+       When (toStkC = cMsg_Ext);
           p1_callStkCtr = 0;
           toProc        = '*EXT';
           //  ... *PERVIOUS
-       When toStkC        = cMsg_Prv;
+       When (toStkC = cMsg_Prv);
           p1_callStkCtr = 1;
           //  ... *SAME
-       When toStkC        = cMsg_Same;
+       When (toStkC = cMsg_Same);
           p1_callStkCtr = 0;
           //  ... sonst
        Other;
@@ -318,28 +316,28 @@
        //  To procedure ...
        Select;
           //  ... *
-       When toProc        = cMsg_ToMyself;
-          p1_callStkE   = '*';
+       When (toProc = cMsg_ToMyself);
+          p1_callStkE = '*';
           //      ... skip SndPgmMsg
           p1_callStkCtr = p1_callStkCtr + 1;
           //  ... *PGMBDY
-       When toProc        = cMsg_ToPgmBdy;
-          p1_callStkE   = '*PGMBDY';
-          If toPgm         = '';
-             toPgm         = '_CL_PEP';
+       When (toProc = cMsg_ToPgmBdy);
+          p1_callStkE = '*PGMBDY';
+          If toPgm = '';
+             toPgm = '_CL_PEP';
           Endif;
           //  ... *CTLBDY
-       When toProc        = cMsg_ToCtlBdy;
-          p1_callStkE   = '*CTLBDY';
+       When (toProc = cMsg_ToCtlBdy);
+          p1_callStkE = '*CTLBDY';
           //  ... *PGMNAME
-       When toProc        = cMsg_ToPgm;
-          p1_callStkE   = '*PGMNAME';
+       When (toProc = cMsg_ToPgm);
+          p1_callStkE = '*PGMNAME';
           //  ... *EXT
-       When toProc        = '*EXT';
-          p1_callStkE   = '*EXT';
+       When (toProc = '*EXT');
+          p1_callStkE = '*EXT';
           //  ... procedure
        Other;
-          p1_callStkE   = toProc;
+          p1_callStkE = toProc;
        Endsl;
 
        //  To module ...
@@ -349,27 +347,25 @@
        p1_qCallStkE.program = toPgm;
 
        //  Message ...
-       p1_DSMsgF      = msg.file;
-       p1_DSMsgL      = msg.lib;
-       p1_msgType     = msg.type;
-       p1_msgID       = msg.ID;
-       p1_lenMsgData  = %size(p1_msgData);
-       p1_msgData     = msg.data;
+       p1_DSMsgF = msg.file;
+       p1_DSMsgL = msg.lib;
+       p1_msgType = msg.type;
+       p1_msgID = msg.ID;
+       p1_lenMsgData = %size(p1_msgData);
+       p1_msgData = msg.data;
 
        //  Message key ...
-       p1_msgKey      = '';
+       p1_msgKey = '';
        //  Errorcode ...
        p1_errCode = f_newApiErrCode(cFalse);
 
        //  Others ...
        p1_lenCallStkE = %size(p1_CallStkE);
-       p1_waitTime    = -1;
+       p1_waitTime = -1;
 
-       QMHSNDPM ( p1_msgID : p1_DSMsgFObj :
-       p1_msgData : p1_lenMsgData : p1_msgType :
-       p1_callStkE : p1_callStkCtr : p1_msgKey
-       : p1_errCode : p1_lenCallStkE :
-       p1_qCallStkE : p1_waitTime );
+       QMHSNDPM(p1_msgID: p1_DSMsgFObj: p1_msgData: p1_lenMsgData: p1_msgType
+                : p1_callStkE: p1_callStkCtr: p1_msgKey: p1_errCode
+                : p1_lenCallStkE: p1_qCallStkE: p1_waitTime);
 
       /END-FREE
      P                 E
@@ -410,65 +406,69 @@
 
      D isPresent       S             10I 0 inz
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      /FREE
 
        //  Optionale Parameter ...
        //  ... Msg-ID
-      /FREE
-       If %parms >= p_msgID;
+       If (%parms >= p_msgID);
           p_testOmit(isPresent: p_msgID : *omit);
        Else;
           isPresent = 0;
        Endif;
 
-       If isPresent = 1;
+       If (isPresent = 1);
           msgID    = i_msgID;
        Else;
           msgID    = '';
        Endif;
+
        //  ... Msg-Data
-       If %parms >= p_msgData;
+       If (%parms >= p_msgData);
           p_testOmit(isPresent: p_msgData: *omit);
        Else;
           isPresent = 0;
        Endif;
 
-       If isPresent = 1;
+       If (isPresent = 1);
           msgData  = i_msgData;
        Else;
           msgData  = '';
        Endif;
+
        //  ... Msg-Typ
-       If %parms >= p_msgType;
+       If (%parms >= p_msgType);
           p_testOmit(isPresent: p_msgType: *omit);
        Else;
           isPresent = 0;
        Endif;
 
-       If isPresent = 1;
+       If (isPresent = 1);
           msgType  = i_msgType;
        Else;
           msgType  = '*INFO';
        Endif;
+
        //  ... Msg-File
-       If %parms >= p_msgFile;
+       If (%parms >= p_msgFile);
           p_testOmit(isPresent: p_msgFile : *omit);
        Else;
           isPresent = 0;
        Endif;
 
-       If isPresent = 1;
+       If (isPresent = 1);
           msgFile  = i_msgFile;
        Else;
           msgFile  = cAppMsgF;
        Endif;
+
        //  ... Msg-Lib
-       If %parms >= p_msgLib;
+       If (%parms >= p_msgLib);
           p_testOmit(isPresent: p_msgLib  : *omit);
        Else;
           isPresent = 0;
        Endif;
 
-       If isPresent = 1;
+       If (isPresent = 1);
           msgLib   = i_msgLib;
        Else;
           msgLib   = cAppMsgL;
@@ -478,9 +478,9 @@
        Clear msg;
 
        msg.file = msgFile;
-       msg.lib  = msgLib;
+       msg.lib = msgLib;
        msg.type = msgType;
-       msg.ID   = msgID;
+       msg.ID = msgID;
        msg.data = msgData;
 
        Return msg;
@@ -503,7 +503,7 @@
       /FREE
        Clear errCode;
 
-       If i_monMsg;
+       If (i_monMsg);
           errCode.bytPrv = %size(errCode);
        Else;
           errCode.bytPrv = 0;
@@ -530,7 +530,7 @@
        //-------------------------------------------------------------------
       /FREE
 
-       If i_errCode.bytAvl = 0;
+       If (i_errCode.bytAvl = 0);
           o_isError = cFalse;
        Else;
           o_isError = cTrue;
@@ -571,18 +571,15 @@
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       /FREE
 
-       QWCRNETA ( rcvVar : rcvVarLen :
-       numNetAtr : i_netAtrName : errCode );
+       QWCRNETA(rcvVar: rcvVarLen: numNetAtr: i_netAtrName: errCode);
 
        pDataRet = %addr(rcvVar);
-       pInfTbl  = %addr(rcvVar) + dataRet.ofsInfTbl;
+       pInfTbl = %addr(rcvVar) + dataRet.ofsInfTbl;
 
-       If (infTbl.dataType = 'C')  and
-          (infTbl.infSts   <>'L');
-          netAtrA  = %subst(infTbl.data: 1:
-                           infTbl.dataLen);
+       If (infTbl.dataType = 'C' and infTbl.infSts <> 'L');
+          netAtrA = %subst(infTbl.data: 1: infTbl.dataLen);
        Else;
-          netAtrA  = '*ERROR';
+          netAtrA = '*ERROR';
        Endif;
 
        return netAtrA;
@@ -614,14 +611,10 @@
        qObj.lib = i_lib;
        errCode = f_newApiErrCode(cTrue);
 
-       QUSROBJD(OBJD0100        :
-               %size(OBJD0100) :
-               'OBJD0100'      :
-               qObj            :
-               i_objType       :
-               errCode         );
+       QUSROBJD(
+          OBJD0100: %size(OBJD0100): 'OBJD0100': qObj: i_objType: errCode);
 
-       If f_isApiErr(errCode);
+       If (f_isApiErr(errCode));
           isAvailable = cFalse;
        Else;
           isAvailable = cTrue;

@@ -128,9 +128,9 @@
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       /FREE
 
-       g_cpyr   = io_cpyr;
-       g_cpyl   = io_cpyl;
-       g_equal  = io_equal;
+       g_cpyr = io_cpyr;
+       g_cpyl = io_cpyl;
+       g_equal = io_equal;
        g_nequal = io_nequal;
 
        ZEI = 3;
@@ -144,8 +144,7 @@
        PGMQ = '_CL_PEP';
 
        //  Remove program messages
-       p_rmvPgmMsg(cMsg_Same     :
-                  cMsg_ToPgmBdy );
+       p_rmvPgmMsg(cMsg_Same: cMsg_ToPgmBdy);
 
        //  Clear indicators
        p_scrClrInd();
@@ -153,7 +152,7 @@
        //  Loop until no more changes
        isDOne = cFalse;
 
-       Dou isDone;
+       Dou (isDone);
 
           //  Display messages
           workstn.msgsflend = cFalse;
@@ -169,39 +168,36 @@
           p_scrClrInd();
 
           //  Remove messages
-          p_rmvPgmMsg(cMsg_Same     :
-                     cMsg_ToPgmBdy );
+          p_rmvPgmMsg(cMsg_Same: cMsg_ToPgmBdy);
 
           //  Process command key ...
           Select;
              //  ... F3  - End program
-          When screen_AID = cKeyF3;
-             isDone = cmd_endPgm;
+          When (screen_AID = cKeyF3);
+             isDone = cmd_endPgm();
              //  ... F5  - Refresh screen
-          When screen_AID = cKeyF5;
+          When (screen_AID = cKeyF5);
              cmd_refresh();
 
              //  ... F12 - End program
-          When screen_AID = cKeyF12;
-             isDone = cmd_endPgm;
+          When (screen_AID = cKeyF12);
+             isDone = cmd_endPgm();
 
              //  ... ENTER
-          When screen_AID = cKeyEnter;
-             isDone = cmd_enter;
+          When (screen_AID = cKeyEnter);
+             isDone = cmd_enter();
 
-             If isDone;
-                io_cpyr   = g_cpyr;
-                io_cpyl   = g_cpyl;
-                io_equal  = g_equal;
+             If (isDone);
+                io_cpyr = g_cpyr;
+                io_cpyl = g_cpyl;
+                io_equal = g_equal;
                 io_nequal = g_nequal;
              Endif;
 
           Other;
              //  ... wrong key
              msg = f_newMsg('USR0001');
-             p_sndPgmMsg(msg           :
-                        cMsg_Same     :
-                        cMsg_ToPgmBdy );
+             p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy);
           Endsl;
 
        Enddo;
@@ -224,8 +220,7 @@
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       /FREE
 
-       p_rmvPgmMsg(cMsg_Same     :
-                  cMsg_ToPgmBdy );
+       p_rmvPgmMsg(cMsg_Same: cMsg_ToPgmBdy);
 
        Return cTrue;
 
@@ -241,9 +236,9 @@
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       /FREE
 
-       ##CPYR   = g_cpyr;
-       ##CPYL   = g_cpyl;
-       ##EQUAL  = g_equal;
+       ##CPYR = g_cpyr;
+       ##CPYL = g_cpyl;
+       ##EQUAL = g_equal;
        ##NEQUAL = g_nequal;
 
        Return;
@@ -263,46 +258,36 @@
       /FREE
 
        //  Check ##CPYL
-       If (##CPYL <> 'Y')  and
-          (##CPYL <> 'N');
+       If (##CPYL <> 'Y' and ##CPYL <> 'N');
           msg = f_newMsg('USR0019');
-          p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy );
+          p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy);
           workstn.cpyl_pc = cTrue;
           workstn.cpyl_ri = cTrue;
           return cFalse;
        Endif;
 
        //  Check ##CPYR
-       If (##CPYR <> 'Y')  and
-          (##CPYR <> 'N');
+       If (##CPYR <> 'Y' and ##CPYR <> 'N');
           msg = f_newMsg('USR0019');
-          p_sndPgmMsg(msg           :
-                     cMsg_Same     :
-                     cMsg_ToPgmBdy );
+          p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy);
           workstn.cpyr_pc = cTrue;
           workstn.cpyr_ri = cTrue;
           return cFalse;
        Endif;
 
        //  Check ##EQUAL
-       If (##EQUAL <> 'Y')  and
-          (##EQUAL <> 'N');
+       If (##EQUAL <> 'Y' and ##EQUAL <> 'N');
           msg = f_newMsg('USR0019');
-          p_sndPgmMsg(msg           :
-                     cMsg_Same     :
-                     cMsg_ToPgmBdy );
+          p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy);
           workstn.equal_pc = cTrue;
           workstn.equal_ri = cTrue;
           return cFalse;
        Endif;
 
        //  Check ##NEQUAL
-       If (##NEQUAL <> 'Y')  and
-          (##NEQUAL <> 'N');
+       If (##NEQUAL <> 'Y' and ##NEQUAL <> 'N');
           msg = f_newMsg('USR0019');
-          p_sndPgmMsg(msg           :
-                     cMsg_Same     :
-                     cMsg_ToPgmBdy );
+          p_sndPgmMsg(msg: cMsg_Same: cMsg_ToPgmBdy);
           workstn.nequal_pc = cTrue;
           workstn.nequal_ri = cTrue;
           return cFalse;
@@ -327,14 +312,14 @@
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       /FREE
 
-       workstn.cpyr_pc   = cFalse;
-       workstn.cpyl_pc   = cFalse;
-       workstn.equal_pc  = cFalse;
+       workstn.cpyr_pc = cFalse;
+       workstn.cpyl_pc = cFalse;
+       workstn.equal_pc = cFalse;
        workstn.nequal_pc = cFalse;
 
-       workstn.cpyr_ri   = cFalse;
-       workstn.cpyl_ri   = cFalse;
-       workstn.equal_ri  = cFalse;
+       workstn.cpyr_ri = cFalse;
+       workstn.cpyl_ri = cFalse;
+       workstn.equal_ri = cFalse;
        workstn.nequal_ri = cFalse;
 
       /END-FREE
@@ -349,7 +334,7 @@
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       /FREE
 
-       If not %open(CMPMSGFD2);
+       If (not %open(CMPMSGFD2));
           Open CMPMSGFD2;
        Endif;
 
@@ -365,7 +350,7 @@
        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       /FREE
 
-       If %open(CMPMSGFD2);
+       If (%open(CMPMSGFD2));
           Close CMPMSGFD2;
        Endif;
 
