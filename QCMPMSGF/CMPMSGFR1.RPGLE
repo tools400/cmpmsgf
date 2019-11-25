@@ -407,7 +407,7 @@
      D g_sflNumRcd     S             10I 0 inz
      D g_sflMaxRcd     S             10I 0 inz(9999)
        //    format name
-     D g_fmtName       S              8A   inz('rtvm0400')
+     D g_fmtName       S              8A   inz('RTVM0400')
        //    filter options
      D g_filterCpyR    S              1A   inz
      D g_filterCpyL    S              1A   inz
@@ -2628,7 +2628,7 @@
        o_errCode  = f_newApiErrCode(cTrue);
 
        //  Retrieve message description
-       If (g_fmtName = 'rtvm0400');
+       If (g_fmtName = 'RTVM0400');
           QMHRTVM(rtvm0400: %size(rtvm0400): g_fmtName: i_msgId: i_qMsgF
                   : '': 0: '*NO': '*YES': o_errCode: i_rtvOpt: 0: 0);
 
