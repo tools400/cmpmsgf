@@ -195,7 +195,7 @@ INSTALL:
      /* -------------------------------- */
              CRTCMD     CMD(&TOLIB/CMPMSGF   )                   +
                           SRCFILE(&SRCLIB/&SRCFILE) SRCMBR(&CMD) +
-                          PGM(&TOLIB/CMPMSGFP  )                 +
+                          PGM(&TOLIB/CMPMSGFC  )                 +
                           HLPSCHIDX(*NONE)                       +
                           HLPPNLGRP(*LIBL/CMPMSGFP  )            +
                           HLPID(CMPMSGF   )                      +
