@@ -1,9 +1,11 @@
-      *---------------------------------------------------------------
-      * Datenstruktur für Message-ID : USR0004
-      *
-      * Already at botton of subfile.
-      *
-     D USR0004         DS
-      *   Keine Ersatzvariablen definiert!
-     D USR0004#        S              8B 0 INZ(0010)
-      *
+**free
+//---------------------------------------------------------------
+// Datenstruktur fr Message-ID : USR0004
+
+// Already at botton of subfile.
+
+dcl-ds USR0004;
+end-ds;
+//   Keine Ersatzvariablen definiert!
+dcl-s USR0004# bindec(8) inz(0010);
+

@@ -1,9 +1,11 @@
-      *---------------------------------------------------------------
-      * Datenstruktur für Message-ID : USR0008
-      *
-      * Reading ...
-      *
-     D USR0008         DS
-      *   Keine Ersatzvariablen definiert!
-     D USR0008#        S              8B 0 INZ(0002)
-      *
+**free
+//---------------------------------------------------------------
+// Datenstruktur fr Message-ID : USR0008
+
+// Reading ...
+
+dcl-ds USR0008;
+end-ds;
+//   Keine Ersatzvariablen definiert!
+dcl-s USR0008# bindec(8) inz(0002);
+

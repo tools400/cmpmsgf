@@ -1,9 +1,11 @@
-      *---------------------------------------------------------------
-      * Datenstruktur für Message-ID : USR0009
-      *
-      * Warning: Not all entries loaded!
-      *
-     D USR0009         DS
-     D  USR00091                    005P 0 INZ(*ZEROS )
-     D USR0009#        S              8B 0 INZ(0003)
-      *
+**free
+//---------------------------------------------------------------
+// Datenstruktur fr Message-ID : USR0009
+
+// Warning: Not all entries loaded!
+
+dcl-ds USR0009;
+  USR00091 packed(005) inz(*zeros);
+end-ds;
+dcl-s USR0009# bindec(8) inz(0003);
+

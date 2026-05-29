@@ -51,7 +51,7 @@
       appblddate CDATA #REQUIRED
      >
      ]>
-<upload  appname="CMPMSGF"  appauthor="Thomas Raddatz"  appblddate="11/25/2019">
+<upload  appname="CMPMSGF"  appauthor="Thomas Raddatz"  appblddate=" 5/29/2026">
 <install_instructions><![CDATA[
      *----------------------------------------------------------------      ------
      *  1. Upload entire XML to your AS/400 to a source file 112 long, into any mbr
@@ -8296,7 +8296,7 @@ CRTBNDCL PGM(&tolib/A_INSTALL) SRCFILE(&tolib/QCMPMSGF) SRCMBR(*PGM) DFTACTGRP(*
 VIEW(*LIST)
 ]]>  </qcmdexc>
 <qcmdexc condition="*NONE" release="*CURRENT" dltsplf="*NONE"><![CDATA[
-CALL PGM(&tolib/A_INSTALL) PARM('&TGTRLS' '&SRCFILE' '&tolib' 'ENG')
+CALL PGM(&tolib/A_INSTALL) PARM(('&TGTRLS') ('&SRCFILE') ('&tolib') ('ENG'))
 ]]>  </qcmdexc>
 <qcmdexc condition="*NONE" release="*CURRENT" dltsplf="*NONE"><![CDATA[
 DLTPGM PGM(&tolib/A_INSTALL)

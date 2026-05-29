@@ -1,65 +1,68 @@
-      /if not defined(rtvm0300_t)
-      /define rtvm0300_t
-      *===============================================================*
-      *  QMHRTVM API - RTVM0300                                       *
-      *===============================================================*
-      *
-     d rtvm0300_t      ds                  qualified           based(pDummy)
-      *  Bytes returned
-     d  bytRet                       10i 0
-      *  Bytes available
-     d  bytAvl                       10i 0
-      *  Message severity
-     d  msgSev                       10i 0
-      *  Alert index
-     d  altIdx                       10i 0
-      * Alert Option
-     d  altOpt                        9a
-      * Log indicator
-     d  logInd                        1a
-      * Message ID
-     d  msgID                         7a
-      * Reserved
-     d  reserved_01                   3a
-      * Nbr. of subst. var. formats
-     d  numVarFmt                    10i 0
-      * CCSID conv. stat. ind. text
-     d  csIndTxt                     10i 0
-      * CCSID conv. stat. ind. data
-     d  csIndDta                     10i 0
-      * CCSID of Text returned
-     d  ccsidTxt                     10i 0
-      * Offset of default reply
-     d  ofsDftR                      10i 0
-      * Length of default reply ret.
-     d  lenDftRpyR                   10i 0
-      * Length of default reply avl.
-     d  lenDftRpyA                   10i 0
-      * Offset of message
-     d  ofsMsg                       10i 0
-      * Length of message returned
-     d  lenMsgR                      10i 0
-      * Length of message available
-     d  lenMsgA                      10i 0
-      * Offset of message
-     d  ofsMsgHlp                    10i 0
-      * Length of message help ret.
-     d  lenMsgHlpR                   10i 0
-      * Length of message help avl.
-     d  lenMsgHlpA                   10i 0
-      * Ofs. of subst. var. formats
-     d  ofsVarFmt                    10i 0
-      * Length subst. var. fmt. ret.
-     d  lenVarFmtR                   10i 0
-      * Length subst. var. fmt. avl.
-     d  lenVarFmtA                   10i 0
-      * Length subst. var. element
-     d  lenVarFmtE                   10i 0
-      * Data
-     d  data                       4096A
-      *                       CHAR(*)  Default reply
-      *                       CHAR(*)  Message
-      *                       CHAR(*)  Message help
-      *                       CHAR(*)  Substitution variable formats
-      *
-      /endif
+**free
+/if not defined(rtvm0300_t)
+/define rtvm0300_t
+//===============================================================*
+//  QMHRTVM API - RTVM0300                                       *
+//===============================================================*
+
+dcl-ds rtvm0300_t qualified based(pDummy);
+  //  Bytes returned
+  bytRet      int(10);
+  //  Bytes available
+  bytAvl      int(10);
+  //  Message severity
+  msgSev      int(10);
+  //  Alert index
+  altIdx      int(10);
+  // Alert Option
+  altOpt      char(9);
+  // Log indicator
+  logInd      char(1);
+  // Message ID
+  msgID       char(7);
+  // Reserved
+  reserved_01 char(3);
+  // Nbr. of subst. var. formats
+  numVarFmt   int(10);
+  // CCSID conv. stat. ind. text
+  csIndTxt    int(10);
+  // CCSID conv. stat. ind. data
+  csIndDta    int(10);
+  // CCSID of Text returned
+  ccsidTxt    int(10);
+  // Offset of default reply
+  ofsDftR     int(10);
+  // Length of default reply ret.
+  lenDftRpyR  int(10);
+  // Length of default reply avl.
+  lenDftRpyA  int(10);
+  // Offset of message
+  ofsMsg      int(10);
+  // Length of message returned
+  lenMsgR     int(10);
+  // Length of message available
+  lenMsgA     int(10);
+  // Offset of message
+  ofsMsgHlp   int(10);
+  // Length of message help ret.
+  lenMsgHlpR  int(10);
+  // Length of message help avl.
+  lenMsgHlpA  int(10);
+  // Ofs. of subst. var. formats
+  ofsVarFmt   int(10);
+  // Length subst. var. fmt. ret.
+  lenVarFmtR  int(10);
+  // Length subst. var. fmt. avl.
+  lenVarFmtA  int(10);
+  // Length subst. var. element
+  lenVarFmtE  int(10);
+  // Data
+  data        char(4096);
+//                       CHAR(*)  Default reply
+//                       CHAR(*)  Message
+//                       CHAR(*)  Message help
+//                       CHAR(*)  Substitution variable formats
+
+end-ds;
+
+/endif

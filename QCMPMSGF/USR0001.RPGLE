@@ -1,9 +1,11 @@
-      *---------------------------------------------------------------
-      * Datenstruktur für Message-ID : USR0001
-      *
-      * You pressed an invalid function key.
-      *
-     D USR0001         DS
-      *   Keine Ersatzvariablen definiert!
-     D USR0001#        S              8B 0 INZ(0010)
-      *
+**free
+//---------------------------------------------------------------
+// Datenstruktur fr Message-ID : USR0001
+
+// You pressed an invalid function key.
+
+dcl-ds USR0001;
+end-ds;
+//   Keine Ersatzvariablen definiert!
+dcl-s USR0001# bindec(8) inz(0010);
+

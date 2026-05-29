@@ -1,9 +1,11 @@
-      *---------------------------------------------------------------
-      * Datenstruktur für Message-ID : USR0014
-      *
-      * Library & does not exist.
-      *
-     D USR0014         DS
-     D  USR00141                    010A   INZ(*BLANKS)
-     D USR0014#        S              8B 0 INZ(0010)
-      *
+**free
+//---------------------------------------------------------------
+// Datenstruktur fr Message-ID : USR0014
+
+// Library & does not exist.
+
+dcl-ds USR0014;
+  USR00141 char(010) inz(*blanks);
+end-ds;
+dcl-s USR0014# bindec(8) inz(0010);
+

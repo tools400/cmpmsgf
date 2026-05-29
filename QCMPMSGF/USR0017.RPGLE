@@ -1,9 +1,11 @@
-      *---------------------------------------------------------------
-      * Datenstruktur für Message-ID : USR0017
-      *
-      * Press &1 to confirm.
-      *
-     D USR0017         DS
-     D  USR00171                    010A   INZ(*BLANKS)
-     D USR0017#        S              8B 0 INZ(0010)
-      *
+**free
+//---------------------------------------------------------------
+// Datenstruktur fr Message-ID : USR0017
+
+// Press &1 to confirm.
+
+dcl-ds USR0017;
+  USR00171 char(010) inz(*blanks);
+end-ds;
+dcl-s USR0017# bindec(8) inz(0010);
+

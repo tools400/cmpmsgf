@@ -1,5 +1,5 @@
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0001                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0001                    */
      /* You pressed an invalid function key.                        */
      /* ----------------------------------------------------------- */
 
@@ -23,7 +23,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0002                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0002                    */
      /* Combination not allowed.                                    */
      /* ----------------------------------------------------------- */
 
@@ -43,7 +43,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0003                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0003                    */
      /* Already at top of subfile.                                  */
      /* ----------------------------------------------------------- */
 
@@ -63,7 +63,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0004                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0004                    */
      /* Already at botton of subfile.                               */
      /* ----------------------------------------------------------- */
 
@@ -83,7 +83,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0005                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0005                    */
      /* No more records available.                                  */
      /* ----------------------------------------------------------- */
 
@@ -103,7 +103,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0006                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0006                    */
      /* Option &1 is not valid.                                     */
      /* ----------------------------------------------------------- */
 
@@ -125,7 +125,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0007                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0007                    */
      /* No data in subfile.                                         */
      /* ----------------------------------------------------------- */
 
@@ -145,7 +145,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0008                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0008                    */
      /* Reading ...                                                 */
      /* ----------------------------------------------------------- */
 
@@ -165,7 +165,7 @@
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0009                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0009                    */
      /* Warning: Not all entries loaded!                            */
      /* ----------------------------------------------------------- */
 
@@ -192,7 +192,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0010                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0010                    */
      /* New and old message file must be different.                 */
      /* ----------------------------------------------------------- */
 
@@ -211,7 +211,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0011                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0011                    */
      /* Abnormal program end. See job log for details.              */
      /* ----------------------------------------------------------- */
 
@@ -232,7 +232,7 @@ n to" to move to another starting point.'                             +
              RCLRSC LVL(*)
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0012                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0012                    */
      /* Message file &1 is alredy open.                             */
      /* ----------------------------------------------------------- */
 
@@ -254,7 +254,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0013                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0013                    */
      /* Message file &1 is not open.                                */
      /* ----------------------------------------------------------- */
 
@@ -276,7 +276,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0014                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0014                    */
      /* Message file &1 is not open.                                */
      /* ----------------------------------------------------------- */
 
@@ -298,7 +298,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0015                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0015                    */
      /* Message file &1 is not open.                                */
      /* ----------------------------------------------------------- */
 
@@ -321,7 +321,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0016                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0016                    */
      /* Could not copy message ID &1. See job log for details.      */
      /* ----------------------------------------------------------- */
 
@@ -343,7 +343,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0017                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0017                    */
      /* Press &1 to confirm.                                        */
      /* ----------------------------------------------------------- */
 
@@ -365,7 +365,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0018                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0018                    */
      /* Lower range limit greater than upper range limit.           */
      /* ----------------------------------------------------------- */
 
@@ -384,7 +384,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0019                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0019                    */
      /* Choose Y or N.                                              */
      /* ----------------------------------------------------------- */
 
@@ -403,7 +403,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0020                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0020                    */
      /* Compare level *YES not allowed without compare date *YES.   */
      /* ----------------------------------------------------------- */
 
@@ -422,7 +422,7 @@ n to" to move to another starting point.'                             +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0021                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0021                    */
      /* PTF missing. CMPMSGF has to use the RTVM0300 format.        */
      /* ----------------------------------------------------------- */
 
@@ -446,7 +446,7 @@ for more information.'                                                +
                 /*  -EOF-  */
 
      /* ----------------------------------------------------------- */
-     /*   Cmd-ADDMSGD für Message-ID :   USR0022                    */
+     /*   Cmd-ADDMSGD fr Message-ID :   USR0022                    */
      /* Message description &1 not found in message file &2 in &3.  */
      /* ----------------------------------------------------------- */
 

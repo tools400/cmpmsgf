@@ -1,329 +1,329 @@
-       // =================================================================== *
-       //                                                                     *
-       //  Kurzdokumentation :                                                *
-       //                                                                     *
-       //  Bereich . . . : CMPMSGF                                            *
-       //  Objekt  . . . : CMPMSGFR4                                          *
-       //  Beschreibung  : Tool: CMPMSGF    (Compare Message File     ) GLOBAL*
-       //  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
-       //  Datum . . . . : 23.12.2001                                         *
-       //                                                                     *
-       // =================================================================== *
-       //                                                                     *
-       //  This software is free software, you can redistribute it and/or     *
-       //  modify it under the terms of the GNU General Public License (GPL)  *
-       //  as published by the Free Software Foundation.                      *
-       //                                                                     *
-       //  See GNU General Public License for details.                        *
-       //          http://www.opensource.org                                  *
-       //          http://www.opensource.org/licenses/gpl-license.html        *
-       //                                                                     *
-       // =================================================================== *
-       //  History:                                                           *
-       //                                                                     *
-       //  Datum       Name          Änderung                                 *
-       //  ----------  ------------  ---------------------------------------  *
-       //                                                                     *
-       // =================================================================== *
-       //
-       //== Workstation Constants ======================================*
-     D cKeyF1          C                   CONST(X'31')
-     D cKeyF2          C                   CONST(X'32')
-     D cKeyF3          C                   CONST(X'33')
-     D cKeyF4          C                   CONST(X'34')
-     D cKeyF5          C                   CONST(X'35')
-     D cKeyF6          C                   CONST(X'36')
-     D cKeyF7          C                   CONST(X'37')
-     D cKeyF8          C                   CONST(X'38')
-     D cKeyF9          C                   CONST(X'39')
-     D cKeyF10         C                   CONST(X'3A')
-     D cKeyF11         C                   CONST(X'3B')
-     D cKeyF12         C                   CONST(X'3C')
-     D cKeyF13         C                   CONST(X'B1')
-     D cKeyF14         C                   CONST(X'B2')
-     D cKeyF15         C                   CONST(X'B3')
-     D cKeyF16         C                   CONST(X'B4')
-     D cKeyF17         C                   CONST(X'B5')
-     D cKeyF18         C                   CONST(X'B6')
-     D cKeyF19         C                   CONST(X'B7')
-     D cKeyF20         C                   CONST(X'B8')
-     D cKeyF21         C                   CONST(X'B9')
-     D cKeyF22         C                   CONST(X'BA')
-     D cKeyF23         C                   CONST(X'BB')
-     D cKeyF24         C                   CONST(X'BC')
+**free
+// =================================================================== *
+//                                                                     *
+//  Kurzdokumentation :                                                *
+//                                                                     *
+//  Bereich . . . : CMPMSGF                                            *
+//  Objekt  . . . : CMPMSGFR4                                          *
+//  Beschreibung  : Tool: CMPMSGF    (Compare Message File     ) GLOBAL*
+//  Author  . . . : Thomas Raddatz   <thomas.raddatz@tools400.de>      *
+//  Datum . . . . : 23.12.2001                                         *
+//                                                                     *
+// =================================================================== *
+//                                                                     *
+//  This software is free software, you can redistribute it and/or     *
+//  modify it under the terms of the GNU General Public License (GPL)  *
+//  as published by the Free Software Foundation.                      *
+//                                                                     *
+//  See GNU General Public License for details.                        *
+//          http://www.opensource.org                                  *
+//          http://www.opensource.org/licenses/gpl-license.html        *
+//                                                                     *
+// =================================================================== *
+//  History:                                                           *
+//                                                                     *
+//  Datum       Name          nderung                                 *
+//  ----------  ------------  ---------------------------------------  *
+//                                                                     *
+// =================================================================== *
 
-     D cKeyClear       C                   CONST(X'BD')
-     D cKeyDelete      C                   CONST(X'BD')
+//== Workstation Constants ======================================*
+dcl-c cKeyF1 X'31';
+dcl-c cKeyF2 X'32';
+dcl-c cKeyF3 X'33';
+dcl-c cKeyF4 X'34';
+dcl-c cKeyF5 X'35';
+dcl-c cKeyF6 X'36';
+dcl-c cKeyF7 X'37';
+dcl-c cKeyF8 X'38';
+dcl-c cKeyF9 X'39';
+dcl-c cKeyF10 X'3A';
+dcl-c cKeyF11 X'3B';
+dcl-c cKeyF12 X'3C';
+dcl-c cKeyF13 X'B1';
+dcl-c cKeyF14 X'B2';
+dcl-c cKeyF15 X'B3';
+dcl-c cKeyF16 X'B4';
+dcl-c cKeyF17 X'B5';
+dcl-c cKeyF18 X'B6';
+dcl-c cKeyF19 X'B7';
+dcl-c cKeyF20 X'B8';
+dcl-c cKeyF21 X'B9';
+dcl-c cKeyF22 X'BA';
+dcl-c cKeyF23 X'BB';
+dcl-c cKeyF24 X'BC';
 
-     D cKeyEnter       C                   CONST(X'F1')
-       //          Nicht definiert                   F2
-     D cKeyHelp        C                   CONST(X'F3')
-     D cKeyPageDown    C                   CONST(X'F4')
-     D cKeyPageUp      C                   CONST(X'F5')
-     D cKeyPrintScr    C                   CONST(X'F6')
-       //          Nicht definiert                   F7
-     D cKeyReset       C                   CONST(X'F8')
+dcl-c cKeyClear X'BD';
+dcl-c cKeyDelete X'BD';
 
-     D cKeyLightPen    C                   CONST(X'3F')
+dcl-c cKeyEnter X'F1';
+//          Nicht definiert                   F2
+dcl-c cKeyHelp X'F3';
+dcl-c cKeyPageDown X'F4';
+dcl-c cKeyPageUp X'F5';
+dcl-c cKeyPrintScr X'F6';
+//          Nicht definiert                   F7
+dcl-c cKeyReset X'F8';
 
-     D cSflFold        C                   CONST(*off)
-     D cSflDrop        C                   CONST(*on )
-       //===============================================================*
+dcl-c cKeyLightPen X'3F';
 
-       //== Global Constants============================================*
+dcl-c cSflFold *off;
+dcl-c cSflDrop *on;
+//===============================================================*
 
-       //  Boolean Constants ...
-     D cTrue           C                   const(*on )
-     D cFalse          C                   const(*off)
+//== Global Constants============================================*
 
-       //  Application Message File ...
-     D cAppMsgF        C                   const('CMPMSGF')
-     D cAppMsgL        C                   const('*LIBL')
+//  Boolean Constants ...
+dcl-c cTrue *on;
+dcl-c cFalse *off;
 
-       //  Messages ...
-       //  ... to stack counter
-     D cMsg_Ext        C                   const(-1)
-     D cMsg_Prv        C                   const(-2)
-     D cMsg_Same       C                   const(-3)
+//  Application Message File ...
+dcl-c cAppMsgF 'CMPMSGF';
+dcl-c cAppMsgL '*LIBL';
 
-       //  ... to procedure
-     D cMsg_ToMyself   C                   const('*')
-     D cMsg_ToPgmBdy   C                   const('*PGMBDY')
-     D cMsg_ToCtlBdy   C                   const('*CTLBDY')
-     D cMsg_ToPgm      C                   const('*PGMNAME')
+//  Messages ...
+//  ... to stack counter
+dcl-c cMsg_Ext -1;
+dcl-c cMsg_Prv -2;
+dcl-c cMsg_Same -3;
 
-     D cMSGID_LOVAL    C                   const(*LOVAL)
-     D cMSGID_HIVAL    C                   const(*HIVAL)
-     D cMSGID_EOF      C                   const('*EOF')
-     D cMSGID_SAME     C                   const('*MSGID')
+//  ... to procedure
+dcl-c cMsg_ToMyself '*';
+dcl-c cMsg_ToPgmBdy '*PGMBDY';
+dcl-c cMsg_ToCtlBdy '*CTLBDY';
+dcl-c cMsg_ToPgm '*PGMNAME';
 
-     D cCmpCopyLeft    C                   const('<=')
-     D cCmpCopyRight   C                   const('=>')
-     D cCmpEqual       C                   const('==')
-     D cCmpNotEqual    C                   const('<>')
-     D cCmpNoAction    C                   const('| ')
+dcl-c cMSGID_LOVAL *loval;
+dcl-c cMSGID_HIVAL *hival;
+dcl-c cMSGID_EOF '*EOF';
+dcl-c cMSGID_SAME '*MSGID';
 
-       //  Others ...
-     D cLowDat7        C                   const('0010101')
-     D cQuote          C                   const('''')
-       //===============================================================*
+dcl-c cCmpCopyLeft '<=';
+dcl-c cCmpCopyRight '=>';
+dcl-c cCmpEqual '==';
+dcl-c cCmpNotEqual '<>';
+dcl-c cCmpNoAction '| ';
 
-       //== Templates ==================================================*
-      /COPY QCMPMSGF,FDMSG
-      /COPY QCMPMSGF,FDQOBJ
-      /COPY QCMPMSGF,FDERRCODE
-      /COPY QCMPMSGF,FDRTVM0300
-      /COPY QCMPMSGF,FDRTVM0400
-      /COPY QCMPMSGF,FDOBJD0100
+//  Others ...
+dcl-c cLowDat7 '0010101';
+dcl-c cQuote '''';
+//===============================================================*
 
-     D range_t         DS                  based(pDummy)
-     D  numVal                        5I 0
-     D  lower                         7A
-     D  upper                         7A
-       //===============================================================*
+//== Templates ==================================================*
+/copy QCMPMSGF,FDMSG
+/copy QCMPMSGF,FDQOBJ
+/copy QCMPMSGF,FDERRCODE
+/copy QCMPMSGF,FDRTVM0300
+/copy QCMPMSGF,FDRTVM0400
+/copy QCMPMSGF,FDOBJD0100
 
-       //== Prototypes =================================================*
-       //  ... compare message file       (CMPMSGFR1)
-     D f_cmpMsgF...
-     D                 PR             1A
-     D  i_file1                      10A   const
-     D  i_lib1                       10A   const
-     D  i_file2                      10A   const
-     D  i_lib2                       10A   const
-     D  i_range                            const likeds(range_t)
-     D  i_cmpDate                     1A   const
-     D  i_cmpLvl                      1A   const
-     D  i_error                       1A   const
+dcl-ds range_t based(pDummy);
+  numVal int(5);
+  lower  char(7);
+  upper  char(7);
+end-ds;
+//===============================================================*
 
-       //  ... change filter              (CMPMSGFR2)
-     D f_chgFilter...
-     D                 PR             1A
-     D  io_cpyr                       1A
-     D  io_cpyl                       1A
-     D  io_equal                      1A
-     D  io_nequal                     1A
+//== Prototypes =================================================*
+//  ... compare message file       (CMPMSGFR1)
+dcl-pr f_cmpMsgF char(1);
+  i_file1   char(10) const;
+  i_lib1    char(10) const;
+  i_file2   char(10) const;
+  i_lib2    char(10) const;
+  i_range   likeds(range_t) const;
+  i_cmpDate char(1) const;
+  i_cmpLvl  char(1) const;
+  i_error   char(1) const;
+end-pr;
 
-       //  ... load module filter         (CMPMSGFR2)
-     D p_loadFilter...
-     D                 PR
+//  ... change filter              (CMPMSGFR2)
+dcl-pr f_chgFilter char(1);
+  io_cpyr   char(1);
+  io_cpyl   char(1);
+  io_equal  char(1);
+  io_nequal char(1);
+end-pr;
 
-       //  ... unload module filter       (CMPMSGFR2)
-     D p_unloadFilter...
-     D                 PR
+//  ... load module filter         (CMPMSGFR2)
+dcl-pr p_loadFilter;
+end-pr;
 
-       //  ... remove program messages    (CMPMSGFR3)
-     D p_rmvPgmMsg...
-     D                 PR
-     D  i_toStkC                     10I 0 const  options(*NOPASS)
-     D  i_toProc                    256A   const  options(*NOPASS)
-     D  i_toMod                      10A   const  options(*NOPASS: *OMIT)
-     D  i_toPgm                      10A   const  options(*NOPASS)
+//  ... unload module filter       (CMPMSGFR2)
+dcl-pr p_unloadFilter;
+end-pr;
 
-       //  ... send program message       (CMPMSGFR3)
-     D p_sndPgmMsg...
-     D                 PR
-     D  i_msg                              const  like(msg_t     )
-     D  i_toStkC                     10I 0 const  options(*NOPASS)
-     D  i_toProc                    256A   const  options(*NOPASS)
-     D  i_toMod                      10A   const  options(*NOPASS: *OMIT)
-     D  i_toPgm                      10A   const  options(*NOPASS)
+//  ... remove program messages    (CMPMSGFR3)
+dcl-pr p_rmvPgmMsg;
+  i_toStkC int(10) options(*nopass) const;
+  i_toProc char(256) options(*nopass) const;
+  i_toMod  char(10) options(*nopass: *omit) const;
+  i_toPgm  char(10) options(*nopass) const;
+end-pr;
 
-       //  ... create a new message       (CMPMSGFR3)
-     D f_newMsg...
-     D                 PR                         like(msg_t     )
-     D  i_msgID                       7A   const  options(*nopass :
-     D                                                    *omit   )
-     D  i_msgDta                    512A   const  options(*nopass :
-     D                                                    *omit   )
-     D  i_msgType                    10A   const  options(*nopass :
-     D                                                    *omit   )
-     D  i_file                       10A   const  options(*nopass :
-     D                                                    *omit   )
-     D  i_lib                        10A   const  options(*nopass :
-     D                                                    *omit   )
+//  ... send program message       (CMPMSGFR3)
+dcl-pr p_sndPgmMsg;
+  i_msg    like(msg_t) const;
+  i_toStkC int(10) options(*nopass) const;
+  i_toProc char(256) options(*nopass) const;
+  i_toMod  char(10) options(*nopass: *omit) const;
+  i_toPgm  char(10) options(*nopass) const;
+end-pr;
 
-       //  ... create a new API errorcode (CMPMSGFR3)
-     D f_newApiErrCode...
-     D                 PR                         like(errCode_t)
-     D  i_monMsg                       N   value
+//  ... create a new message       (CMPMSGFR3)
+dcl-pr f_newMsg like(msg_t);
+  i_msgID   char(7) options(*nopass: *omit) const;
+  i_msgDta  char(512) options(*nopass: *omit) const;
+  i_msgType char(10) options(*nopass: *omit) const;
+  i_file    char(10) options(*nopass: *omit) const;
+  i_lib     char(10) options(*nopass: *omit) const;
+end-pr;
 
-       //  ... test for API error         (CMPMSGFR3)
-     D f_isApiErr...
-     D                 PR              N
-     D  i_errCode                          value  likeds(errCode_t)
+//  ... create a new API errorcode (CMPMSGFR3)
+dcl-pr f_newApiErrCode like(errCode_t);
+  i_monMsg ind value;
+end-pr;
 
-       //  ... retrieve network attribute (CMPMSGFR3)
-     D f_rtvNetAtrA...
-     D                 PR          4096A
-     D  i_netAtrName                 10A   value
+//  ... test for API error         (CMPMSGFR3)
+dcl-pr f_isApiErr ind;
+  i_errCode likeds(errCode_t) value;
+end-pr;
 
-       //  ... check if object exists     (CMPMSGFR3)
-     D f_exist...
-     D                 PR              N
-     D  i_obj                        10A   value
-     D  i_lib                        10A   value
-     D  i_objType                    10A   value
-       //===============================================================*
+//  ... retrieve network attribute (CMPMSGFR3)
+dcl-pr f_rtvNetAtrA char(4096);
+  i_netAtrName char(10) value;
+end-pr;
 
-       //== external Prototypes ========================================*
-       //  ... test omitted argument
-     D p_testOmit...
-     D                 PR                         extproc('CEETSTA')
-     D  o_isPresent                  10I 0
-     D  i_argNum                     10I 0 const
-     D  o_fc                         12A          options(*omit)
+//  ... check if object exists     (CMPMSGFR3)
+dcl-pr f_exist ind;
+  i_obj     char(10) value;
+  i_lib     char(10) value;
+  i_objType char(10) value;
+end-pr;
+//===============================================================*
 
-       //  ... Display Command Line Window (QUSCMDLN) API
-     D QUSCMDLN...
-     D                 PR                  extpgm('QUSCMDLN')
+//== external Prototypes ========================================*
+//  ... test omitted argument
+dcl-pr p_testOmit extproc('CEETSTA');
+  o_isPresent int(10);
+  i_argNum    int(10) const;
+  o_fc        char(12) options(*omit);
+end-pr;
 
-       //  ... Remove Program Messages (QMHRMVPM) API
-     D QMHRMVPM        PR                  EXTPGM('QMHRMVPM')
-     D  i_callStkE                  256a   const
-     D  i_callStkC                   10i 0 const
-     D  i_msgKey                      4a   const
-     D  i_msgToRmv                   10a   const
-     D  io_ErrCode                65535a          options(*varsize)
-     D  i_lenStkE                    10i 0 const  options(*nopass )             | optGrp 1
-     D  i_callStkEQ                  20A   const  options(*nopass )             |
-     D  i_rmvUnhdlExc                10a   const  options(*nopass )             |
-     D  i_callStkEDT                 10a   const  options(*nopass )             | optGrp 2
-     D  i_alwDfRpyRjc                10a   const  options(*nopass )             | optGrp 3
+//  ... Display Command Line Window (QUSCMDLN) API
+dcl-pr QUSCMDLN extpgm('QUSCMDLN');
+end-pr;
 
-       //  ... Send Program Message (QMHSNDPM) API
-     D QMHSNDPM        PR                  EXTPGM('QMHSNDPM')
-     D  i_msgID                       7a   const
-     D  i_qMsgF                      20A   const
-     D  i_msgData                 32767A   const  options(*varsize )
-     D  i_length                     10i 0 const
-     D  i_msgType                    10a   const
-     D  i_callStkE                  256a   const
-     D  i_callStkC                   10i 0 const
-     D  o_msgKey                      4a
-     D  io_ErrCode                32767A          options(*varsize )
-     D  i_lenStkE                    10i 0 const  options(*nopass  )            | optGrp 1
-     D  i_callStkEQ                  20A   const  options(*nopass  )            |
-     D  i_wait                       10i 0 const  options(*nopass  )            |
-     D  i_callStkEDT                 10a   const  options(*nopass  )            | optGrp 2
-     D  i_ccsid                      10i 0 const  options(*nopass  )            |
+//  ... Remove Program Messages (QMHRMVPM) API
+dcl-pr QMHRMVPM extpgm('QMHRMVPM');
+  i_callStkE    char(256) const;
+  i_callStkC    int(10) const;
+  i_msgKey      char(4) const;
+  i_msgToRmv    char(10) const;
+  io_ErrCode    char(65535) options(*varsize);
+  i_lenStkE     int(10) options(*nopass) const; // | optGrp 1
+  i_callStkEQ   char(20) options(*nopass) const; // |
+  i_rmvUnhdlExc char(10) options(*nopass) const; // |
+  i_callStkEDT  char(10) options(*nopass) const; // | optGrp 2
+  i_alwDfRpyRjc char(10) options(*nopass) const; // | optGrp 3
+end-pr;
 
-       //  ... Retrieve Network Attributes (QWCRNETA) API
-     D QWCRNETA        PR                  EXTPGM('QWCRNETA')
-     D  o_rcvVar                  32767A          options(*varsize)
-     D  i_lenRcv                     10i 0 const
-     D  i_numAttr                    10i 0 const
-     D  i_attrNames                  10a   const  dim(50) options(*varsize)
-     D  io_errorCode              32767A          options(*varsize)
+//  ... Send Program Message (QMHSNDPM) API
+dcl-pr QMHSNDPM extpgm('QMHSNDPM');
+  i_msgID      char(7) const;
+  i_qMsgF      char(20) const;
+  i_msgData    char(32767) options(*varsize) const;
+  i_length     int(10) const;
+  i_msgType    char(10) const;
+  i_callStkE   char(256) const;
+  i_callStkC   int(10) const;
+  o_msgKey     char(4);
+  io_ErrCode   char(32767) options(*varsize);
+  i_lenStkE    int(10) options(*nopass) const; // | optGrp 1
+  i_callStkEQ  char(20) options(*nopass) const; // |
+  i_wait       int(10) options(*nopass) const; // |
+  i_callStkEDT char(10) options(*nopass) const; // | optGrp 2
+  i_ccsid      int(10) options(*nopass) const; // |
+end-pr;
 
-       //  ... Retrieve Message (QMHRTVM) API
-     D QMHRTVM...
-     D                 PR                  extpgm('QMHRTVM')
-     D  i_msgD                    32767A         options(*varsize)
-     D  i_lenMsgD                    10I 0 const
-     D  i_format                      8A   const
-     D  i_msgID                       7A   const
-     D  i_qMsgF                      20A   const
-     D  i_rplcData                32767A   const options(*varsize)
-     D  i_lenRplcData                10I 0 const
-     D  i_rplcSubstV                 10A   const
-     D  i_rtnFmtCtlC                 10A   const
-     D  io_errCode                32767A         options(*varsize)
-     D  i_rtvOpt                     10A   const options(*nopass)
-     D  i_ccsid                      10I 0 const options(*nopass)
-     D  i_rplDtaCcsid                10I 0 const options(*nopass)
+//  ... Retrieve Network Attributes (QWCRNETA) API
+dcl-pr QWCRNETA extpgm('QWCRNETA');
+  o_rcvVar     char(32767) options(*varsize);
+  i_lenRcv     int(10) const;
+  i_numAttr    int(10) const;
+  i_attrNames  char(10) dim(50) options(*varsize) const;
+  io_errorCode char(32767) options(*varsize);
+end-pr;
 
-       //  ... Retrieve Object Description (QUSROBJD) API
-     D QUSROBJD...
-     D                 PR                  extpgm('QUSROBJD')
-     D  i_objD                    32767A         options(*varsize)
-     D  i_lenObjD                    10I 0 const
-     D  i_format                      8A   const
-     D  i_qObj                       20A   const
-     D  i_objType                    10A   const
-     D  io_errCode                32767A         options(*varsize:
-     D                                                   *nopass )
+//  ... Retrieve Message (QMHRTVM) API
+dcl-pr QMHRTVM extpgm('QMHRTVM');
+  i_msgD        char(32767) options(*varsize);
+  i_lenMsgD     int(10) const;
+  i_format      char(8) const;
+  i_msgID       char(7) const;
+  i_qMsgF       char(20) const;
+  i_rplcData    char(32767) options(*varsize) const;
+  i_lenRplcData int(10) const;
+  i_rplcSubstV  char(10) const;
+  i_rtnFmtCtlC  char(10) const;
+  io_errCode    char(32767) options(*varsize);
+  i_rtvOpt      char(10) options(*nopass) const;
+  i_ccsid       int(10) options(*nopass) const;
+  i_rplDtaCcsid int(10) options(*nopass) const;
+end-pr;
 
-       //  ... system -- Execute a Command
-     D system...
-     D                 PR            10I 0 extproc('system')
-     D  i_cmd                          *   value options(*string)
+//  ... Retrieve Object Description (QUSROBJD) API
+dcl-pr QUSROBJD extpgm('QUSROBJD');
+  i_objD     char(32767) options(*varsize);
+  i_lenObjD  int(10) const;
+  i_format   char(8) const;
+  i_qObj     char(20) const;
+  i_objType  char(10) const;
+  io_errCode char(32767) options(*varsize: *nopass);
+end-pr;
 
-     D EXCP_MSGID      S              7A   import('_EXCP_MSGID')
+//  ... system -- Execute a Command
+dcl-pr system int(10) extproc('system');
+  i_cmd pointer options(*string) value;
+end-pr;
 
-       //===============================================================*
+dcl-s EXCP_MSGID char(7) import('_EXCP_MSGID');
 
-       //== Program status data structure===============================*
-     D sds            SDS                  qualified
-     D  pgmName                      10A
-     D  pgmStat                       5S 0
-     D  pPrevStat                     5S 0
-     D  lastSeq                       8A
-     D  lastSubr                      8A
-     D  numParm                       3S 0
-     D  msgID                         7A
-     D  miInstr                       4A
-     D  workArea                     30A
-     D  pgmLib                       10A
-     D  msgText                      80A
-     D  excpInd                       4A
-     D  unused1                      16A
-     D  datFmt                        8A
-     D  year                          2S 0
-     D  fileOpr                       8A
-     D  fileStat                     35A
-     D  job                          10A
-     D  user                         10A
-     D  jobNbr                        6S 0
-     D  jobD                          6S 0
-     D  pgmDate                       6S 0
-     D  jobTime                       6S 0
-     D  crtDate                       6A
-     D  crtTime                       6A
-     D  compVer                       4A
-     D  srcFile                      10A
-     D  srcLib                       10A
-     D  srcMbr                       10A
-     D  pgmProc                      10A
-     D  modProc                      10A
-     D  unused2                      76A
-       //===============================================================*
+//===============================================================*
+
+//== Program status data structure===============================*
+dcl-ds sds qualified psds;
+  pgmName   char(10);
+  pgmStat   zoned(5);
+  pPrevStat zoned(5);
+  lastSeq   char(8);
+  lastSubr  char(8);
+  numParm   zoned(3);
+  msgID     char(7);
+  miInstr   char(4);
+  workArea  char(30);
+  pgmLib    char(10);
+  msgText   char(80);
+  excpInd   char(4);
+  unused1   char(16);
+  datFmt    char(8);
+  year      zoned(2);
+  fileOpr   char(8);
+  fileStat  char(35);
+  job       char(10);
+  user      char(10);
+  jobNbr    zoned(6);
+  jobD      zoned(6);
+  pgmDate   zoned(6);
+  jobTime   zoned(6);
+  crtDate   char(6);
+  crtTime   char(6);
+  compVer   char(4);
+  srcFile   char(10);
+  srcLib    char(10);
+  srcMbr    char(10);
+  pgmProc   char(10);
+  modProc   char(10);
+  unused2   char(76);
+end-ds;
+//===============================================================*
